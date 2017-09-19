@@ -1,0 +1,27 @@
+{
+  "name": "musicmonster",
+  "version": "1.0.0",
+  "description": "Shiven gets the beat, Max gets the lead, Amzad breaks it down and I move it around.............",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MistyMen/musicMonster.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MistyMen/musicMonster/issues"
+  },
+  "homepage": "https://github.com/MistyMen/musicMonster#readme",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "morgan": "^1.8.2",
+    "nodemon": "^1.12.1",
+    "pg-promise": "^6.7.1"
+  }
+}
