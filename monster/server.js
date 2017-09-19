@@ -26,8 +26,12 @@ app.use('/static', express.static(path.json(_dirname, 'public')));
 
 /*set up routes*/
 app.use('/', (req, res) =>
-  res.sendFile('public/about.html');
+  res.sendFile('public/index.html');
   )
-/*API routes*/
-const musicRoute = require('/route/tracksroutes')
 
+/*API routes*/
+const musicRoute = require('/route/musicroutes')
+
+app.get('*', (req, res) => {
+  res.status(404).json(err);
+})
