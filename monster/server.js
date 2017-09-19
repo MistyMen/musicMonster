@@ -31,6 +31,7 @@ app.use('/', (req, res) =>
 
 /*API routes*/
 const musicRoute = require('/route/musicroutes')
+app.use('api/artist', musicRoute);
 
 app.get('*', (req, res) => {
   res.status(404).json(err);
