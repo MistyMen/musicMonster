@@ -1,0 +1,42 @@
+html {
+  font: sans-serif;
+  background-color: darkslategray;
+  height: 100%;
+}
+
+/*body {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+*/
+nav {
+  /*position: absolute;*/
+  background-color: palevioletred;
+  color: papayawhip;
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px
+}
+
+li {
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.form {
+  line-height: 50%;
+  align-items: center;
+}
+
+.SearchForm {
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+}
