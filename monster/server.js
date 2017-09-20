@@ -15,7 +15,7 @@ app.listen(port, () => {
 
 /*set up body parser */
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extend: false}));
+app.use(bodyParser.urlencoded({extended: false}));
 
 /*set up logger*/
 app.use(logger('dev'));
@@ -26,13 +26,14 @@ app.use('/static', express.static(path.json(_dirname, 'public')));
 
 /*set up routes*/
 app.use('/', (req, res) =>
-  res.sendFile('public/index.html');
+  res.sendFile(__dirname + 'public/index.html');
   )
 
 /*API routes*/
 const musicRoute = require('/route/musicroutes')
 app.use('api/artist', musicRoute);
 
+/*error message*/
 app.get('*', (req, res) => {
-  res.status(404).json(err);
+  res.status(404).json({messsage: "not found"});
 })
