@@ -15,9 +15,9 @@ controllerMon.indexAll = (req, res) => {
     });
   }
 
-// /*middleware to get particular record*/
+/*middleware to get particular record*/
 // controllerMon.showOne = (req, res) => {
-//   modelMon.findId(res.params.id)
+//   modelMon.findName(res.params.name)
 //     .then(record => {
 //       res.json({
 //         message: 'ok',

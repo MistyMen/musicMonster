@@ -9,32 +9,40 @@ Music.findAll = () => {
   );
 }
 
-// Music.findById = (id) => {
-//   return db.oneOrNone(
-//     `
-//     SELECT * FROM artists
-//     WHERE id = $1`,
-//     [id]
-//   );
-// };
+function checker(name) {
+    return db.oneOrNone(
+    `
+    SELECT * FROM artists
+    WHERE name = $1`,
+    [name]
+  );
 
 Music.create = music => {
-  return (
-    db.one(
-      `
-    INSERT INTO artists (name, picture)
-    VALUES ($1, $2)
-    RETURNING *`,
+  if(!checker(music.name)) {
+    return (
+      db.one(
+        `
+      INSERT INTO artists (name, picture)
+      VALUES ($1, $2)`
       [music.name, music.picture]
-    ),
-    db.one(
-      `
-    INSERT INTO tracks (song, url)
-    VALUES ($1, $2)
-    RETURNING *`,
+      ),
+
+      db.one(
+        `
+      INSERT INTO tracks (song, url)
+      VALUES ($1, $2)`
       [music.song, music.url]
+      ),
+    );
+  } else if(checker(music.name) && !checker(music.song)) {
+      return  db.one(
+          `
+        INSERT INTO tracks (artist_id, song, url)
+        VALUES ($1, $2, $3)
+        RETURNING *`,
+          [checker(music.name).id, music.song, music.url]
     )
-  );
+  }
 }
 
 module.exports = Music;

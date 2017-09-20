@@ -1,5 +1,8 @@
 \c monster_dev
 
+\drop table artists
+\drop table tracks
+
 CREATE TABLE IF NOT EXISTS artists (
   id SERIAL PRIMARY KEY,
   name VARCHAR(1024),
