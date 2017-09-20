@@ -6,9 +6,13 @@ class SearchForm extends Component {
       <form
         className="SearchForm">
         <input
+        className="search"
         type="text"
-        placeholder="Search for a song"/>
-        <button id="submit">Find it!</button>
+        placeholder="Search for a song"
+        onChange={this.props.handleInputChange}/>
+        <button
+        className="searchButton"
+        id="submit">Find it!</button>
       </form>
       )
   }

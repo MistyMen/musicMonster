@@ -12,12 +12,27 @@ import './reset.css';
 import './App.css';
 
 class MusicMonster extends Component {
+  constructor() {
+    super();
+    this.state = {
+      input: '',
+    }
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(event) {
+    this.setState({
+      input: event.target.value
+    });
+    console.log(event.target.value)
+  };
+
   render() {
     return (
       <div className="App">
         <Nav />
         <div className="form">
-          <SearchForm />
+          <SearchForm handleInputChange={this.handleInputChange} />
         </div>
       </div>
     );
