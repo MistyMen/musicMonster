@@ -1,16 +1,8 @@
 html {
   font: sans-serif;
   background-color: darkslategray;
-  height: 100%;
 }
 
-/*body {
-  height: 100%;
-  width: 100%;
-  display: flex;
-}
-
-*/
 nav {
   /*position: absolute;*/
   background-color: palevioletred;
@@ -30,13 +22,20 @@ li {
   font-size: 24px;
 }
 
+.root {
+  width: 100%;
+  height: 100%;
+}
+
 .form {
-  line-height: 50%;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .SearchForm {
   background-color: blue;
-  display: flex;
-  justify-content: center;
 }
