@@ -1,6 +1,6 @@
 /*import all dependences*/
 const express = require('express');
-const logger = require('morgar');
+const logger = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
 
@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 /*set port and start it listening*/
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log(`listen port ${PORT}`);
 });
 
@@ -21,16 +21,15 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(logger('dev'));
 
 /*set static file_path*/
-app.use('/static', express.static(path.json(_dirname, 'public')));
-
+app.use(express.static('public'));
 
 /*set up routes*/
 app.use('/', (req, res) =>
-  res.sendFile(__dirname + 'public/index.html');
-  )
+  res.sendFile(__dirname + 'public/index.html')
+  );
 
 /*API routes*/
-const musicRoute = require('/route/musicroutes')
+const musicRoute = require('./routes/musicroutes')
 app.use('api/artist', musicRoute);
 
 /*error message*/
