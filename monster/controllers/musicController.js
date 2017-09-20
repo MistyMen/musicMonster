@@ -15,26 +15,28 @@ controllerMon.indexAll = (req, res) => {
     });
   }
 
-/*middleware to get particular record*/
-controllerMon.showOne = (req, res) => {
-  modelMon.findId(res.params.id)
-    .then(record => {
-      res.json({
-        message: 'ok',
-        data: { record }
-      });
-    }).catch(err => {
-        console.log(err);
-        res.status(400).json({message: "400", err})
-    })
-  },
+// /*middleware to get particular record*/
+// controllerMon.showOne = (req, res) => {
+//   modelMon.findId(res.params.id)
+//     .then(record => {
+//       res.json({
+//         message: 'ok',
+//         data: { record }
+//       });
+//     }).catch(err => {
+//         console.log(err);
+//         res.status(400).json({message: "400", err})
+//     })
+//   },
 
 /*store new record in db*/
 controllerMon.create = (req, res) => {
   modelMon.create({
       name: req.body.name,
-      track: req.body.track,
-      description: req.body.description
+      picture: req.body.picture,
+      song: req.body.song,
+      url: req.body.url
+
     })
       .then(record => {
         res.json({
