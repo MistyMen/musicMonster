@@ -7,8 +7,8 @@ class Nav extends Component {
       <nav>
         <ul>
           <li>|||</li>
-          <li><Link to={}   >Music Monster</Linl></li>
-          <li><Link to={}   >User Profile</Link></li>
+          <li>Music Monster</li>
+          <li>Profile</li>
         </ul>
       </nav>
       )
