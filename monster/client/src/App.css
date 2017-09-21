@@ -1,13 +1,18 @@
-html {
+body {
   font: sans-serif;
-  background-color: darkslategray;
+  position: absolute;
+  background-color: lightblue;
+  height: 100%;
+  width: 100%;
+  /*display: flex;*/
 }
 
 nav {
-  /*position: absolute;*/
+  position: absolute;
   background-color: palevioletred;
   color: papayawhip;
   width: 100%;
+  display: block;
 }
 
 ul {
@@ -22,20 +27,35 @@ li {
   font-size: 24px;
 }
 
-.root {
-  width: 100%;
-  height: 100%;
-}
-
-.form {
+main {
   position: relative;
-  height: 100%;
   width: 100%;
+  top: 150px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .SearchForm {
-  background-color: blue;
+  position: relative;
+}
+
+.search {
+  width: 350px;
+  padding: 10px;
+}
+
+.searchButton {
+  padding: 12.5px;
+  border: none;
+  margin-left: 5px;
+  background-color: slategrey;
+}
+
+.results {
+  position: relative;
+  margin: 50px;
+  height: 200px;
+  width: 400px;
+  background-color: grey;
 }
