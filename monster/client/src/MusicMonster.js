@@ -3,7 +3,7 @@
 // Import all the necessary packages
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-
+import Fetch from 'react-fetch';
 // Import all the necessary components
 import Nav from './components/partials/Nav';
 import SearchForm from './components/SearchForm';
@@ -14,13 +14,13 @@ import './reset.css';
 import './App.css';
 
 class MusicMonster extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     input: '',
-  //   }
-  //   this.handleInputChange = this.handleInputChange.bind(this);
-  // }
+  constructor() {
+    super();
+    this.state = {
+      input: '',
+    }
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
 
   componentWillMount() {
     console.log('Will Mount...');
@@ -30,12 +30,12 @@ class MusicMonster extends Component {
     console.log('Did mount...');
   }
 
-  // handleInputChange(event) {
-  //   this.setState({
-  //     input: event.target.value
-  //   });
-  //   console.log(event.target.value)
-  // };
+  handleInputChange(event) {
+    this.setState({
+      input: event.target.value
+    });
+    console.log(event.target.value)
+  };
 
   render() {
     console.log('Rendering...');
