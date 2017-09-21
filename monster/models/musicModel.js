@@ -1,29 +1,35 @@
-const db = require('../db/config');
+const db = require("../db/config");
 
 const Music = {};
 
 Music.findAll = () => {
   return db.query(
-    `SELECT * FROM artists`
+    `SELECT artists.name, artists.picture, tracks.song, tracks.url FROM artists
+    INNER JOIN tracks ON (artists.id = tracks.artist_id)`
   );
 };
 
-Music.findById = (id) => {
-  return db.oneOrNone(
-    `
-    SELECT * FROM artists
-    WHERE id = $1`, 
-    [id]
-  );
+Music.findArtistByName = data => {
+  return db.query(`SELECT * From artists where name =$1`, [data.name]);
 };
 
-Music.create = (music) => {
+Music.createArtist = music => {
   return db.one(
     `
     INSERT INTO artists (name, picture)
     VALUES ($1, $2)
     RETURNING *`,
-    [music.music, music.picture]
+    [music.name, music.picture]
+  );
+};
+
+Music.createTrack = music => {
+  return db.one(
+    `
+    INSERT INTO tracks (artist_id, song, url)
+    VALUES ($1, $2, $3)
+    RETURNING *`,
+    [music.artist_id, music.song, music.url]
   );
 };
 
