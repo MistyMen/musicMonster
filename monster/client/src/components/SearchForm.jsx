@@ -19,8 +19,9 @@ class SearchForm extends Component {
   render() {
     return(
       <form
-        className="SearchForm">
+        className="SearchForm" onSubmit={this.props.callSpotifyApi}>
         <input
+        value= {this.props.updateValue}
         className="search"
         type="text"
         placeholder="Search for a song"
