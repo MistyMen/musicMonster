@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Nav extends Component {
   render() {
@@ -7,8 +7,8 @@ class Nav extends Component {
       <nav>
         <ul>
           <li>|||</li>
-          <li>Music Monster</li>
-          <li>User Profile</li>
+          <li><Link to={}   >Music Monster</Linl></li>
+          <li><Link to={}   >User Profile</Link></li>
         </ul>
       </nav>
       )

@@ -1,6 +1,7 @@
 const modelMon = require('../models/musicModel')
 
-const controllerMon = {};
+const controllerMon = {}
+
 /*middleware to get all records*/
 controllerMon.indexAll = (req, res) => {
   modelMon.findAll()
@@ -36,16 +37,14 @@ controllerMon.create = (req, res) => {
       picture: req.body.picture,
       song: req.body.song,
       url: req.body.url
-
     })
       .then(record => {
         res.json({
           message: 'ok',
-          data: { record }
         })
       }).catch(err => {
         console.log(err);
-        res.status('400').json({message: "400. Something goes wrong"})
+        res.status('400').json({message: "400. Something goes wrong"});
     })
   },
 

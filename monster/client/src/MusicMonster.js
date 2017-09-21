@@ -12,6 +12,21 @@ import './reset.css';
 import './App.css';
 
 class MusicMonster extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      inputField : '',
+    }
+
+
+  }
+
+
+
+
+
+
   render() {
     return (
       <div className="App">
