@@ -1,33 +1,29 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class SearchForm extends Component {
-  constructor() {
-    super();
-    this.state = {
-      input: '',
-    }
-    this.handleInputChange = this.handleInputChange.bind(this);
+  componentWillMount() {
+    console.log('Search form will mount...');
   }
 
-  handleInputChange(event) {
-    this.setState({
-      input: event.target.value
-    });
-    console.log(event.target.value)
+  componentDidMount() {
+    console.log('Search form did mount...');
   }
 
   render() {
     return(
       <form
-        className="SearchForm" onSubmit={this.props.handleSubmit}>
+        className="SearchForm" onSubmit={this.props.callSpotifyApi}>
         <input
+        value= {this.props.updateValue}
         className="search"
         type="text"
         placeholder="Search for a song"
-        onChange={this.handleInputChange}/>
+        onChange={this.props.handleInputChange}/>
         <button
         className="searchButton"
-        id="submit">Find it!</button>
+        id="submit">
+        <Link to="/results">Find it!</Link></button>
       </form>
       )
   }

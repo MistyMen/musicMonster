@@ -2,8 +2,9 @@
 
 // Import all the necessary packages
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
 import Fetch from 'react-fetch';
+
+import { Route, Switch } from 'react-router-dom';
 // Import all the necessary components
 import Nav from './components/partials/Nav';
 import SearchForm from './components/SearchForm';
@@ -17,7 +18,13 @@ class MusicMonster extends Component {
   constructor() {
     super();
     this.state = {
-      input: '',
+        searchData: null,
+        input: '',
+        artist: '',
+        track: '',
+        track_url: '',
+        image: '',
+        album: '',
     }
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -30,12 +37,25 @@ class MusicMonster extends Component {
     console.log('Did mount...');
   }
 
+
   handleInputChange(event) {
+    event.preventDefault();
     this.setState({
       input: event.target.value
     });
     console.log(event.target.value)
-  };
+
+  callSpotifyApi(event){
+    console.log(event)
+    fetch(`https://api.spotify.com/v1/search?q=eminem&type=artist`)
+      .then((res) => {
+        return res.json();
+      }).then((jsonRes) => {
+        this.setState({
+          searchData: jsonRes.data,
+        })
+      })
+}
 
   render() {
     console.log('Rendering...');
@@ -43,14 +63,18 @@ class MusicMonster extends Component {
       <div className="App">
         <Nav />
         <main>
-        <SearchForm />
+        <SearchForm handleInputChange={this.handleInputChange} input={this.state.input}/>
           <Switch>
-            <Route exact path="/results" component={Results} />
+
+            <Route exact path="/results" render={props =><Results handleInputChange={this.handleInputChange} input={this.state.input}/>} />
+
           </Switch>
         </main>
       </div>
     );
   }
 }
+// <Route path='/QuoteList' component={QuoteList}/>
+// <Route exact path='/results' component={Results} handleInputChange={this.handleInputChange} updateValue={this.state.input} callSpotifyApi={this.callSpotifyApi}/>
 
 export default MusicMonster;
