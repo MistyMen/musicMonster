@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 class SearchForm extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     input: '',
-  //   }
-  //   this.handleInputChange = this.handleInputChange.bind(this);
-  // }
+  constructor() {
+    super();
+    this.state = {
+      input: '',
+    }
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
 
-  // handleInputChange(event) {
-  //   this.setState({
-  //     input: event.target.value
-  //   });
-  //   console.log(event.target.value)
-  // }
+  handleInputChange(event) {
+    this.setState({
+      input: event.target.value
+    });
+    console.log(event.target.value)
+  }
 
   render() {
     return(
@@ -25,10 +24,10 @@ class SearchForm extends Component {
         className="search"
         type="text"
         placeholder="Search for a song"
-        onChange={this.props.handleInputChange}/>
+        onChange={this.handleInputChange}/>
         <button
         className="searchButton"
-        id="submit"><Link to="/results">Find it!</Link></button>
+        id="submit">Find it!</button>
       </form>
       )
   }
