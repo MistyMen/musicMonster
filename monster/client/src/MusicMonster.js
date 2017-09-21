@@ -2,7 +2,7 @@
 
 // Import all the necessary packages
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 // Import all the necessary components
 import Nav from './components/partials/Nav';
@@ -51,7 +51,8 @@ class MusicMonster extends Component {
     this.setState({
       input: event.target.value
     });
-    console.log(event.target.value)
+    console.log(event.target.value);
+    // console.log(this.state.input);
   };
 
   render() {
@@ -60,9 +61,11 @@ class MusicMonster extends Component {
       <div className="App">
         <Nav />
         <main>
-        <SearchForm handleInputChange={this.handleInputChange}/>
+        <SearchForm handleInputChange={this.handleInputChange} input={this.state.input}/>
           <Switch>
-            <Route exact path='/results' component={Results} handleInputChange={this.handleInputChange} updateValue={this.state.input} callSpotifyApi={this.callSpotifyApi}/>
+
+            <Route exact path="/results" render={props =><Results handleInputChange={this.handleInputChange} input={this.state.input}/>} />
+
           </Switch>
         </main>
       </div>
@@ -70,4 +73,6 @@ class MusicMonster extends Component {
   }
 }
 // <Route path='/QuoteList' component={QuoteList}/>
+// <Route exact path='/results' component={Results} handleInputChange={this.handleInputChange} updateValue={this.state.input} callSpotifyApi={this.callSpotifyApi}/>
+
 export default MusicMonster;

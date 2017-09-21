@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class SearchForm extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     input: '',
-  //   }
-  //   this.handleInputChange = this.handleInputChange.bind(this);
-  // }
+  componentWillMount() {
+    console.log('Search form will mount...');
+  }
 
-  // handleInputChange(event) {
-  //   this.setState({
-  //     input: event.target.value
-  //   });
-  //   console.log(event.target.value)
-  // }
+  componentDidMount() {
+    console.log('Search form did mount...');
+  }
 
   render() {
     return(
@@ -28,7 +22,8 @@ class SearchForm extends Component {
         onChange={this.props.handleInputChange}/>
         <button
         className="searchButton"
-        id="submit">Find it!</button>
+        id="submit">
+        <Link to="/results">Find it!</Link></button>
       </form>
       )
   }
