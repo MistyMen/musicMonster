@@ -8,7 +8,7 @@ class Nav extends Component {
         <ul>
           <li>|||</li>
           <li>Music Monster</li>
-          <li>User Profile</li>
+          <li>Profile</li>
         </ul>
       </nav>
       )
