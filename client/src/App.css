@@ -1,12 +1,18 @@
-html {
+body {
   font: sans-serif;
-  background-color: black;
+  position: absolute;
+  background-color: lightblue;
+  height: 100%;
+  width: 100%;
+  /*display: flex;*/
 }
 
 nav {
+  position: absolute;
   background-color: palevioletred;
   color: papayawhip;
   width: 100%;
+  display: block;
 }
 
 ul {
@@ -21,13 +27,17 @@ li {
   font-size: 24px;
 }
 
-.form {
-  position: absolute;
-  height: 75%;
+main {
+  position: relative;
   width: 100%;
+  top: 150px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.SearchForm {
+  position: relative;
 }
 
 .search {
@@ -40,4 +50,12 @@ li {
   border: none;
   margin-left: 5px;
   background-color: slategrey;
+}
+
+.results {
+  position: relative;
+  margin: 50px;
+  height: 200px;
+  width: 400px;
+  background-color: grey;
 }
