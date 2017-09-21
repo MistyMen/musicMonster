@@ -17,7 +17,13 @@ class MusicMonster extends Component {
   constructor() {
     super();
     this.state = {
-      input: '',
+        searchData: null,
+        input: '',
+        artist: '',
+        track: '',
+        track_url: '',
+        image: '',
+        album: '',
     }
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -31,6 +37,7 @@ class MusicMonster extends Component {
   }
 
   handleInputChange(event) {
+    event.preventDefault();
     this.setState({
       input: event.target.value
     });

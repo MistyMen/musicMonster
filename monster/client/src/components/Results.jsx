@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import '../result.css';
 
 class Results extends Component {
-  constructor() {
-      super();
+  // constructor() {
+  //     super();
 
-      // Test data, to be replaced with spotify API data
-      this.state = {
-        searchData: null,
-        artist: '',
-        track: '',
-        album: '',
-      }
-    }
+  //     // Test data, to be replaced with spotify API data
+  //     this.state = {
+  //       searchData: null,
+  //       artist: '',
+  //       track: '',
+  //       track_url: '',
+  //       image: '',
+  //       album: '',
+  //     }
+  //   }
 
     componentWillMount() {
       console.log("Results will mount...");
