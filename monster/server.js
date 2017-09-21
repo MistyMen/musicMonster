@@ -24,13 +24,13 @@ app.use(logger('dev'));
 app.use(express.static('public'));
 
 /*set up routes*/
-app.use('/', (req, res) =>
-  res.sendFile(__dirname + 'public/index.html')
-  );
+// app.use('/', (req, res) =>
+//   res.sendFile(__dirname + '/public/index.html')
+//   );
 
 /*API routes*/
 const musicRoute = require('./routes/musicroutes')
-app.use('api/artist', musicRoute);
+app.use('/api/artists', musicRoute);
 
 /*error message*/
 app.get('*', (req, res) => {

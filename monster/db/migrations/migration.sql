@@ -15,10 +15,3 @@ CREATE TABLE IF NOT EXISTS tracks (
   song VARCHAR(1024),
   url VARCHAR(1024)
 );
-
--- CREATE TABLE IF NOT EXISTS user (
---   id BIGSERIAL PRIMARY KEY,
---   artist_id VARCHAR(1024),
---   name VARCHAR(1024),
---   url VARCHAR(1024),
--- );
