@@ -14,13 +14,13 @@ import './reset.css';
 import './App.css';
 
 class MusicMonster extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     input: '',
-  //   }
-  //   this.handleInputChange = this.handleInputChange.bind(this);
-  // }
+  constructor() {
+    super();
+    this.state = {
+      input: '',
+    }
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
 
   componentWillMount() {
     console.log('Will Mount...');
@@ -30,12 +30,12 @@ class MusicMonster extends Component {
     console.log('Did mount...');
   }
 
-  // handleInputChange(event) {
-  //   this.setState({
-  //     input: event.target.value
-  //   });
-  //   console.log(event.target.value)
-  // };
+  handleInputChange(event) {
+    this.setState({
+      input: event.target.value
+    });
+    console.log(event.target.value)
+  };
 
   render() {
     console.log('Rendering...');
@@ -43,9 +43,9 @@ class MusicMonster extends Component {
       <div className="App">
         <Nav />
         <main>
-        <SearchForm />
+        <SearchForm handleInputChange={this.handleInputChange}/>
           <Switch>
-            <Route exact path="/results" component={Results} />
+            <Route exact path="/results" render={props =><Results handleInputChange={this.handleInputChange} />} />
           </Switch>
         </main>
       </div>

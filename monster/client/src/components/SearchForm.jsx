@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 
 class SearchForm extends Component {
-  constructor() {
-    super();
-    this.state = {
-      input: '',
-    }
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     input: '',
+  //   }
+  //   this.handleInputChange = this.handleInputChange.bind(this);
+  // }
 
-  handleInputChange(event) {
-    this.setState({
-      input: event.target.value
-    });
-    console.log(event.target.value)
-  }
+  // handleInputChange(event) {
+  //   this.setState({
+  //     input: event.target.value
+  //   });
+  //   console.log(event.target.value)
+  // }
 
   render() {
     return(
@@ -24,7 +24,7 @@ class SearchForm extends Component {
         className="search"
         type="text"
         placeholder="Search for a song"
-        onChange={this.handleInputChange}/>
+        onChange={this.props.handleInputChange}/>
         <button
         className="searchButton"
         id="submit">Find it!</button>
