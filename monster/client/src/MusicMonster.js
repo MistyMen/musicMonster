@@ -19,11 +19,10 @@ class MusicMonster extends Component {
     this.state = {
         searchData: null,
         input: '',
-        artist: '',
-        track: '',
-        track_url: '',
-        image: '',
-        album: '',
+        name: '',
+        picture: '',
+        song: '',
+        url: '',
     }
     this.handleInputChange = this.handleInputChange.bind(this);
   }
