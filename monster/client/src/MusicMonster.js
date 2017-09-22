@@ -4,11 +4,13 @@
 import React, { Component } from 'react';
 import axios from "axios";
 
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 // Import all the necessary components
 import Nav from './components/partials/Nav';
 import SearchForm from './components/SearchForm';
 import Results from './components/Results';
+// import Result from './components/Result';
+
 
 // CSS files
 import './reset.css';
@@ -26,7 +28,7 @@ class MusicMonster extends Component {
         image: '',
         album: '',
     }
-
+    this.submitToServer = this.submitToServer.bind(this);
     this.callSpotifyApi = this.callSpotifyApi.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -37,21 +39,6 @@ class MusicMonster extends Component {
 
   componentDidMount(e) {
     console.log('Did mount...');
-  //   console.log(e)
-  //   axios({
-  //     url: `https://api.spotify.com/v1/search?q=eminem&type=artist`,
-  //     method:`GET`,
-  //     headers:{
-  //           Authorization: `Bearer BQD5-fzCkRalpmC2mMNFNrv4mBgJzfyF0Xnt6fm731H20ZORhmWYlx57-XVtCnR68I0R_jVfJZUoTSUBL9yP2LucGq3p4YcssnkXdWLPP6oaAG5DjB26O7-TgddRR6IjBeG2AfLIZ2S85wUzZt9VK-i_22PVzxhJj1sp`
-  //     }
-  // })
-  // .then(res => {
-  //     return res.json();
-  //   }).then((jsonRes) => {
-  //     this.setState({
-  //       searchData: jsonRes.data,
-  //     })
-  //   })
   }
 
 
@@ -70,37 +57,52 @@ class MusicMonster extends Component {
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
       method:`GET`,
       headers:{
-            Authorization: `Bearer BQDO61PnmCDLi-EiaKqMVepZIgl8jewClVx9lLAAmL598VTo6HxYEhT4y_9E06pXrE79y6ByPOPcgpNyPl9ShPsfKM0z6xdheRrVRvpPbxL01rBk13IFX1-i58644VklBzKIcRS7OdTStaCTAexfGSo_c4m5w8djZ_L9`
+            Authorization: `Bearer BQDVGVm78nz2QR7-DuK1e_0x0vh-QtTljLMlyBLzaDRBN4WpG1teVy5yh51CDtAxZzbvpwgvjsecS6tjXgmdWzdizODwcf_t85syK3G6-vH90a3pBFQwXhXu2hFKAHFglURlMhaMtHbQ3Hy2djPOMjbc7v2LNEgWARxF`
       }
   })
   .then(res => {
     console.log(res);
 
     const artistName = res.data.artists.items["0"].name;
+    const track_url = res.data.artists.items
     const artistPopularity = res.data.artists.items["0"].popularity;
     const artistFollowers = res.data.artists.items["0"].followers.total;
-    const album = res.
+    const genre = res.data.artists.items[0].genres
+    const image = res.data.artists.items["0"].images[0].url
+    console.log(genre);
+    console.log(artistName);
+    console.log(artistPopularity);
+    console.log(artistFollowers);
+    console.log(image);
+    console.log(track_url);
+
+
     this.setState({
-      name: artistName
+      artist: artistName,
+      image: image,
+      track: track_url,
     })
+    console.log(this.state)
   })
+
   .catch(err => console.error(err))
 }
 
-// onSubmit(e){
-//   e.preventDefault();
+submitToServer(e){
+  e.preventDefault();
 
-//   axios({
-//     url: 'http:localhost:3001/[endpoint]',
-//     method: 'POST',
-//     data: {
-//       artistSearch: this.state.artist
-//     }
-//   })
-//   .then(res => {
-//     // res will include all the information you sent back from the server
-//   })
-// }
+  axios({
+    url: 'http:localhost:3001/api/artists',
+    method: 'POST',
+    data: {
+      artistSearch: this.state.artist
+    }
+  })
+  .then(res => {
+    // res will include all the information you sent back from the server
+  })
+  .catch(err => console.log(err));
+}
 
   render() {
     console.log('Rendering...');
@@ -108,17 +110,17 @@ class MusicMonster extends Component {
       <div className="App">
         <Nav />
         <main>
-        <SearchForm handleInputChange={this.handleInputChange} callSpotifyApi={this.callSpotifyApi} input={this.state.input}/>
-          <Switch>
-
-            <Route exact path="/results" render={props => <Results handleInputChange={this.handleInputChange} input={this.state.input}/>} />
-
-          </Switch>
+            <SearchForm handleInputChange={this.handleInputChange} callSpotifyApi={this.callSpotifyApi} input={this.state.input}/>
+            <Route exact path="/results" render={props => <Results artist={this.state.artist} image={this.state.image} track={this.state.track} />}/>
         </main>
       </div>
     );
   }
 }
-// <Route path='/QuoteList' component={QuoteList}/>
-// <Route exact path='/results' component={Results} handleInputChange={this.handleInputChange} updateValue={this.state.input} callSpotifyApi={this.callSpotifyApi}/>
+
+
+
+ // artist: artistName,
+ //      image: image,
+ //      track: track_url,
 export default MusicMonster;
