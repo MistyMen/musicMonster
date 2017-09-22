@@ -17,7 +17,7 @@ class Results extends Component {
           <ul>
             <li className="artist">Artist</li>
             <li className="track">Track</li>
-            <li className="Album">Album</li>
+            <li className="Album">Album </li>
             <li className="length">length</li>
           </ul>
         </div>
