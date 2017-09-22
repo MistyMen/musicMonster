@@ -13,7 +13,22 @@ class Results extends Component {
     console.log('Results rendering...');
     return(
       <div className="results">
-        {this.props.input}
+        <div className="result">
+          <ul>
+            <li className="artist">Artist</li>
+            <li className="track">Track</li>
+            <li className="Album">Album</li>
+            <li className="length">length</li>
+          </ul>
+        </div>
+        <div className="result">
+          <ul>
+            <li className="artist">Artist</li>
+            <li className="track">Track</li>
+            <li className="Album">Album</li>
+            <li className="length">length</li>
+          </ul>
+        </div>
       </div>
       )
   }
