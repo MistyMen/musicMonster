@@ -19,12 +19,12 @@ class MusicMonster extends Component {
     this.state = {
         searchData: null,
         input: '',
-        artist: '',
-        track: '',
-        track_url: '',
-        image: '',
-        album: '',
+        name: '',
+        picture: '',
+        song: '',
+        url: '',
     }
+
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
@@ -35,7 +35,8 @@ class MusicMonster extends Component {
   componentDidMount() {
     console.log('Did mount...');
   }
-  callSpotifyApi(event){
+
+  callSpotifyApi(event) {
     console.log(event)
     fetch(`https://api.spotify.com/v1/search?q=eminem&type=artist`)
       .then((res) => {
@@ -44,8 +45,9 @@ class MusicMonster extends Component {
         this.setState({
           searchData: jsonRes.data,
         })
-      })
+    })
 }
+
   handleInputChange(event) {
     event.preventDefault();
     this.setState({
@@ -55,7 +57,6 @@ class MusicMonster extends Component {
     // console.log(this.state.input);
   };
 
-
   render() {
     console.log('Rendering...');
     return (
@@ -64,9 +65,7 @@ class MusicMonster extends Component {
         <main>
         <SearchForm handleInputChange={this.handleInputChange} input={this.state.input}/>
           <Switch>
-
             <Route exact path="/results" render={props =><Results handleInputChange={this.handleInputChange} input={this.state.input}/>} />
-
           </Switch>
         </main>
       </div>

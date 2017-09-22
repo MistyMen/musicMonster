@@ -1,7 +1,7 @@
 \c monster_dev
 
-INSERT INTO artists (name, picture) VALUES
-  ('Eminem', 'pictureUrl');
+INSERT INTO artists (id, name, picture) VALUES
+  (1, 'Eminem', 'pictureUrl');
 
-INSERT INTO tracks (artist_id, song, url) VALUES
-  (1, 'Lose Yourself', 'SongUrl');
+INSERT INTO tracks (id, artist_id, song, url) VALUES
+  (1, 1, 'Lose Yourself', 'SongUrl');

@@ -14,16 +14,16 @@ class SearchForm extends Component {
     return(
       <form
         className="SearchForm" onSubmit={this.props.callSpotifyApi}>
-        <input
-        value= {this.props.updateValue}
-        className="search"
-        type="text"
-        placeholder="Search for a song"
-        onChange={this.props.handleInputChange}/>
-        <button
-        className="searchButton"
-        id="submit">
-        <Link to="/results">Find it!</Link></button>
+          <input
+            value= {this.props.updateValue}
+            className="search"
+            type="text"
+            placeholder="Search for a song"
+            onChange={this.props.handleInputChange}/>
+          <button
+            className="searchButton"
+            id="submit">
+          <Link to="/results">Find it!</Link></button>
       </form>
       )
   }
