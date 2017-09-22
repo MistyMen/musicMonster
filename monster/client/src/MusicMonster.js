@@ -19,11 +19,11 @@ class MusicMonster extends Component {
     this.state = {
         searchData: null,
         input: '',
-        artist: '',
-        track: '',
-        track_url: '',
-        image: '',
         album: '',
+        name: '',
+        picture: '',
+        song: '',
+        url: '',
     }
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -63,9 +63,7 @@ class MusicMonster extends Component {
         <main>
         <SearchForm handleInputChange={this.handleInputChange} input={this.state.input}/>
           <Switch>
-
-            <Route exact path="/results" render={props =><Results handleInputChange={this.handleInputChange} input={this.state.input}/>} />
-
+            <Route exact path="/results" render={props =><Results handleInputChange={this.handleInputChange} data={this.state.searchData}/>} />
           </Switch>
         </main>
       </div>

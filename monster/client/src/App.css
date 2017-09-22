@@ -61,6 +61,15 @@ main {
   position: relative;
   margin: 50px;
   height: 200px;
-  width: 400px;
+  width: 60%;
   background-color: grey;
+}
+
+.result {
+  background-color: lightgreen;
+  margin-top: 5px;
+}
+
+.artist .track .Album .length{
+  font-size: 18px;
 }
