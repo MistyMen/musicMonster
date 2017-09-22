@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Fetch from 'react-fetch';
 
 class Results extends Component {
   componentWillMount() {
