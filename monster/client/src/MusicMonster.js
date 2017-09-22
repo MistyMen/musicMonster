@@ -6,6 +6,7 @@ import axios from "axios";
 
 import { Route } from 'react-router-dom';
 // Import all the necessary components
+import Iframe from 'react-iframe';
 import Nav from './components/partials/Nav';
 import SearchForm from './components/SearchForm';
 import Results from './components/Results';
@@ -57,7 +58,7 @@ class MusicMonster extends Component {
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
       method:`GET`,
       headers:{
-            Authorization: `Bearer BQBO7OrV6Q0qpqU5xXZonOP6OHGgyIlrcj-HFkZ4LB30fzXj3M63V-m9N0drBTqxAhn7Fd5dS54k0UG3bjNYgtk6nvnUz7C4YIYlSt3zb4zxPzQpJjAqU-ImKbGvFVKSx5jbE6K7MYajtkdwFs34EAP_3B40dipmFWtE`
+            Authorization: `Bearer BQA4J4ml_eebhIgUrIEN41UBCLr_wuaqokYMCR9matdg4IF4mtmCSxjmeiFmgzqjjN5FqOVosRMiVLmB9C-e4mPuwsEsn_RlVNd5oJHKGbCGxJHAIPdbBADGHcbUbZfNAWFbkTyeb6Kz-uGCSWhMNtv__gW0EDtd2uK3`
       }
   })
   .then(res => {
