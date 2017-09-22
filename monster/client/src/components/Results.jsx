@@ -1,34 +1,10 @@
 import React, { Component } from 'react';
-// import '../result.css';
+import Fetch from 'react-fetch';
 
 class Results extends Component {
-  constructor() {
-      super();
-
-      // Test data, to be replaced with spotify API data
-      this.state = {
-        searchData: null,
-        artist: '',
-        track: '',
-        album: '',
-      }
-    }
-
-    componentWillMount() {
-      console.log("Results will mount...");
-    }
-
-  // Put API for spotify + configure for api
-  //   componentDidMount() {
-  //   fetch('https://ada-api.herokuapp.com/api/quotes')
-  //     .then((res) => {
-  //       return res.json();
-  //     }).then((jsonRes) => {
-  //       this.setState({
-  //         searchData: jsonRes.data,
-  //       })
-  //     })
-  // }
+  componentWillMount() {
+    console.log("Results will mount...");
+  }
 
   componentDidMount() {
     console.log('Results did mount...');
@@ -38,7 +14,7 @@ class Results extends Component {
     console.log('Results rendering...');
     return(
       <div className="results">
-        Results Div
+        {this.props.input}
       </div>
       )
   }
