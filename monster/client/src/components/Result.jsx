@@ -9,8 +9,8 @@ class Result extends Component {
   render() {
     console.log('Q rendering ____)_)_)_)_)_)_)_(KJHjwdjhwjdhwjdh', this.props.song);
     return (
-      <div className="result">
-        {this.props.song}
+      <div className="results">
+        {this.props.song.href}
 
       </div>
     )
