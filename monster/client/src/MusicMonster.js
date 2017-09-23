@@ -3,8 +3,9 @@
 // Import all the necessary packages
 import React, { Component } from "react";
 import Fetch from "react-fetch";
+import axios from "axios";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 
-import { Route, Switch } from "react-router-dom";
 // Import all the necessary components
 import Nav from "./components/partials/Nav";
 import SearchForm from "./components/SearchForm";
@@ -27,31 +28,34 @@ class MusicMonster extends Component {
       album: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.callSpotifyApi = this.callSpotifyApi.bind(this);
   }
 
-  componentWillMount() {
-    console.log('Will Mount...');
-  }
+  // componentWillMount() {
+  //   console.log('Will Mount...');
+  // }
 
-  componentDidMount() {
-    console.log('Did mount...');
-  }
+  // componentDidMount() {
+  //   console.log('Did mount...');
+  // }
 
   handleInputChange(event) {
     event.preventDefault();
     this.setState({
       input: event.target.value
     });
-    console.log(event.target.value);
+    // console.log(event.target.value);
   }
 
   callSpotifyApi(event) {
-    console.log(event);
-    fetch(`https://api.spotify.com/v1/search?q=eminem&type=artist`)
-      .then(res => {
-        return res.json();
-      })
+    event.preventDefault();
+    // console.log(event, "callSpotifyApi");
+    axios(`https://ada-api.herokuapp.com/api/quotes`)
+      // .then(res => {
+      //   return res.json();
+      // })
       .then(jsonRes => {
+        console.log(jsonRes, "axios");
         this.setState({
           searchData: jsonRes.data
         });
@@ -61,27 +65,24 @@ class MusicMonster extends Component {
   render() {
     console.log("Rendering...");
     return (
-      <div className="App">
-        <Nav />
-        <main>
-          <SearchForm
-            handleInputChange={this.handleInputChange}
-            input={this.state.input}
-          />
-          <Switch>
-            <Route
-              exact
-              path="/results"
-              render={props => (
-                <Results
-                  handleInputChange={this.handleInputChange}
-                  input={this.state.input}
-                />
-              )}
+      <Router>
+        <div className="App">
+          <Nav />
+          <main>
+            <SearchForm
+              handleInputChange={this.handleInputChange}
+              input={this.state.input}
+              callSpotifyApi={this.callSpotifyApi}
             />
-          </Switch>
-        </main>
-      </div>
+          </main>
+
+          <Route
+            exact
+            path="/results"
+            render={props => <Results data={this.state.searchData} />}
+          />
+        </div>
+      </Router>
     );
   }
 }
@@ -89,3 +90,17 @@ class MusicMonster extends Component {
 // <Route exact path='/results' component={Results} handleInputChange={this.handleInputChange} updateValue={this.state.input} callSpotifyApi={this.callSpotifyApi}/>
 
 export default MusicMonster;
+
+// <Switch>
+//   <Route
+//     exact
+//     path="/results"
+//     render={props => (
+//       <Results
+//         handleInputChange={this.handleInputChange}
+//         input={this.state.input}
+//         searchData={this.state.searchData}
+//       />
+//     )}
+//   />
+// </Switch>;
