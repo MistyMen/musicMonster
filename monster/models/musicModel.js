@@ -20,6 +20,18 @@ Music.save = (music) => {
       music);
 };
 
+Music.userIndex = (user, func) => {
+  return db.one(
+    `SELECT * FROM user
+      WHERE
+      id = $/username/
+      AND
+      password = $/password/
+      RETURNING *
+    `,
+      user);
+};
+
 Music.createTrack = (music) => {
   return db.one(
     `

@@ -22,7 +22,7 @@ function createTrack(id) {
   modelMon.createTrack({
       song: req.body.song,
       url: req.body.url,
-      artist_id: req.body.artist_id
+      artist_id: req.body.artist_id,
     })
     .then((record) => {
       console.log('OK...Creating Track', record);
