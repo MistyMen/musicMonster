@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { slide as Menu } from 'react-burger-menu';
+// import { Link } from 'react-router-dom';
 
 class Nav extends Component {
   render() {
     return(
       <nav>
         <ul>
-          <li>|||</li>
-          <li><Link to="/">Music Monster</Link></li>
-          <li>Profile</li>
+          <li>
+          <div className="buttons">
+            <Menu width={ '20%' }>
+              <a id="Home" className="menu-item" href="/">Home</a>
+              <a id="Results" className="menu-item" href="/results">Results</a>
+              <a id="User" className="menu-item" href="/">User</a>
+            </Menu>
+            </div>
+          </li>
+          <span className="logo"><li>Music Monster</li></span>
+          <span className="logo"><li>Profile</li></span>
         </ul>
       </nav>
       )

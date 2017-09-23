@@ -12,20 +12,19 @@ class SearchForm extends Component {
 
   render() {
     return(
-      <form
-        className="SearchForm" onSubmit={this.props.callSpotifyApi}>
+      <form className="SearchForm" onSubmit={this.props.callSpotifyApi}>
         <input
         value= {this.props.input}
         className="search"
         type="text"
         placeholder="Search for a Artist"
         onChange={this.props.handleInputChange}/>
-        <button type="submit" value="submit"
+        <button
+        type="submit"
         className="searchButton"
-        id="submit">
-        <Link to="/results">Find it!</Link></button>
+        id="submit"><Link type="submit" to="/results">Find</Link></button>
       </form>
-      )
+      );
   }
 }
 
