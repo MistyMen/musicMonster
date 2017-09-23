@@ -57,14 +57,13 @@ class MusicMonster extends Component {
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
       method:`GET`,
       headers:{
-            Authorization: `Bearer BQBO7OrV6Q0qpqU5xXZonOP6OHGgyIlrcj-HFkZ4LB30fzXj3M63V-m9N0drBTqxAhn7Fd5dS54k0UG3bjNYgtk6nvnUz7C4YIYlSt3zb4zxPzQpJjAqU-ImKbGvFVKSx5jbE6K7MYajtkdwFs34EAP_3B40dipmFWtE`
+            Authorization: `Bearer BQC3DRLrstOaMu6K1T1N79jHQjamH9vEGZ7IaAnr-cWIEAQ8gyxPx2ZeVAXFrDSyWqbihQK2x1BPizwCHn3KQ5gD4XaEOTvu77MwJ7tNrisglhEkewokCBdyMGXZqsRWj4b8n3sI9U8pI8k3LgWdv-a48_iOH4Y48K_S`
       }
   })
   .then(res => {
     console.log(res);
-
     const artistName = res.data.artists.items["0"].name;
-    const track_url = res.data.artists.items[0].href;
+    const track_url = res.data.artists.items["0"].external_urls.spotify;
     const artistPopularity = res.data.artists.items["0"].popularity;
     const artistFollowers = res.data.artists.items["0"].followers.total;
     const genre = res.data.artists.items[0].genres
@@ -92,15 +91,20 @@ class MusicMonster extends Component {
 
 submitToServer(e){
   e.preventDefault();
+  console.log('this is the submit to server -----------')
 
   axios({
-    url: 'http:localhost:3001/api/artists',
     method: 'POST',
+    url: 'http://localhost:3001/api/artists',
+
     data: {
-      artistSearch: this.state.artist
+      name: this.state.artist,
+      picture: this.state.image
     }
+
   })
   .then(res => {
+    console.log(this.state.artist,'-----------')
     // res will include all the information you sent back from the server
   })
   .catch(err => console.log(err));
@@ -112,8 +116,9 @@ submitToServer(e){
       <div className="App">
         <Nav />
         <main>
+            <button onClick={this.submitToServer}>press to save</button>
             <SearchForm handleInputChange={this.handleInputChange} callSpotifyApi={this.callSpotifyApi} input={this.state.input}/>
-            <Route exact path="/results" render={props => <Results artist={this.state.artist} image={this.state.image} track={this.state.track} data={this.state.searchData} input={this.state.input}/>}/>
+            <Route exact path="/results" render={props => <Results artist={this.state.artist} image={this.state.image} track={this.state.track} data={this.state.searchData} input={this.state.input} submit={this.submitToServer}/>}/>
         </main>
       </div>
     );

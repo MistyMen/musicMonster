@@ -17,6 +17,8 @@ controllerMon.indexAll = (req, res) => {
     });
 };
 
+
+
 /*store new record in db*/
 function createTrack(id) {
   modelMon
@@ -38,14 +40,14 @@ function createTrack(id) {
   let id = "";
   modelMon
     .findArtistByName({
-      name: "asasdasdqqweqw"
+      name: ""
     })
     .then(data => {
       if (typeof data[0] !== "object") {
         modelMon
           .createArtist({
-            name: "asasdasdqqweqw",
-            picture: "asdad"
+            name: "req.data.name",
+            picture: "req.data.picture"
           })
           .then(record => {
             id = record.id;
