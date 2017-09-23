@@ -62,7 +62,7 @@ class MusicMonster extends Component {
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
       method:`GET`,
       headers:{
-            Authorization: `Bearer BQA4J4ml_eebhIgUrIEN41UBCLr_wuaqokYMCR9matdg4IF4mtmCSxjmeiFmgzqjjN5FqOVosRMiVLmB9C-e4mPuwsEsn_RlVNd5oJHKGbCGxJHAIPdbBADGHcbUbZfNAWFbkTyeb6Kz-uGCSWhMNtv__gW0EDtd2uK3`
+            Authorization: `Bearer BQDKJrIoYulXYLIlH8RfG71ayVtBz8P-ukZFXu3-SxuM6rrZt986pjHH1lecNtGh0keRkzk8EEofhIos2XbRTkxereGz6TthBLa-0YTpAJhvGGdzXxWS62zE9jFY3_O1sNIi4Whb2J15ShcfufH6dsGk-j5E2Yb6nl5a`
       }
   })
   .then(res => {
@@ -73,7 +73,7 @@ class MusicMonster extends Component {
     const artistPopularity = res.data.artists.items["0"].popularity;
     const artistFollowers = res.data.artists.items["0"].followers.total;
     const genre = res.data.artists.items[0].genres
-    const image = res.data.artists.items["0"].images[0].url
+    const image = res.data.artists.items["0"].images[1].url
     console.log(genre);
     console.log(artistName);
     console.log(artistPopularity);
