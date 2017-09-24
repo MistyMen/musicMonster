@@ -1,4 +1,3 @@
-
 /* Google Font */
 @import url('https://fonts.googleapis.com/css?family=Amarante');
 body {
@@ -8,7 +7,7 @@ body {
   margin: 10px auto;
   font-size: 24px;
   cursor: default;
-  font-family: 'Amarante', cursive;
+  font-family: "Amarante", cursive;
 }
 
 a {
@@ -37,7 +36,9 @@ header {
 .reg {
   display: flex;
 }
-.menu, .login, .sign {
+.menu,
+.login,
+.sign {
   cursor: pointer;
 }
 
@@ -48,7 +49,10 @@ header {
   transition: all 0.5s;
 }
 
-.menu:hover, .login:hover, .sign:hover, .about a:hover {
+.menu:hover,
+.login:hover,
+.sign:hover,
+.about a:hover {
   color: white;
 }
 .menu:hover {
@@ -57,7 +61,8 @@ header {
   transform: rotate(180deg);
 }
 /* Separation */
-.login, .VLine {
+.login,
+.VLine {
   margin-right: 10px;
 }
 
@@ -78,7 +83,7 @@ header {
   margin-top: 22px;
 }
 /* Subtitle - choice and input box */
-.search{
+.search {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,7 +104,7 @@ header {
   margin: 6px;
   border-radius: 6px;
   font-weight: 400;
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 15px;
   cursor: pointer;
 }
@@ -162,21 +167,33 @@ header {
   background: linear-gradient(to top right, #ffccff -6%, #99ffcc 112%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-top: 6px;
 }
 
 .searchSec {
   text-transform: uppercase;
   letter-spacing: 4px;
   color: #a7a7a7;
-  margin-top: -16px;
+  margin-top: -8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.searchSec span {
+
+.searchSec h3 {
+  margin: 0px 0px 8px;
+}
+.searchSec h3 span {
   padding: 3px 2px 3px 7px;
   margin: 3px;
   border-radius: 6px;
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 10px;
   cursor: pointer;
+}
+
+.searchInputSec form {
+  margin-top: 6px;
 }
 
 .artistSec {
@@ -186,7 +203,7 @@ header {
 .artistSec:hover {
   border: 1px solid white;
 }
-.searchSec span:hover {
+.searchSec h3 span:hover {
   color: white;
 }
 
@@ -207,6 +224,11 @@ header {
   cursor: pointer;
   outline: none;
   transition: all 0.5s;
+  margin-left: 10px;
+}
+
+.results .searchSec .btnSec a {
+  color: white;
 }
 
 .results .searchSec .btnSec:hover {
@@ -248,6 +270,8 @@ header {
   filter: grayscale(100%);
   border: 1px solid #3e2b14;
   padding: 6px;
+  margin-right: 24px;
+  height: 400px;
 }
 
 footer {

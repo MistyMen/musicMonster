@@ -4,13 +4,14 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import { Route } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 // Import all the necessary components
-import Iframe from "react-iframe";
+// import Iframe from "react-iframe";
 import Nav from "./components/partials/Nav";
 import Footer from "./components/partials/Footer";
 import SearchForm from "./components/SearchForm";
 import Results from "./components/Results";
+import { Link } from "react-router-dom";
 // import Result from './components/Result';
 
 // CSS files
@@ -23,16 +24,16 @@ class MusicMonster extends Component {
     this.state = {
       searchData: null,
       input: "",
-      album: "",
-      name: "",
-      picture: "",
-      song: "",
-      url: ""
+      artist: "",
+      image: "",
+      track: "",
+      home: true
     };
     this.submitToServer = this.submitToServer.bind(this);
     this.callSpotifyApi = this.callSpotifyApi.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.callSpotifyApi = this.callSpotifyApi.bind(this);
+    this.checkUrl = this.checkUrl.bind(this);
   }
 
   componentWillMount() {
@@ -40,6 +41,9 @@ class MusicMonster extends Component {
   }
 
   componentDidMount(e) {
+    console.log("HAAAAAAAAAA");
+    this.checkUrl();
+
     console.log("Did mount...");
   }
   handleInputChange(event) {
@@ -48,8 +52,26 @@ class MusicMonster extends Component {
     });
   }
 
+  checkUrl() {
+    window.location.href.includes("results")
+      ? this.setState({ home: false })
+      : this.setState({ home: true });
+  }
+
   callSpotifyApi(e) {
-    console.log("in here");
+    // Condition to set Home to false for CSS style
+    console.log("before", this.state.home);
+
+    // if (this.state.home) {
+    //   // window.location.href = "/results";
+
+    //   this.setState({
+    //     home: false
+    //   });
+    // }
+    console.log("after", this.state.home);
+    // //  // //  //  //  //  //  //  //  //  //
+
     e.preventDefault();
     const artistSearch = this.state.input;
 
@@ -57,7 +79,7 @@ class MusicMonster extends Component {
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
       method: `GET`,
       headers: {
-        Authorization: `Bearer BQDKJrIoYulXYLIlH8RfG71ayVtBz8P-ukZFXu3-SxuM6rrZt986pjHH1lecNtGh0keRkzk8EEofhIos2XbRTkxereGz6TthBLa-0YTpAJhvGGdzXxWS62zE9jFY3_O1sNIi4Whb2J15ShcfufH6dsGk-j5E2Yb6nl5a`
+        Authorization: `Bearer BQCvNOGEtAlCPatkbHRB4Uu0-2p-cp-DXnQAUjlPyBcSaSjuGGA4abKRi24bzJG68or0CN43y3A7QsfsqUcIuiDRl8q_iPAR5LoQBe5p4crjSwZlE8pikM-Ajr0wvVD7KIJCVhK7EnjyANsnucYOf2w9QhmaxiWfxNDe&refresh_token=AQCxyeR4mxd8kYraAo3omSgtLmhy5uaEU2gPWrQs4ADELBuKo5ywWww61ILrsr_vZgaXzrbWfWZojvtAWjTsmuRhxqUJDbX2uef8d1NdRa2I1L0BETMSqMogVGhxn3oYdG8`
       }
     })
       .then(res => {
@@ -83,7 +105,7 @@ class MusicMonster extends Component {
           track: track_url
         });
         console.log("TRACK TRACK, ", this.state.searchData);
-        // console.log("Search DATA -------->",res.data.artists.items["0"]);
+        console.log("Search DATA -------->", res.data.artists.items);
       })
       .catch(err => console.error(err));
   }
@@ -106,37 +128,49 @@ class MusicMonster extends Component {
 
   render() {
     console.log("Rendering...");
+    console.log(this.state.home);
     return (
       <div className="App">
         <Nav />
+        <div className={"container" + (this.state.home ? "" : "Sec")}>
+          <div className={this.state.home ? "front" : "results"}>
+            <div className={"title" + (this.state.home ? "" : "Sec")}>
+              Music Monster
+            </div>
+            <div className={"search" + (this.state.home ? "" : "Sec")}>
+              <h3>
+                <span>Genre</span>
+                <span className={"artist" + (this.state.home ? "" : "Sec")}>
+                  Artist
+                </span>
+                <span>Music</span>
+              </h3>
 
-        <div className="container" >
-        <div className="front">
-          <div className="title">Music Monster</div>
-          <div className="search">
-            <h3><span>Genre</span>
-            <span className="artist">Artist</span><span>Music</span></h3>
+              <SearchForm
+                home={this.state.home}
+                handleInputChange={this.handleInputChange}
+                callSpotifyApi={this.callSpotifyApi}
+                input={this.state.input}
+              />
 
-            <SearchForm
-            handleInputChange={this.handleInputChange}
-            callSpotifyApi={this.callSpotifyApi}
-            input={this.state.input}
-          />
-          <Route
-          exact
-          path="/results"
-          render={props => (
-            <Results
-              artist={this.state.artist}
-              image={this.state.image}
-              track={this.state.track}
-              data={this.state.searchData}
-              input={this.state.input}
-            />
-          )}
-        />
+              <Switch>
+                <Route
+                  exact
+                  path="/results"
+                  render={props => (
+                    <Results
+                      checkUrl={this.checkUrl}
+                      artist={this.state.artist}
+                      image={this.state.image}
+                      track={this.state.track}
+                      data={this.state.searchData}
+                      input={this.state.input}
+                    />
+                  )}
+                />
+              </Switch>
+            </div>
           </div>
-        </div>
         </div>
         <Footer />
       </div>
