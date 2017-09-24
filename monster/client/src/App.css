@@ -78,6 +78,7 @@ menu {
 .result {
   background-color: lightgreen;
   margin-top: 5px;
+  padding: 10px;
 }
 
 .artist .track .Album .length{

@@ -3,13 +3,14 @@
 // Import all the necessary packages
 import React, { Component } from 'react';
 import axios from "axios";
+import { Route, Switch} from 'react-router-dom';
 
-import { Route } from 'react-router-dom';
 // Import all the necessary components
 import Nav from './components/partials/Nav';
 import SearchForm from './components/SearchForm';
 import Results from './components/Results';
-// import Result from './components/Result';
+import Register from './components/Register'
+import Login from './components/Login'
 
 
 // CSS files
@@ -27,10 +28,14 @@ class MusicMonster extends Component {
         picture: '',
         song: '',
         url: '',
+        username: '',
+        password: '',
     }
     this.submitToServer = this.submitToServer.bind(this);
     this.callSpotifyApi = this.callSpotifyApi.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleUsernameInput = this.handleUsernameInput.bind(this);
+    this.handlePasswordInput = this.handlePasswordInput.bind(this);
   }
 
   componentWillMount() {
@@ -48,11 +53,27 @@ class MusicMonster extends Component {
     });
 }
 
+handleUsernameInput(event) {
+  event.preventDefault();
+    this.setState({
+      username: event.target.value
+    });
+    console.log(event.target.value);
+}
+
+handlePasswordInput(event) {
+  event.preventDefault();
+    this.setState({
+      password: event.target.value
+    });
+    console.log(event.target.value);
+}
+
   callSpotifyApi(e){
     console.log('in here')
     e.preventDefault();
     const artistSearch = this.state.input;
-
+    console.log(artistSearch);
      axios({
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
       method:`GET`,
@@ -112,17 +133,37 @@ submitToServer(e){
       <div className="App">
         <Nav />
         <main>
-            <SearchForm handleInputChange={this.handleInputChange} callSpotifyApi={this.callSpotifyApi} input={this.state.input}/>
-            <Route exact path="/results" render={props => <Results artist={this.state.artist} image={this.state.image} track={this.state.track} data={this.state.searchData} input={this.state.input}/>}/>
+            <SearchForm
+              handleInputChange={this.handleInputChange}
+              callSpotifyApi={this.callSpotifyApi}
+              input={this.state.input}
+              log={console.log(this.props.location)}/>
+            <Switch>
+            <Route exact path="/results"
+              render={props => <Results
+                artist={this.state.artist}
+                image={this.state.image}
+                track={this.state.track}
+                data={this.state.searchData}
+                input={this.state.input}/>}/>
+            <Route exact path="/login"
+              render={props => <Login
+                username={this.state.username}
+                password={this.state.password}
+                handleUsernameInput={this.handleUsernameInput}
+                handlePasswordInput={this.handlePasswordInput}/>}/>
+            <Route exact path="/register"
+              render={props => <Register
+                username={this.state.username}
+                password={this.state.password}
+                handleUsernameInput={this.handleUsernameInput}
+                handlePasswordInput={this.handlePasswordInput}/>}/>
+              }
+            </Switch>
         </main>
       </div>
     );
   }
 }
 
-
-
- // artist: artistName,
- //      image: image,
- //      track: track_url,
 export default MusicMonster;
