@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const User = {};
 
 User.findOne = (user) => {
-  return db.one(
+  return db.oneOrNone(
     `SELECT * FROM users
       WHERE
       username = $/username/
@@ -13,14 +13,15 @@ User.findOne = (user) => {
 };
 
 User.saveNew = (user) => {
-  return db.one(`INSERT INTO users (username, password)
-    VALUES ($/username/, $/password/)
-    RETURNING*`,
-    user);
+  return db.one(
+    `INSERT INTO users (username, password)
+      VALUES ($/username/, $/password/)
+      RETURNING*`,
+      user);
 };
 
-User.comparePassword = (password) => {
-  return bcrypt.compareSync(password, this.password);
+User.comparePassword = (password, databasePass) => {
+  return bcrypt.compareSync(password, databasePass);
 };
 
 module.exports = User;

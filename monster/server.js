@@ -3,7 +3,7 @@ const express = require('express');
 const logger = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
-const jwt = require('json-web-token');
+const jwt = require('jsonwebtoken');
 const expressJWT = require('express-jwt');
 const music = require('./models/musicModel');
 
@@ -26,13 +26,13 @@ app.use((req, res, next) => {
   if(req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
     jwt.verify(req.headers.authorization.split(' ')[1], 'darkWaider', (err, decode) => {
       if(err) {
-        req.body = undefined;
+        req.user = undefined;
       }
-      req.body = decode;
+      req.user = decode;
       next();
-      })
-    } else {
-      req.body = undefined;
+    })
+  } else {
+      req.user = undefined;
       next();
     }
 });
@@ -46,11 +46,6 @@ app.use(logger('dev'));
 
 /*set static file_path*/
 app.use(express.static('public'));
-
-/*set up routes*/
-// app.use('/', (req, res) =>
-//   res.sendFile(__dirname + '/public/index.html')
-//   );
 
 /*API routes*/
 const musicRoute = require('./routes/musicroutes');
