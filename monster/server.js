@@ -5,7 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const jwt = require('json-web-token');
 const expressJWT = require('express-jwt');
-const Music = require('./models/musicModel');
+const music = require('./models/musicModel');
 
 // const passport = require('passport');
 // const session = require('express-session');
@@ -24,17 +24,17 @@ app.listen(PORT, () => {
 /*exprees middleware for user*/
 app.use((req, res, next) => {
   if(req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
-    jwt.verify(req.headers.authorization.split(' ')[1], ' RESTFULLAPIds', (err, decode) => {
+    jwt.verify(req.headers.authorization.split(' ')[1], 'darkWaider', (err, decode) => {
       if(err) {
         req.body = undefined;
-        req.body = decode;
-        next();
-       }
-     })
-  } else {
+      }
+      req.body = decode;
+      next();
+      })
+    } else {
       req.body = undefined;
       next();
-  }
+    }
 });
 
 /*set up body parser */
@@ -53,7 +53,7 @@ app.use(express.static('public'));
 //   );
 
 /*API routes*/
-const musicRoute = require('./routes/musicroutes')
+const musicRoute = require('./routes/musicroutes');
 app.use('/api', musicRoute);
 
 /*error message*/

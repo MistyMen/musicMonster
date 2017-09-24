@@ -1,26 +1,26 @@
-const db = require("../db/config");
+const db = require('../db/config');
 const bcrypt = require('bcrypt');
 
-const User = {}
+const User = {};
 
 User.findOne = (user) => {
   return db.one(
-    `SELECT * FROM user
+    `SELECT * FROM users
       WHERE
-      email = $/email/
-      RETURNING *`,
+      username = $/username/
+      `,
       user);
 };
 
 User.saveNew = (user) => {
-  return db.one(`INSERT INTO user (username, password, email)
-    VALUES ($/username/, $/password/, $/email/)
+  return db.one(`INSERT INTO users (username, password)
+    VALUES ($/username/, $/password/)
     RETURNING*`,
     user);
 };
 
-// User.index.comparePassword = function(password) {
-//   return bcrypt.compareSync(password, this.hash_password);
-// }
+User.comparePassword = (password) => {
+  return bcrypt.compareSync(password, this.password);
+};
 
-module exports = User;
+module.exports = User;

@@ -2,7 +2,7 @@
 
 drop table if exists artists;
 drop table if exists tracks;
-drop table if exists user;
+drop table if exists users;
 
 CREATE TABLE artists (
   id VARCHAR(64) PRIMARY KEY,
@@ -11,6 +11,12 @@ CREATE TABLE artists (
 );
 
 CREATE INDEX ON artists (name);
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(64) NOT NULL,
+  password TEXT NOT NULL
+);
 
 CREATE TABLE tracks (
   id VARCHAR(64) PRIMARY KEY,
@@ -21,10 +27,3 @@ CREATE TABLE tracks (
 
 CREATE INDEX ON tracks (song);
 
-
-CREATE TABLE user (
-  id serial PRIMARY KEY,
-  username VARCHAR(64) NOT NULL,
-  email VARCHAR(64) NOT NULL,
-  password TEXT NOT NULL
-)
