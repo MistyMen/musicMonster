@@ -57,7 +57,7 @@ class MusicMonster extends Component {
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
       method:`GET`,
       headers:{
-            Authorization: `Bearer BQC3DRLrstOaMu6K1T1N79jHQjamH9vEGZ7IaAnr-cWIEAQ8gyxPx2ZeVAXFrDSyWqbihQK2x1BPizwCHn3KQ5gD4XaEOTvu77MwJ7tNrisglhEkewokCBdyMGXZqsRWj4b8n3sI9U8pI8k3LgWdv-a48_iOH4Y48K_S`
+            Authorization: `Bearer BQCLAuAW44alXtrpVaSjEzlXdXyG2wuy_eqrYhbqBglTLtwsplEq36DAl_LliCV1rQM8iBTnWwwXSh5k23b2PoI7WhMBRBS1BugvxYcyAFrcP5eUN1GgceEFO5Z6G3n63HlPjDX9rnK5jELfmP4zBCAgn_WM-ywjlqT`
       }
   })
   .then(res => {
