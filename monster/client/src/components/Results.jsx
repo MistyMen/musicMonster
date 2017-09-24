@@ -13,69 +13,60 @@ class Results extends Component {
     console.log("Results will mount...");
   }
 
-  componentDidMount() {
-    console.log('Results did mount...in Results');
-    this.setState({
-      searchResults: "https://open.spotify.com/embed?uri=" + this.props.data["0"].external_urls.spotify
-    });
-  }
+  // componentDidMount() {
+  //   console.log('Results did mount...in Results');
+  //   this.setState({
+  //     searchResults: "https://open.spotify.com/embed?uri=" + this.props.data["0"].external_urls.spotify
+  //   });
+  // }
 
   render() {
     console.log("Results rendering...");
     // console.log(this.props.artist, "Artist")
-    console.log(this.props.image, "Image");
-    console.log("tracks here------>", this.props.data["0"].external_urls.spotify);
+    // console.log(this.props.image, "Image");
+    // console.log("tracks here------>", this.props.data["0"].external_urls.spotify);
     return (
       <div className="results">
-      <img src={this.props.image} alt="Artist Image" />
-      <h3>{this.props.artist} </h3>
-      <iframe src={this.state.searchResults} width="300" height="380" frameBorder="0" allowTransparency="true"></iframe>
+     
+      <div className="containerSec" >
+
+      <div className="musicInfo">
+        <div className="name">G-Eazy</div>
+        <div className="music">
+          <div className="image">
+            <img src="https://yt3.ggpht.com/-VvJBQ3QFIvI/AAAAAAAAAAI/AAAAAAAAAAA/8S5HaQc--Lk/s900-c-k-no-mo-rj-c0xffffff/photo.jpg" alt="G Eazy" height="400" width="400" />
+          </div>
+          <div className="tracks">
+            <iframe src="https://open.spotify.com/embed?uri=https://open.spotify.com/album/09Q3WwGYsQe5ognkvVkmCu" width="400" height="415"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+
+
+
+
+
+
+
+      
       </div>
     );
   }
 }
 export default Results;
-// {data.match('/' + this.props.input + '/g')}
+// <img src={this.props.image} alt="Artist Image" />
+// <h3>{this.props.artist} </h3>
+// <iframe src={this.state.searchResults} width="300" height="380" frameBorder="0" allowTransparency="true"></iframe>
 
-// {this.props.data.map(song => {
-//   console.log(song);
-//   return <Result song={song} key={song.id} />
-//     })}
 
-// {this.props.data.filter(d => {
-//  console.log(this.props.input)
-//  // let dataD = d
-//  console.log(d.name)
-//  // console.log(this.props.input == d.match('/' + d.name + '/g'))
+// <div className="results">
+// <div className="titleSec">Music Monster</div>
+// <div className="searchSec">
+//   <span>Genre</span>
+//   <span className="artistSec">Artist</span><span>Music</span>
 
-// })}
-
-//        }
-// var longWords = words.filter(function(word){
-//   return word.length > 6;
-// });
-// {this.props.data(song => {
-//      console.log(song);
-//        })}
-// return <Result song={song} key={song.id} />
-//   <span>{this.props.artist}</span>
-//   <img src={this.props.image} />
-// {this.props.input}
-// <span >{this.props.image}</span>
-
-// <div className="result">
-// <ul>
-//   <li className="artist">{this.props.artist}</li>
-//   <li className="track">{this.props.track}</li>
-//   <li className="Album">asas</li>
-//   <li className="length">length</li>
-// </ul>
 // </div>
-// <div className="result">
-// <ul>
-//   <li className="artist">Artist</li>
-//   <li className="track">Track</li>
-//   <li className="Album">Album</li>
-//   <li className="length">length</li>
-// </ul>
 // </div>

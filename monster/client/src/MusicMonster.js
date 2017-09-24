@@ -1,17 +1,17 @@
 // This is the top level of the application
 
 // Import all the necessary packages
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import axios from "axios";
 
-import { Route } from 'react-router-dom';
+import { Route } from "react-router-dom";
 // Import all the necessary components
-import Iframe from 'react-iframe';
-import Nav from './components/partials/Nav';
-import SearchForm from './components/SearchForm';
-import Results from './components/Results';
+import Iframe from "react-iframe";
+import Nav from "./components/partials/Nav";
+import Footer from "./components/partials/Footer";
+import SearchForm from "./components/SearchForm";
+import Results from "./components/Results";
 // import Result from './components/Result';
-
 
 // CSS files
 import "./reset.css";
@@ -21,14 +21,14 @@ class MusicMonster extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        searchData: null,
-        input: '',
-        album: '',
-        name: '',
-        picture: '',
-        song: '',
-        url: '',
-    }
+      searchData: null,
+      input: "",
+      album: "",
+      name: "",
+      picture: "",
+      song: "",
+      url: ""
+    };
     this.submitToServer = this.submitToServer.bind(this);
     this.callSpotifyApi = this.callSpotifyApi.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -36,112 +36,112 @@ class MusicMonster extends Component {
   }
 
   componentWillMount() {
-    console.log('Will Mount...');
+    console.log("Will Mount...");
   }
 
   componentDidMount(e) {
-    console.log('Did mount...');
+    console.log("Did mount...");
   }
-
-  // componentDidMount() {
-  //   console.log('Did mount...');
-  // }
-
   handleInputChange(event) {
     this.setState({
       input: event.target.value
     });
-}
+  }
 
-  callSpotifyApi(e){
-    console.log('in here')
+  callSpotifyApi(e) {
+    console.log("in here");
     e.preventDefault();
     const artistSearch = this.state.input;
 
-     axios({
+    axios({
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
-      method:`GET`,
-      headers:{
-            Authorization: `Bearer BQDKJrIoYulXYLIlH8RfG71ayVtBz8P-ukZFXu3-SxuM6rrZt986pjHH1lecNtGh0keRkzk8EEofhIos2XbRTkxereGz6TthBLa-0YTpAJhvGGdzXxWS62zE9jFY3_O1sNIi4Whb2J15ShcfufH6dsGk-j5E2Yb6nl5a`
+      method: `GET`,
+      headers: {
+        Authorization: `Bearer BQDKJrIoYulXYLIlH8RfG71ayVtBz8P-ukZFXu3-SxuM6rrZt986pjHH1lecNtGh0keRkzk8EEofhIos2XbRTkxereGz6TthBLa-0YTpAJhvGGdzXxWS62zE9jFY3_O1sNIi4Whb2J15ShcfufH6dsGk-j5E2Yb6nl5a`
       }
-  })
-  .then(res => {
-    console.log(res);
-
-    const artistName = res.data.artists.items["0"].name;
-    const track_url = res.data.artists.items[0].href;
-    const artistPopularity = res.data.artists.items["0"].popularity;
-    const artistFollowers = res.data.artists.items["0"].followers.total;
-    const genre = res.data.artists.items[0].genres
-    const image = res.data.artists.items["0"].images[1].url
-    console.log(genre);
-    console.log(artistName);
-    console.log(artistPopularity);
-    console.log(artistFollowers);
-    console.log(image);
-    console.log(track_url);
-
-
-    this.setState({
-      searchData: res.data.artists.items,
-      artist: artistName,
-      image: image,
-      track: track_url,
     })
-    console.log("TRACK TRACK, ",this.state.searchData)
-     // console.log("Search DATA -------->",res.data.artists.items["0"]);
-  })
+      .then(res => {
+        console.log(res);
 
-  .catch(err => console.error(err))
-}
+        const artistName = res.data.artists.items["0"].name;
+        const track_url = res.data.artists.items[0].href;
+        const artistPopularity = res.data.artists.items["0"].popularity;
+        const artistFollowers = res.data.artists.items["0"].followers.total;
+        const genre = res.data.artists.items[0].genres;
+        const image = res.data.artists.items["0"].images[1].url;
+        console.log(genre);
+        console.log(artistName);
+        console.log(artistPopularity);
+        console.log(artistFollowers);
+        console.log(image);
+        console.log(track_url);
 
-submitToServer(e){
-  e.preventDefault();
+        this.setState({
+          searchData: res.data.artists.items,
+          artist: artistName,
+          image: image,
+          track: track_url
+        });
+        console.log("TRACK TRACK, ", this.state.searchData);
+        // console.log("Search DATA -------->",res.data.artists.items["0"]);
+      })
+      .catch(err => console.error(err));
+  }
 
-  axios({
-    url: 'http:localhost:3001/api/artists',
-    method: 'POST',
-    data: {
-      artistSearch: this.state.artist
-    }
-  })
-  .then(res => {
-    // res will include all the information you sent back from the server
-  })
-  .catch(err => console.log(err));
-}
+  submitToServer(e) {
+    e.preventDefault();
+
+    axios({
+      url: "http:localhost:3001/api/artists",
+      method: "POST",
+      data: {
+        artistSearch: this.state.artist
+      }
+    })
+      .then(res => {
+        // res will include all the information you sent back from the server
+      })
+      .catch(err => console.log(err));
+  }
 
   render() {
     console.log("Rendering...");
     return (
       <div className="App">
         <Nav />
-        <main>
-            <SearchForm handleInputChange={this.handleInputChange} callSpotifyApi={this.callSpotifyApi} input={this.state.input}/>
-            <Route exact path="/results" render={props => <Results artist={this.state.artist} image={this.state.image} track={this.state.track} data={this.state.searchData} input={this.state.input}/>}/>
-        </main>
+
+        <div className="container" >
+        <div className="front">
+          <div className="title">Music Monster</div>
+          <div className="search">
+            <h3><span>Genre</span>
+            <span className="artist">Artist</span><span>Music</span></h3>
+
+            <SearchForm
+            handleInputChange={this.handleInputChange}
+            callSpotifyApi={this.callSpotifyApi}
+            input={this.state.input}
+          />
+          <Route
+          exact
+          path="/results"
+          render={props => (
+            <Results
+              artist={this.state.artist}
+              image={this.state.image}
+              track={this.state.track}
+              data={this.state.searchData}
+              input={this.state.input}
+            />
+          )}
+        />
+          </div>
+        </div>
+        </div>
+        <Footer />
       </div>
     );
   }
 }
 
-
-
- // artist: artistName,
- //      image: image,
- //      track: track_url,
 export default MusicMonster;
-
-// <Switch>
-//   <Route
-//     exact
-//     path="/results"
-//     render={props => (
-//       <Results
-//         handleInputChange={this.handleInputChange}
-//         input={this.state.input}
-//         searchData={this.state.searchData}
-//       />
-//     )}
-//   />
-// </Switch>;
