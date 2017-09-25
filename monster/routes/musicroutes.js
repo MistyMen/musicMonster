@@ -7,5 +7,6 @@ musicRoutes.get("/", controllerMod.indexAll);
 // musicRoutes.get('/:id', controllerMod.showOne);
 musicRoutes.get("/", controllerMod.create);
 musicRoutes.delete("/:id", controllerMod.destroy);
+musicRoutes.post('/', controllerMod.create);
 
 module.exports = musicRoutes;
