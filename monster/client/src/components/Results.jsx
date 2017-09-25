@@ -11,12 +11,6 @@ class Results extends Component {
   }
 
   render() {
-    // debugger;
-    // console.log(this.props.track, "Track");
-    // console.log("Results rendering...");
-    // console.log(this.props.artist, "Artist")
-    // console.log(this.props.image, "Image");
-    // console.log("tracks here------>", this.props.data["0"].external_urls.spotify);
     return (
       <div className="results">
         <div className="musicInfo">

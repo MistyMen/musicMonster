@@ -23,4 +23,3 @@ class SearchForm extends Component {
 }
 
 export default SearchForm;
-// <Link type="submit" to="/results">Find it!</Link>
