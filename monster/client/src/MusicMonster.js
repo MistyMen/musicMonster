@@ -12,6 +12,7 @@ import Footer from "./components/partials/Footer";
 import SearchForm from "./components/SearchForm";
 import Results from "./components/Results";
 import { Link } from "react-router-dom";
+import { scaleRotate as Menu } from "react-burger-menu";
 // import Result from './components/Result';
 
 // CSS files
@@ -59,53 +60,43 @@ class MusicMonster extends Component {
   }
 
   callSpotifyApi(e) {
-    // Condition to set Home to false for CSS style
-    console.log("before", this.state.home);
-
-    // if (this.state.home) {
-    //   // window.location.href = "/results";
-
-    //   this.setState({
-    //     home: false
-    //   });
-    // }
-    console.log("after", this.state.home);
-    // //  // //  //  //  //  //  //  //  //  //
-
     e.preventDefault();
     const artistSearch = this.state.input;
+    const APIKey =
+      "BQC1LZnWwTlo39vJZi6hRbAMGf9dI0ptqQDDLhgMA00mxDwrEA96JlbtNBUcDFveHnsWImCwtFPEJAJJ4Hh1JtKrfSRVhcJ5TxC8Xkh8ofy-OJTw4BhG9IFUedHYLNsfvUrkaQu-gUME16BbKGbrO2MvxrjX_Z-aAfnd&refresh_token=AQAOC73a_iLb38OuiEw3XIggOmePs89XYSmkAbok8yUfgmwfGLZ_pDhgZyK7rc9DcDsXLdPw_190dYR3UvqqkOgTwWoFyQCgcYswwdQed0q77iG1MkCJvR0ouhafItGOamE";
 
     axios({
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
       method: `GET`,
       headers: {
-        Authorization: `Bearer BQCvNOGEtAlCPatkbHRB4Uu0-2p-cp-DXnQAUjlPyBcSaSjuGGA4abKRi24bzJG68or0CN43y3A7QsfsqUcIuiDRl8q_iPAR5LoQBe5p4crjSwZlE8pikM-Ajr0wvVD7KIJCVhK7EnjyANsnucYOf2w9QhmaxiWfxNDe&refresh_token=AQCxyeR4mxd8kYraAo3omSgtLmhy5uaEU2gPWrQs4ADELBuKo5ywWww61ILrsr_vZgaXzrbWfWZojvtAWjTsmuRhxqUJDbX2uef8d1NdRa2I1L0BETMSqMogVGhxn3oYdG8`
+        Authorization: `Bearer ${APIKey}`
       }
     })
       .then(res => {
         console.log(res);
 
         const artistName = res.data.artists.items["0"].name;
-        const track_url = res.data.artists.items[0].href;
+        const track_url = res.data.artists.items["0"].external_urls.spotify;
         const artistPopularity = res.data.artists.items["0"].popularity;
         const artistFollowers = res.data.artists.items["0"].followers.total;
         const genre = res.data.artists.items[0].genres;
         const image = res.data.artists.items["0"].images[1].url;
-        console.log(genre);
-        console.log(artistName);
-        console.log(artistPopularity);
-        console.log(artistFollowers);
-        console.log(image);
-        console.log(track_url);
+        // console.log(genre);
+        // console.log(artistName);
+        // console.log(artistPopularity);
+        // console.log(artistFollowers);
+        // console.log(image);
+        console.log("Track URL", track_url);
 
         this.setState({
           searchData: res.data.artists.items,
           artist: artistName,
           image: image,
-          track: track_url
+          track: "https://open.spotify.com/embed?uri=" + track_url
         });
-        console.log("TRACK TRACK, ", this.state.searchData);
-        console.log("Search DATA -------->", res.data.artists.items);
+        // console.log("TRACK TRACK, ", this.state.searchData);
+        // console.log("Search DATA -------->", res.data.artists.items);
+        console.log("Track URL", this.state.track);
       })
       .catch(err => console.error(err));
   }
@@ -130,49 +121,94 @@ class MusicMonster extends Component {
     console.log("Rendering...");
     console.log(this.state.home);
     return (
-      <div className="App">
-        <Nav />
-        <div className={"container" + (this.state.home ? "" : "Sec")}>
-          <div className={this.state.home ? "front" : "results"}>
-            <div className={"title" + (this.state.home ? "" : "Sec")}>
-              Music Monster
-            </div>
-            <div className={"search" + (this.state.home ? "" : "Sec")}>
-              <h3>
-                <span>Genre</span>
-                <span className={"artist" + (this.state.home ? "" : "Sec")}>
-                  Artist
-                </span>
-                <span>Music</span>
-              </h3>
+      <div id="outer-container">
+        <Menu
+          width={"15%"}
+          pageWrapId={"page-wrap"}
+          outerContainerId={"outer-container"}
+        >
+          <ul>
+            <li>
+              <a id="home" className="menu-item" href="/">
+                Home
+              </a>
+            </li>
+            <li>
+              <a id="user" className="menu-item" href="/">
+                User
+              </a>
+            </li>
+            <li>
+              <a
+                id="about"
+                className="menu-item"
+                href="https://github.com/MistyMen/musicMonster"
+              >
+                About
+              </a>
+            </li>
+            <li>
+              <a id="contact" className="menu-item" href="/contact">
+                Contact
+              </a>
+            </li>
+            <li>
+              <a
+                id="setting"
+                onClick={this.showSettings}
+                className="menu-item--small"
+                href=""
+              >
+                Settings
+              </a>
+            </li>
+          </ul>
+        </Menu>
+        <main id="page-wrap">
+          <Nav />
 
-              <SearchForm
-                home={this.state.home}
-                handleInputChange={this.handleInputChange}
-                callSpotifyApi={this.callSpotifyApi}
-                input={this.state.input}
-              />
+          <div className={"container" + (this.state.home ? "" : "Sec")}>
+            <div className={this.state.home ? "front" : "results"}>
+              <div className={"title" + (this.state.home ? "" : "Sec")}>
+                Music Monster
+              </div>
+              <div className={"search" + (this.state.home ? "" : "Sec")}>
+                <h3>
+                  <span>Genre</span>
+                  <span className={"artist" + (this.state.home ? "" : "Sec")}>
+                    Artist
+                  </span>
+                  <span>Music</span>
+                </h3>
 
-              <Switch>
-                <Route
-                  exact
-                  path="/results"
-                  render={props => (
-                    <Results
-                      checkUrl={this.checkUrl}
-                      artist={this.state.artist}
-                      image={this.state.image}
-                      track={this.state.track}
-                      data={this.state.searchData}
-                      input={this.state.input}
-                    />
-                  )}
+                <SearchForm
+                  home={this.state.home}
+                  handleInputChange={this.handleInputChange}
+                  callSpotifyApi={this.callSpotifyApi}
+                  input={this.state.input}
                 />
-              </Switch>
+
+                <Switch>
+                  <Route
+                    exact
+                    path="/results"
+                    render={props => (
+                      <Results
+                        checkUrl={this.checkUrl}
+                        artist={this.state.artist}
+                        image={this.state.image}
+                        track={this.state.track}
+                        data={this.state.searchData}
+                        input={this.state.input}
+                      />
+                    )}
+                  />
+                </Switch>
+              </div>
             </div>
           </div>
-        </div>
-        <Footer />
+          <Footer />
+        </main>
       </div>
     );
   }
