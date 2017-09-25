@@ -9,7 +9,7 @@ body {
   color: white;
   font-size: 24px;
   cursor: default;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 a {
@@ -39,8 +39,8 @@ header {
   display: flex;
 }
 .menu,
-.login,
-.sign {
+a .login,
+a .sign {
   cursor: pointer;
 }
 
@@ -52,8 +52,7 @@ header {
 }
 
 .menu:hover,
-.login:hover,
-.sign:hover,
+.reg a:hover,
 .about a:hover {
   color: white;
 }
@@ -62,12 +61,6 @@ header {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-/* Separation */
-.login,
-.VLine {
-  margin-right: 10px;
-}
-
 /* First Page */
 .front {
   display: flex;
