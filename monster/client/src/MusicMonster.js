@@ -3,18 +3,17 @@
 // Import all the necessary packages
 import React, { Component } from "react";
 import axios from "axios";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+
 // Import all the necessary components
-// import Iframe from "react-iframe";
 import Nav from "./components/partials/Nav";
 import Footer from "./components/partials/Footer";
 import SearchForm from "./components/SearchForm";
 import Results from "./components/Results";
 import { Link } from "react-router-dom";
-import { scaleRotate as Menu } from "react-burger-menu";
+import Menu from "./components/partials/Menu";
 import Register from "./components/Register";
 import Login from "./components/Login";
-// import Result from './components/Result';
 
 // CSS files
 import "./reset.css";
@@ -29,13 +28,14 @@ class MusicMonster extends Component {
       artist: "",
       image: "",
       song: "",
+      track: "",
+      comments: "",
       username: "",
       password: "",
       home: true,
       testObject: {},
     };
     this.submitToServer = this.submitToServer.bind(this);
-    this.callSpotifyApi = this.callSpotifyApi.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleUsernameInput = this.handleUsernameInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
@@ -58,7 +58,6 @@ class MusicMonster extends Component {
     });
   };
 
-
   handleInputChange(event) {
     event.preventDefault();
     this.setState({
@@ -69,6 +68,7 @@ class MusicMonster extends Component {
   };
 
   checkUrl() {
+    console.log("CheckingURL -------->", this.state.home);
     window.location.href.includes("results")
       ? this.setState({ home: false })
       : this.setState({ home: true });
@@ -157,51 +157,29 @@ class MusicMonster extends Component {
 
   render() {
     console.log("Rendering...");
-    console.log("Test",this.state.testObject);
+    console.log(this.state.home);
+
+    let searchF = null;
+    if(window.location.href.includes("login") == false && window.location.href.includes("register") == false) {
+      searchF = <div className="searchSection">
+                  <h3>
+                    <span>Genre</span>
+                    <span className={"artist" + (this.state.home ? "" : "Sec")}>
+                      Artist
+                    </span>
+                    <span>Music</span>
+                  </h3>
+                    <SearchForm
+                      home={this.state.home}
+                      handleInputChange={this.handleInputChange}
+                      callSpotifyApi={this.callSpotifyApi}
+                      input={this.state.input}
+                    />
+                  </div>
+    }
     return (
       <div id="outer-container">
-        <Menu
-          width={"15%"}
-          pageWrapId={"page-wrap"}
-          outerContainerId={"outer-container"}
-        >
-          <ul>
-            <li>
-              <a id="home" className="menu-item" href="/">
-                Home
-              </a>
-            </li>
-            <li>
-              <a id="user" className="menu-item" href="/">
-                User
-              </a>
-            </li>
-            <li>
-              <a
-                id="about"
-                className="menu-item"
-                href="https://github.com/MistyMen/musicMonster"
-              >
-                About
-              </a>
-            </li>
-            <li>
-              <a id="contact" className="menu-item" href="/contact">
-                Contact
-              </a>
-            </li>
-            <li>
-              <a
-                id="setting"
-                onClick={this.showSettings}
-                className="menu-item--small"
-                href=""
-              >
-                Settings
-              </a>
-            </li>
-          </ul>
-        </Menu>
+        <Menu />
         <main id="page-wrap">
           <Nav />
 
@@ -211,21 +189,7 @@ class MusicMonster extends Component {
                 Music Monster
               </div>
               <div className={"search" + (this.state.home ? "" : "Sec")}>
-                <h3>
-                  <span>Genre</span>
-                  <span className={"artist" + (this.state.home ? "" : "Sec")}>
-                    Artist
-                  </span>
-                  <span>Music</span>
-                </h3>
-
-                <SearchForm
-                  home={this.state.home}
-                  handleInputChange={this.handleInputChange}
-                  callSpotifyApi={this.callSpotifyApi}
-                  input={this.state.input}
-                />
-
+              {searchF}
                 <Switch>
                   <Route
                     exact
