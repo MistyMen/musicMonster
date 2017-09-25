@@ -12,6 +12,7 @@ import SearchForm from "./components/SearchForm";
 import Results from "./components/Results";
 import { Link } from "react-router-dom";
 import Menu from "./components/partials/Menu";
+import User from "./components/partials/User";
 import Register from "./components/Register";
 import Login from "./components/Login";
 
@@ -27,10 +28,12 @@ class MusicMonster extends Component {
       input: "",
       artist: "",
       image: "",
-      track: "",
+      song: "",
       username: "",
       password: "",
-      home: true
+      home: true,
+      isLoggedIn: false,
+      dataBase: []
     };
     this.submitToServer = this.submitToServer.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -38,18 +41,18 @@ class MusicMonster extends Component {
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.callSpotifyApi = this.callSpotifyApi.bind(this);
     this.checkUrl = this.checkUrl.bind(this);
-  };
+  }
 
   componentWillMount() {
     console.log("Will Mount...");
-  };
+  }
 
   componentDidMount(e) {
     console.log("HAAAAAAAAAA");
     this.checkUrl();
 
     console.log("Did mount...");
-  };
+  }
 
   handleInputChange(event) {
     event.preventDefault();
@@ -58,14 +61,14 @@ class MusicMonster extends Component {
     });
     console.log(event.target.value);
     // console.log(this.state.input);
-  };
+  }
 
   checkUrl() {
     console.log("CheckingURL -------->", this.state.home);
     window.location.href.includes("results")
       ? this.setState({ home: false })
       : this.setState({ home: true });
-  };
+  }
 
   handleUsernameInput(event) {
     event.preventDefault();
@@ -73,7 +76,7 @@ class MusicMonster extends Component {
       username: event.target.value
     });
     console.log(event.target.value);
-  };
+  }
 
   handlePasswordInput(event) {
     event.preventDefault();
@@ -81,13 +84,22 @@ class MusicMonster extends Component {
       password: event.target.value
     });
     console.log(event.target.value);
-  };
+  }
+
+  handleSongDelete(id) {
+    axios
+      .delete(`http://localhost:3001/api/artists/${id}`)
+      .then(res => {
+        console.log("DELETE Request SENT");
+      })
+      .catch(err => console.log(err));
+  }
 
   callSpotifyApi(e) {
     e.preventDefault();
     const artistSearch = this.state.input;
     const APIToken =
-      "BQBW1ODyJencES28moyb__Bltc4Kp9gKA8L48T_TbLDvPHStsHSg9JTVnuI4uDB4qYBT85mn6y-knJ2Vtjha-PrwJZ4dk1L1cRkN1ErjyjnQ-4NoMS7IoF_XNjBLW4Z00HBtlV695ucrJjL4Hn39FHFI3Io8KA6psKzd&refresh_token=AQBMPnJovyAdZig52i2ZBnBuxM835Osl0DKJKCX1esB5vbLjEDQtItlsvwcdssf52mYaZkbWoZSCQV9G6NhJKk40KpkFoQRVrprLZDtax525LDHIOeMXh0vsMLjzh0dnM14-OJTw4BhG9IFUedHYLNsfvUrkaQu-gUME16BbKGbrO2MvxrjX_Z-aAfnd&refresh_token=AQAOC73a_iLb38OuiEw3XIggOmePs89XYSmkAbok8yUfgmwfGLZ_pDhgZyK7rc9DcDsXLdPw_190dYR3UvqqkOgTwWoFyQCgcYswwdQed0q77iG1MkCJvR0ouhafItGOamE";
+      "BQCAYxe9bOudPJYcLO7LI9od_Y6hGuLIaP2JKyMztS-fpiPj9o9JeB4mJZ2ybEO-SCio5qqxAzMGdNAkAJykFqMtT8ja9rCjaTD-Knt2vtk7SExAtG9tlDDlENMtyBA3K7y-HCq1QlbjfyIhFWkIEqeZIUcaeYdqbfJa";
 
     axios({
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
@@ -110,20 +122,22 @@ class MusicMonster extends Component {
         // console.log(artistPopularity);
         // console.log(artistFollowers);
         // console.log(image);
-        console.log("Track URL", track_url);
+        console.log("SONG URL", track_url);
 
         this.setState({
           searchData: res.data.artists.items,
           artist: artistName,
           image: image,
-          track: "https://open.spotify.com/embed?uri=" + track_url
+          song: "https://open.spotify.com/embed?uri=" + track_url,
+          isLoggedIn: true
         });
         // console.log("TRACK TRACK, ", this.state.searchData);
         // console.log("Search DATA -------->", res.data.artists.items);
-        console.log("Track URL", this.state.track);
+        console.log("SONG URL", this.state.song);
+        console.log("isLoggedIn", this.state.isLoggedIn);
       })
       .catch(err => console.error(err));
-  };
+  }
 
   submitToServer(e) {
     e.preventDefault();
@@ -151,7 +165,7 @@ class MusicMonster extends Component {
         });
       })
       .catch(err => console.log(err));
-  };
+  }
 
   render() {
     console.log("Rendering...");
@@ -168,22 +182,28 @@ class MusicMonster extends Component {
                 Music Monster
               </div>
               <div className={"search" + (this.state.home ? "" : "Sec")}>
+                <div className="searchSection">
+                  <h3>
+                    <span>Genre</span>
+                    <span className={"artist" + (this.state.home ? "" : "Sec")}>
+                      Artist
+                    </span>
+                    <span>Music</span>
+                  </h3>
 
-              <div className="searchSection">
-                <h3>
-                  <span>Genre</span>
-                  <span className={"artist" + (this.state.home ? "" : "Sec")}>
-                    Artist
-                  </span>
-                  <span>Music</span>
-                </h3>
+                  <SearchForm
+                    home={this.state.home}
+                    handleInputChange={this.handleInputChange}
+                    callSpotifyApi={this.callSpotifyApi}
+                    input={this.state.input}
+                  />
+                </div>
 
-                <SearchForm
-                  home={this.state.home}
-                  handleInputChange={this.handleInputChange}
-                  callSpotifyApi={this.callSpotifyApi}
-                  input={this.state.input}
-                />
+                <div className="UserPage">
+                  <User
+                    isLoggedIn={this.state.isLoggedIn}
+                    handleSongDelete={this.handleSongDelete}
+                  />
                 </div>
 
                 <Switch>
@@ -219,7 +239,7 @@ class MusicMonster extends Component {
                         checkUrl={this.checkUrl}
                         artist={this.state.artist}
                         image={this.state.image}
-                        track={this.state.track}
+                        song={this.state.song}
                         data={this.state.searchData}
                         input={this.state.input}
                       />
@@ -233,7 +253,7 @@ class MusicMonster extends Component {
         </main>
       </div>
     );
-  };
-};
+  }
+}
 
 export default MusicMonster;

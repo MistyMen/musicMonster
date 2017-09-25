@@ -177,6 +177,7 @@ a .sign {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-top: 6px;
+  font-family: "Amarante", cursive;
 }
 
 .searchSec {
