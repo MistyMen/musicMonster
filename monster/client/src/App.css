@@ -87,9 +87,9 @@ a .sign {
 
 .searchSection {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   margin: 10px 0px 0px 0px;
+  flex-direction: column;
 }
 
 .search {
@@ -186,6 +186,7 @@ a .sign {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-top: 6px;
+  font-family: "Amarante", cursive;
 }
 
 .searchSec {
@@ -194,6 +195,7 @@ a .sign {
   color: #a7a7a7;
   margin-top: -8px;
   display: flex;
+  /* flex-wrap: wrap; */
   flex-direction: column;
   align-items: center;
 }

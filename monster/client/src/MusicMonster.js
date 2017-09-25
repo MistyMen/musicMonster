@@ -12,6 +12,7 @@ import SearchForm from "./components/SearchForm";
 import Results from "./components/Results";
 import { Link } from "react-router-dom";
 import Menu from "./components/partials/Menu";
+import User from "./components/partials/User";
 import Register from "./components/Register";
 import Login from "./components/Login";
 
@@ -28,11 +29,12 @@ class MusicMonster extends Component {
       artist: "",
       image: "",
       song: "",
-      track: "",
-      comments: "",
+      comments:"",
       username: "",
       password: "",
       home: true,
+      isLoggedIn: false,
+      dataBase: []
     };
     this.submitToServer = this.submitToServer.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -44,18 +46,12 @@ class MusicMonster extends Component {
 
   componentWillMount() {
     console.log("Will Mount...");
-  };
+  }
 
-<<<<<<< HEAD
-  componentDidMount() {
-    console.log('Did mount...');
-=======
-  componentDidMount(e) {
+ componentDidMount(e) {
     console.log("HAAAAAAAAAA");
     this.checkUrl();
-
     console.log("Did mount...");
->>>>>>> f76406d5617f33a8ed8ca3785342672b40b1b51c
   };
 
   handleInputChange(event) {
@@ -65,14 +61,14 @@ class MusicMonster extends Component {
     });
     console.log(event.target.value);
     // console.log(this.state.input);
-  };
+  }
 
   checkUrl() {
     console.log("CheckingURL -------->", this.state.home);
     window.location.href.includes("results")
       ? this.setState({ home: false })
       : this.setState({ home: true });
-  };
+  }
 
   handleUsernameInput(event) {
     event.preventDefault();
@@ -80,7 +76,7 @@ class MusicMonster extends Component {
       username: event.target.value,
     });
     console.log(event.target.value);
-  };
+  }
 
   handlePasswordInput(event) {
     event.preventDefault();
@@ -88,7 +84,16 @@ class MusicMonster extends Component {
       password: event.target.value,
     });
     console.log(event.target.value);
-  };
+  }
+
+  handleSongDelete(id) {
+    axios
+      .delete(`http://localhost:3001/api/artists/${id}`)
+      .then(res => {
+        console.log("DELETE Request SENT");
+      })
+      .catch(err => console.log(err));
+  }
 
   callSpotifyApi(e) {
     e.preventDefault();
@@ -118,12 +123,13 @@ class MusicMonster extends Component {
           searchData: res.data.artists.items,
           artist: artistName,
           image: image,
-          track: "https://open.spotify.com/embed?uri=" + track_url
+          song: "https://open.spotify.com/embed?uri=" + track_url,
+          isLoggedIn: true
         });
         console.log("Track URL", this.state.track);
       })
       .catch(err => console.error(err));
-  };
+  }
 
   submitToServer(e) {
     e.preventDefault();
@@ -134,8 +140,9 @@ class MusicMonster extends Component {
       url: "http://localhost:3001/api/user/",
       data: {
         name: this.state.artist,
-        picture: this.state.image,
-        track: this.state.track,
+        image: this.state.image,
+        song: this.state.song,
+        comments:this.state.comments,
       }
 
     })
@@ -153,7 +160,7 @@ class MusicMonster extends Component {
         });
       })
       .catch(err => console.log(err));
-  };
+  }
 
   render() {
     console.log("Rendering...");
@@ -223,7 +230,7 @@ class MusicMonster extends Component {
                         checkUrl={this.checkUrl}
                         artist={this.state.artist}
                         image={this.state.image}
-                        track={this.state.track}
+                        song={this.state.song}
                         data={this.state.searchData}
                         input={this.state.input}
                       />
@@ -236,11 +243,10 @@ class MusicMonster extends Component {
           <Footer />
         </main>
       </div>
-<<<<<<< HEAD
+
     );
-=======
-    )
->>>>>>> f76406d5617f33a8ed8ca3785342672b40b1b51c
+
+
   }
 }
 
