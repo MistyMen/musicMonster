@@ -46,16 +46,9 @@ class MusicMonster extends Component {
     console.log("Will Mount...");
   };
 
-<<<<<<< HEAD
+
   componentDidMount() {
     console.log('Did mount...');
-=======
-  componentDidMount(e) {
-    console.log("HAAAAAAAAAA");
-    this.checkUrl();
-
-    console.log("Did mount...");
->>>>>>> f76406d5617f33a8ed8ca3785342672b40b1b51c
   };
 
   handleInputChange(event) {
@@ -94,7 +87,7 @@ class MusicMonster extends Component {
     e.preventDefault();
     const artistSearch = this.state.input;
     const APIToken =
-      "BQCAYxe9bOudPJYcLO7LI9od_Y6hGuLIaP2JKyMztS-fpiPj9o9JeB4mJZ2ybEO-SCio5qqxAzMGdNAkAJykFqMtT8ja9rCjaTD-Knt2vtk7SExAtG9tlDDlENMtyBA3K7y-HCq1QlbjfyIhFWkIEqeZIUcaeYdqbfJa";
+      "BQD-kf6_D-nqB4-lwLrHhFL0qud7Sc6uDm04Z6SR4s0ERnlCJ-oQil-cXnyByuQGDMD8jtNfpqeG-O41VQLr203CegxoIVJO_8mvmLuPz1HVeJSw69Xd4_elHr5kh9A7echCaYPtYJubSz35LnJ_cTU9RFZagzrSBkkF";
 
     axios({
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
@@ -128,27 +121,26 @@ class MusicMonster extends Component {
   submitToServer(e) {
     e.preventDefault();
     console.log("this is the submit to server -----------");
-
     axios({
       method: "POST",
-      url: "http://localhost:3001/api/user/",
+      url: "http://localhost:3001/api/results",
       data: {
-        name: this.state.artist,
-        picture: this.state.image,
-        track: this.state.track,
+        artist: this.state.artist,
+        image: this.state.image,
+        song: this.state.track,
       }
-
     })
       .then(res => {
         console.log(this.state.artist, "-----------");
         // res will include all the information you sent back from the server
         const savingMusicToDataBase = {
-          name: res.data.artists.items["0"].name,
-          picture: res.data.artists.items["0"].images[1].url,
+          artist: res.data.artists.items["0"].name,
+          image: res.data.artists.items["0"].images[1].url,
         };
         this.setState(prevState => {
           return {
-            artists: prevState.artists.concat(savingMusicToDataBase),
+            artists: prevState.artists.concat(savingMusicToDataBase.artist),
+            image: prevState.artists.concat(savingMusicToDataBase.image)
           };
         });
       })
@@ -220,6 +212,7 @@ class MusicMonster extends Component {
                     path="/results"
                     render={props => (
                       <Results
+                        submit={this.submitToServer}
                         checkUrl={this.checkUrl}
                         artist={this.state.artist}
                         image={this.state.image}
@@ -236,11 +229,8 @@ class MusicMonster extends Component {
           <Footer />
         </main>
       </div>
-<<<<<<< HEAD
+
     );
-=======
-    )
->>>>>>> f76406d5617f33a8ed8ca3785342672b40b1b51c
   }
 }
 

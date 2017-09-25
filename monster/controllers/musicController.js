@@ -36,6 +36,7 @@ controllerMon.create = (req, res) => {
       res.status('400').json({ message: '400. Something goes wrong' });
     });
 };
+
 /*update particular record*/
 controllerMon.update = (req, res) => {
   modelMon.update(req.body)
