@@ -31,7 +31,7 @@ class MusicMonster extends Component {
       song: "",
       username: "",
       password: "",
-      home: true
+      home: true,
     };
     this.submitToServer = this.submitToServer.bind(this);
     this.callSpotifyApi = this.callSpotifyApi.bind(this);
@@ -40,7 +40,7 @@ class MusicMonster extends Component {
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.callSpotifyApi = this.callSpotifyApi.bind(this);
     this.checkUrl = this.checkUrl.bind(this);
-  };
+  }
 
   componentWillMount() {
     console.log("Will Mount...");
@@ -122,7 +122,7 @@ class MusicMonster extends Component {
 
     axios({
       method: "POST",
-      url: "http://localhost:3001/api/user/records",
+      url: "http://localhost:3001/api/user/",
       data: {
         name: this.state.artist,
         picture: this.state.image,
@@ -133,7 +133,7 @@ class MusicMonster extends Component {
         // res will include all the information you sent back from the server
         const savingMusicToDataBase = {
           name: res.data.artists.items["0"].name,
-          picture: res.data.artists.items["0"].images[1].url
+          picture: res.data.artists.items["0"].images[1].url,
         };
         this.setState(prevState => {
           return {

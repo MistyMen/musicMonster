@@ -17,15 +17,17 @@ controllerMon.indexAll = (req, res) => {
     });
 };
 
-/*store new record in db*/
-function createTrack(id) {
-  modelMon.createTrack({
+/*store new record in db. NEED TO FIGURE OUT HOW ADD A USER_ID*/
+controllerMon.create = (req, res) => {
+  modelMon.createRecord({
+      id: req.body.id,
+      artist: req.body.song,
+      image: req.body.artist_id,
       song: req.body.song,
-      url: req.body.url,
-      artist_id: req.body.artist_id,
+      user_id: () =>
     })
     .then((record) => {
-      console.log('OK...Creating Track', record);
+      console.log('OK...Creating record', record);
     })
     .catch((err) => {
       console.log(err);
@@ -33,17 +35,16 @@ function createTrack(id) {
     });
 };
 
-/*create a new record in a user db*/
-controllerMon.create = async (req, res) => {
-  try {
-    const nothing = await modelMon.save(req.body);
-    const record = await createTrack(req.body.id);
-    console.log("OK...Creating Track", record);
-  } catch (e) {
-    // something happened
-    next(err);
-  }
-};
+// /*create a new record in a user db*/
+// controllerMon.create = (req, res) => {
+//     const nothing = await modelMon.save(req.body);
+//     const record = await createRecord(req.body.id);//
+//     console.log("OK...Creating Track", record);
+//   } catch (e) {
+//     // something happened
+//     next(err);
+//   }
+// };
 
   /*delete records*/
   controllerMon.destroy = (req, res) => {

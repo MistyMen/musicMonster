@@ -14,10 +14,10 @@ const musicRoutes = express.Router();
 musicRoutes.post('/auth/register', userController.reg);
 musicRoutes.post('/auth/sign_in', userController.singIn);
 
-musicRoutes.route('/user/records')
+musicRoutes.route('/user/:id')
           .get(controllerMod.indexAll)
           .post(userController.loginReq, controllerMod.create);
 
-musicRoutes.delete('/user/records/:id', controllerMod.destroy);
+musicRoutes.delete('/user/:id', controllerMod.destroy);
 
 module.exports = musicRoutes;
