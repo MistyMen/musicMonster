@@ -21,14 +21,14 @@ import "./reset.css";
 import "./App.css";
 
 class MusicMonster extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       searchData: null,
       input: "",
       artist: "",
       image: "",
-      track: "",
+      song: "",
       username: "",
       password: "",
       home: true
@@ -41,18 +41,19 @@ class MusicMonster extends Component {
     this.checkUrl = this.checkUrl.bind(this);
   };
 
-
   componentDidMount(e) {
-    console.log("HAAAAAAAAAA");
-    this.checkUrl();
-
     console.log("Did mount...");
+    this.checkUrl();
+}
+  componentWillMount() {
+    console.log("Will Mount...");
   };
+
 
   handleInputChange(event) {
     event.preventDefault();
     this.setState({
-      input: event.target.value
+      input: event.target.value,
     });
     console.log(event.target.value);
     // console.log(this.state.input);
@@ -67,7 +68,7 @@ class MusicMonster extends Component {
   handleUsernameInput(event) {
     event.preventDefault();
     this.setState({
-      username: event.target.value
+      username: event.target.value,
     });
     console.log(event.target.value);
   };
@@ -75,7 +76,7 @@ class MusicMonster extends Component {
   handlePasswordInput(event) {
     event.preventDefault();
     this.setState({
-      password: event.target.value
+      password: event.target.value,
     });
     console.log(event.target.value);
   };
@@ -88,9 +89,9 @@ class MusicMonster extends Component {
 
     axios({
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
-      method: `GET`,
+      method: 'GET',
       headers: {
-        Authorization: `Bearer ${APIToken}`
+        Authorization: `Bearer ${APIToken}`,
       }
     })
       .then(res => {
@@ -102,11 +103,6 @@ class MusicMonster extends Component {
         const artistFollowers = res.data.artists.items["0"].followers.total;
         const genre = res.data.artists.items[0].genres;
         const image = res.data.artists.items["0"].images[1].url;
-        // console.log(genre);
-        // console.log(artistName);
-        // console.log(artistPopularity);
-        // console.log(artistFollowers);
-        // console.log(image);
         console.log("Track URL", track_url);
 
         this.setState({
@@ -115,8 +111,6 @@ class MusicMonster extends Component {
           image: image,
           track: "https://open.spotify.com/embed?uri=" + track_url
         });
-        // console.log("TRACK TRACK, ", this.state.searchData);
-        // console.log("Search DATA -------->", res.data.artists.items);
         console.log("Track URL", this.state.track);
       })
       .catch(err => console.error(err));
@@ -131,8 +125,8 @@ class MusicMonster extends Component {
       url: "http://localhost:3001/api/user/records",
       data: {
         name: this.state.artist,
-        picture: this.state.image
-      }
+        picture: this.state.image,
+      },
     })
       .then(res => {
         console.log(this.state.artist, "-----------");
@@ -143,7 +137,7 @@ class MusicMonster extends Component {
         };
         this.setState(prevState => {
           return {
-            artists: prevState.artists.concat(savingMusicToDataBase)
+            artists: prevState.artists.concat(savingMusicToDataBase),
           };
         });
       })
@@ -268,7 +262,7 @@ class MusicMonster extends Component {
         </main>
       </div>
     );
-  };
-};
+  }
+}
 
 export default MusicMonster;

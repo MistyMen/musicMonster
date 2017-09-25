@@ -10,7 +10,6 @@ import './index.css';
 import MusicMonster from './MusicMonster';
 import registerServiceWorker from './registerServiceWorker';
 
-
 ReactDOM.render(
   <Router>
     <MusicMonster />
