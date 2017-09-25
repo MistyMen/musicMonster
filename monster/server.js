@@ -7,12 +7,13 @@ const jwt = require('jsonwebtoken');
 const expressJWT = require('express-jwt');
 const music = require('./models/musicModel');
 
-// const passport = require('passport');
-// const session = require('express-session');
-// const RedisStore = require('connect-redis')(session);
-// const LocalStrategy = require('passport-local').Strategy;
+// you need cors to make the connection between front end and back end
+// also you need to use app.use(cors()); for it to work
+const cors = require('cors')
 
 const app = express();
+
+app.use(cors())
 
 const PORT = process.env.PORT || 3001;
 

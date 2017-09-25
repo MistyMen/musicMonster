@@ -18,6 +18,7 @@ CREATE TABLE users (
   password TEXT NOT NULL
 );
 
+
 CREATE TABLE tracks (
   id VARCHAR(64) PRIMARY KEY,
   artist_id VARCHAR(64) REFERENCES artists,
@@ -26,4 +27,3 @@ CREATE TABLE tracks (
 );
 
 CREATE INDEX ON tracks (song);
-
