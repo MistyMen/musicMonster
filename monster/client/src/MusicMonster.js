@@ -3,8 +3,6 @@
 // Import all the necessary packages
 import React, { Component } from "react";
 import axios from "axios";
-import { Route, Switch } from "react-router-dom";
-
 import { Route, Redirect, Switch } from "react-router-dom";
 // Import all the necessary components
 // import Iframe from "react-iframe";
