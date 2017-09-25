@@ -1,108 +1,312 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css?family=Amarante');
 body {
-  font: sans-serif;
-  position: fixed;
-  background-color: lightblue;
-  height: 100%;
-  width: 100%;
-/*  display: flex;
-*/}
-
-nav {
-  position: fixed;
-  height: 40px;
-  background-color: palevioletred;
-  color: papayawhip;
-  width: 100%;
-}
-
-ul {
-  list-style-type: none;
-  display: flex;
-  justify-content: space-between;
-  /*padding: 10px*/
-}
-
-li {
-  text-decoration: none;
+  background: rgba(30, 34, 32, 0.77);
+  color: white;
+  /* width: 95%; */
+  /* margin: 10px auto; */
   font-size: 24px;
+  cursor: default;
+  font-family: "Amarante", cursive;
 }
 
 a {
   text-decoration: none;
+  color: #a7a7a7;
+}
+
+header {
+  display: flex;
+  justify-content: flex-end;
+  width: 99%;
+  background: #252323;
+  padding: 8px;
+  color: #a7a7a7;
+}
+
+.container {
+  background-image: url("https://ckc4me.files.wordpress.com/2013/02/green-eyed-monster-0c366c10addd516fcc8dc247281fc5ec.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: 100%;
+  min-height: 745px;
+}
+/* Parent of Login/Regis */
+.reg {
+  display: flex;
+}
+.menu,
+.login,
+.sign {
+  cursor: pointer;
+}
+
+.menu {
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  transition: all 0.5s;
+}
+
+.menu:hover,
+.login:hover,
+.sign:hover,
+.about a:hover {
+  color: white;
+}
+.menu:hover {
+  -ms-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+/* Separation */
+.login,
+.VLine {
+  margin-right: 10px;
+}
+
+/* First Page */
+.front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 400px;
+  justify-content: center;
+}
+
+.front .title {
+  font-size: 75px;
+  background: linear-gradient(to top right, #ffccff -6%, #99ffcc 112%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 22px;
+}
+/* Subtitle - choice and input box */
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 36px;
+  width: 25%;
+}
+.search h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #a7a7a7;
+}
+.search h3 span {
+  padding: 3px 2px 3px 4px;
+  margin: 6px;
+  border-radius: 6px;
+  font-weight: 400;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.artist {
+  border: 2px solid grey;
+  border-radius: 6px;
+}
+.artist:hover {
+  border: 2px solid white;
+}
+.search h3 span:hover {
+  color: white;
+  font-size: 17px;
+}
+
+.searchInput {
+  font-size: 20px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.searchInput:focus {
+  outline-color: #00ff00;
+}
+
+.front .search .btn {
+  font-size: 20px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  background: linear-gradient(to top right, #ffccff -6%, #99ffcc 112%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.5s;
+  margin-left: 8px;
+}
+
+.front .search .btn:hover {
+  background-color: white;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+/* Results Page */
+.containerSec {
+  min-height: 745px;
+  transition: all 1s ease-in-out;
+  background: #333;
+}
+.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.results .titleSec {
+  font-size: 45px;
+  background: linear-gradient(to top right, #ffccff -6%, #99ffcc 112%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 6px;
+}
+
+.searchSec {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #a7a7a7;
+  margin-top: -8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.searchSec h3 {
+  margin: 0px 0px 8px;
+}
+.searchSec h3 span {
+  padding: 3px 2px 3px 7px;
+  margin: 3px;
+  border-radius: 6px;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.searchInputSec form {
+  margin-top: 6px;
+}
+
+.artistSec {
+  border: 1px solid grey;
+  border-radius: 6px;
+}
+.artistSec:hover {
+  border: 1px solid white;
+}
+.searchSec h3 span:hover {
+  color: white;
+}
+
+.searchInputSec {
+  font-size: 12px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.searchInputSec:focus {
+  outline-color: black;
+}
+
+.results .searchSec .btnSec {
+  font-size: 12px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.5s;
+  margin-left: 10px;
+}
+
+.results .searchSec .btnSec a {
   color: black;
 }
 
-main {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  top: 100px;
+.results .searchSec .btnSec:hover {
+  background-color: white;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+/* Results Page Image, Track, and name */
+
+.musicInfo {
   display: flex;
-  align-items: center;
+  padding: 20px;
   flex-direction: column;
+  align-items: center;
 }
 
-menu {
-  z-index: 2;
-  margin: 0px;
+.musicInfo .music {
+  display: flex;
+  justify-content: space-around;
+  width: 65%;
+}
+.musicInfo .name {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  padding: 5px;
+  background: linear-gradient(to top right, #ffccff -6%, #99ffcc 112%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: 62%;
+}
+.musicInfo .music img {
+  display: flex;
+  justify-content: flex-start;
+  border-radius: 2%;
+  box-shadow: 1px 1px 20px #aaa;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  border: 1px solid #3e2b14;
+  padding: 6px;
+  margin-right: 24px;
+  height: 400px;
 }
 
-.logo {
-  padding-top: 7px;
+footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 99%;
+  background: #252323;
+  padding: 8px;
+  color: #a7a7a7;
 }
 
-/*.SearchForm {
-  z-index: 1;
-}*/
-
-.search {
-  width: 350px;
-  padding: 10px;
-}
-
-.searchButton {
-  padding: 12.5px;
-  border: none;
-  margin-left: 5px;
-  background-color: slategrey;
-}
-
-.results {
-  position: relative;
-  margin: 50px;
-  height: 200px;
-  width: 60%;
-  background-color: grey;
-}
-
-.result {
-  background-color: lightgreen;
-  margin-top: 5px;
-  padding: 10px;
-}
-
-.artist .track .Album .length{
-  font-size: 18px;
-}
-
-/* CSS for slideout menu */
-
-menu {
-  z-index: 2;
-}
+/* Burger Menu */
 
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
-  width: 30px;
+  width: 36px;
   height: 30px;
-  left: 20px;
+  left: 12px;
   top: 5px;
+  transition: all 0.5s;
+}
+
+.bm-burger-button:hover {
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  transition: all 0.5s;
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #373a47;
+  background: #a7a7a7;
 }
 
 /* Position and sizing of clickable cross button */
@@ -118,25 +322,51 @@ menu {
 
 /* General sidebar styles */
 .bm-menu {
-  background-color: #373a47;
+  background: #252323;
+  padding: 2.5em 1.5em 0;
   font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
 }
 
 /* Wrapper for item list */
 .bm-item-list {
-  background-color: #373a47;
-  color: white;
-  width: 20%;
-  margin: 50px 0px 0px 0px;
+  color: #b8b7ad;
+  /* padding: 0.8em; */
 }
 
-.menu-item {
-  /*background-color: orange;*/
-  color: papayawhip;
-  padding: 10px;
+.bm-item-list ul {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 24%;
+  font-size: 30px;
 }
 
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+}
+
+/* Menu Bar List - Customized*/
+#home,
+#user,
+#about,
+#contact,
+#setting {
+  text-transform: uppercase;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+}
+
+#home:hover,
+#user:hover,
+#about:hover,
+#contact:hover,
+#setting:hover {
+  color: #6e6969;
 }

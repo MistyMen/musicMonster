@@ -5,3 +5,6 @@ INSERT INTO artists (name, picture) VALUES
 
 INSERT INTO tracks (artist_id, song, url) VALUES
   (1, 'Lose Yourself', 'SongUrl');
+
+
+
