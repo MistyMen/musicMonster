@@ -15,7 +15,7 @@ class Results extends Component {
     return (
       <div className="results">
         <div className="musicInfo">
-          <div className="name">{this.props.artist}<Add /></div>
+          <div className="name">{this.props.artist}<Add onClick={this.props.submitToServer}/></div>
           <div className="music">
             <div className="image">
               <img src={this.props.image} alt={this.props.artist} />
