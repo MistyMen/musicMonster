@@ -1,4 +1,5 @@
 const modelMon = require('../models/musicModel');
+const user = require('../models/userModel');
 
 const controllerMon = {};
 
@@ -17,6 +18,15 @@ controllerMon.indexAll = (req, res) => {
     });
 };
 
+function findUser(elem) {
+  user.findOne(elem)
+    .then((userData) => {
+      return userData.id;
+    }).catch((err) => {
+      console.log(err);
+    });
+};
+
 /*store new record in db. NEED TO FIGURE OUT HOW ADD A USER_ID*/
 controllerMon.create = (req, res) => {
   modelMon.createRecord({
@@ -24,7 +34,7 @@ controllerMon.create = (req, res) => {
       artist: req.body.song,
       image: req.body.artist_id,
       song: req.body.song,
-      user_id: () =>
+      user_id: findUser(req.body.username),
     })
     .then((record) => {
       console.log('OK...Creating record', record);
@@ -35,27 +45,16 @@ controllerMon.create = (req, res) => {
     });
 };
 
-// /*create a new record in a user db*/
-// controllerMon.create = (req, res) => {
-//     const nothing = await modelMon.save(req.body);
-//     const record = await createRecord(req.body.id);//
-//     console.log("OK...Creating Track", record);
-//   } catch (e) {
-//     // something happened
-//     next(err);
-//   }
-// };
-
   /*delete records*/
-  controllerMon.destroy = (req, res) => {
-    modelMon
-      .delete(res.params.id)
-      .then(() => {
-        res.redirect('/');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+controllerMon.destroy = (req, res) => {
+  modelMon
+    .delete(res.params.id)
+    .then(() => {
+      res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   };
 
 module.exports = controllerMon;
