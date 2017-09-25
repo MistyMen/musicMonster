@@ -1,6 +1,4 @@
 const user = require('../models/userModel');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 
 const userController = {};
 
@@ -35,13 +33,6 @@ userController.singIn = (req, res) => {
   }).catch((err) => {
         console.log(err);
   });
-};
-
-userController.loginReq = (req, res, next) => {
-  if (req.body) {
-    next();
-  } else (
-    res.status(401).json({ message: 'Unauthorized user' }));
 };
 
 module.exports = userController;
