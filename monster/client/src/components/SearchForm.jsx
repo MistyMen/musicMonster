@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 class SearchForm extends Component {
   render() {
     return (
-      <form className="" onSubmit={this.props.callSpotifyApi}>
+
+      <form className="SearchForm" onSubmit={this.props.callSpotifyApi}>
         <input
           value={this.props.input}
           className={"searchInput" + (this.props.home ? "" : "Sec")}
