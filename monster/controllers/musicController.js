@@ -24,12 +24,10 @@ controllerMon.create = (req, res) => {
       artist: req.body.song,
       image: req.body.artist_id,
       song: req.body.song,
+      comments: req.body.comments,
     })
-    .then((record) => {
-      res.json({
-        message: 'ok',
-        data: { record },
-      });
+    .then(() => {
+      res.json({ message: 'ok' });
     })
     .catch((err) => {
       console.log(err);
@@ -40,11 +38,11 @@ controllerMon.create = (req, res) => {
 controllerMon.update = (req, res) => {
   modelMon.update(req.body)
     .then((record) => {
-      res.json({message: `records ${record.comments} updated`});
-      res.redirect('/results');
+      res.json({ message: `records ${record.comments} updated` });
+      res.redirect('/user');
     }).catch((err) => {
         console.log(err);
-        res.status(401).json({message: 'something went wrong'});
+        res.status(401).json({ message: 'something went wrong' });
     });
 };
 
