@@ -7,6 +7,7 @@ class Results extends Component {
 
   componentDidMount() {
     console.log("Results did mount...");
+    this.props.checkUrl();
   }
 
   render() {

@@ -34,7 +34,6 @@ class MusicMonster extends Component {
       home: true
     };
     this.submitToServer = this.submitToServer.bind(this);
-    this.callSpotifyApi = this.callSpotifyApi.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleUsernameInput = this.handleUsernameInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
@@ -44,22 +43,6 @@ class MusicMonster extends Component {
 
   componentWillMount() {
     console.log("Will Mount...");
-  };
-
-  componentDidMount() {
-    console.log('Did mount...');
-  };
-
-  callSpotifyApi(event) {
-    console.log(event)
-    fetch(`https://api.spotify.com/v1/search?q=eminem&type=artist`)
-      .then((res) => {
-        return res.json();
-      }).then((jsonRes) => {
-        this.setState({
-          searchData: jsonRes.data,
-        })
-    })
   };
 
   componentDidMount(e) {
@@ -79,6 +62,7 @@ class MusicMonster extends Component {
   };
 
   checkUrl() {
+    console.log("CheckingURL -------->", this.state.home);
     window.location.href.includes("results")
       ? this.setState({ home: false })
       : this.setState({ home: true });
@@ -104,7 +88,7 @@ class MusicMonster extends Component {
     e.preventDefault();
     const artistSearch = this.state.input;
     const APIToken =
-      "BQC1LZnWwTlo39vJZi6hRbAMGf9dI0ptqQDDLhgMA00mxDwrEA96JlbtNBUcDFveHnsWImCwtFPEJAJJ4Hh1JtKrfSRVhcJ5TxC8Xkh8ofy-OJTw4BhG9IFUedHYLNsfvUrkaQu-gUME16BbKGbrO2MvxrjX_Z-aAfnd&refresh_token=AQAOC73a_iLb38OuiEw3XIggOmePs89XYSmkAbok8yUfgmwfGLZ_pDhgZyK7rc9DcDsXLdPw_190dYR3UvqqkOgTwWoFyQCgcYswwdQed0q77iG1MkCJvR0ouhafItGOamE";
+      "BQBW1ODyJencES28moyb__Bltc4Kp9gKA8L48T_TbLDvPHStsHSg9JTVnuI4uDB4qYBT85mn6y-knJ2Vtjha-PrwJZ4dk1L1cRkN1ErjyjnQ-4NoMS7IoF_XNjBLW4Z00HBtlV695ucrJjL4Hn39FHFI3Io8KA6psKzd&refresh_token=AQBMPnJovyAdZig52i2ZBnBuxM835Osl0DKJKCX1esB5vbLjEDQtItlsvwcdssf52mYaZkbWoZSCQV9G6NhJKk40KpkFoQRVrprLZDtax525LDHIOeMXh0vsMLjzh0dnM14-OJTw4BhG9IFUedHYLNsfvUrkaQu-gUME16BbKGbrO2MvxrjX_Z-aAfnd&refresh_token=AQAOC73a_iLb38OuiEw3XIggOmePs89XYSmkAbok8yUfgmwfGLZ_pDhgZyK7rc9DcDsXLdPw_190dYR3UvqqkOgTwWoFyQCgcYswwdQed0q77iG1MkCJvR0ouhafItGOamE";
 
     axios({
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
