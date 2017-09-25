@@ -26,7 +26,10 @@ controllerMon.create = (req, res) => {
       song: req.body.song,
     })
     .then((record) => {
-      console.log('OK...Creating record', record);
+      res.json({
+        message: 'ok',
+        data: { record },
+      });
     })
     .catch((err) => {
       console.log(err);
