@@ -22,8 +22,8 @@ class MusicMonster extends Component {
         name: '',
         picture: '',
         song: '',
-        url: '',
-    }
+        url: ''
+    };
 
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -66,13 +66,12 @@ class MusicMonster extends Component {
         <SearchForm handleInputChange={this.handleInputChange} input={this.state.input}/>
           <Switch>
             <Route exact path="/results" render={props =><Results handleInputChange={this.handleInputChange} input={this.state.input}/>} />
+
           </Switch>
         </main>
       </div>
     );
   }
 }
-// <Route path='/QuoteList' component={QuoteList}/>
-// <Route exact path='/results' component={Results} handleInputChange={this.handleInputChange} updateValue={this.state.input} callSpotifyApi={this.callSpotifyApi}/>
 
 export default MusicMonster;
