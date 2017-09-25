@@ -1,13 +1,15 @@
 /* Google Font */
 @import url('https://fonts.googleapis.com/css?family=Amarante');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   background: rgba(30, 34, 32, 0.77);
   color: white;
-  /* width: 95%; */
-  /* margin: 10px auto; */
   font-size: 24px;
   cursor: default;
-  font-family: "Amarante", cursive;
+  font-family: 'Open Sans', sans-serif;
 }
 
 a {
@@ -35,11 +37,16 @@ header {
 /* Parent of Login/Regis */
 .reg {
   display: flex;
+  justify-content: space-between;
 }
 .menu,
 .login,
 .sign {
   cursor: pointer;
+}
+
+.sign {
+  margin: 0px 5px 0px 0px;
 }
 
 .menu {
@@ -81,14 +88,26 @@ header {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-top: 22px;
+  font-family: "Amarante", cursive;
 }
 /* Subtitle - choice and input box */
-.search {
+
+.searchSection {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px 0px 0px 0px;
+}
+
+.search {
   margin-top: 36px;
   width: 25%;
+}
+
+.SearchForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .search h3 {
   margin-bottom: 20px;
@@ -104,7 +123,6 @@ header {
   margin: 6px;
   border-radius: 6px;
   font-weight: 400;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 15px;
   cursor: pointer;
 }
@@ -122,7 +140,7 @@ header {
 }
 
 .searchInput {
-  font-size: 20px;
+  font-size: 15px;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
 }
@@ -132,7 +150,9 @@ header {
 }
 
 .front .search .btn {
-  font-size: 20px;
+  height: 30px;
+  width: 75px;
+  font-size: 18px;
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
   cursor: pointer;
@@ -145,7 +165,11 @@ header {
 }
 
 .front .search .btn:hover {
-  background-color: white;
+  background-color: black;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  height: 30px;
+  width: 100px;
   letter-spacing: 2px;
   font-weight: 700;
 }
@@ -219,21 +243,25 @@ header {
 }
 
 .results .searchSec .btnSec {
-  font-size: 12px;
+  font-size: 13px;
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
   cursor: pointer;
-  outline: none;
+  border: none;
   transition: all 0.5s;
-  margin-left: 10px;
 }
 
 .results .searchSec .btnSec a {
   color: black;
+  transition: all 0.5s;
+}
+
+.results .searchSec .btnSec a:hover {
+  color: #00ff00;
 }
 
 .results .searchSec .btnSec:hover {
-  background-color: white;
+  background-color: black;
   letter-spacing: 1px;
   font-weight: 700;
 }
@@ -252,16 +280,19 @@ header {
   justify-content: space-around;
   width: 65%;
 }
+
 .musicInfo .name {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   font-size: 30px;
   padding: 5px;
+  margin-bottom: 10px;
   background: linear-gradient(to top right, #ffccff -6%, #99ffcc 112%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  width: 62%;
+  width: 100%;
 }
+
 .musicInfo .music img {
   display: flex;
   justify-content: flex-start;
@@ -273,6 +304,14 @@ header {
   padding: 6px;
   margin-right: 24px;
   height: 400px;
+}
+
+.AddButton {
+  border-radius: 100%;
+  border: 2px solid white;
+  font-size: 18px;
+  color: red;
+  background-color: transparent;
 }
 
 footer {
@@ -287,13 +326,13 @@ footer {
 
 /* Burger Menu */
 
-/* Position and sizing of burger button */
+/* Position and sizing of burger button apple*/
 .bm-burger-button {
   position: fixed;
-  width: 36px;
-  height: 30px;
+  width: 30px;
+  height: 25px;
   left: 12px;
-  top: 5px;
+  top: 7px;
   transition: all 0.5s;
 }
 
@@ -370,3 +409,46 @@ footer {
 #setting:hover {
   color: #6e6969;
 }
+
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginButton {
+  background-color: grey;
+  font-size: 16px;
+  border: none;
+  height: 40px;
+  width: 100px;
+  margin-top: 5px;
+  transition: all 0.5s;
+}
+
+.loginButton:hover {
+  background-color: black;
+  color: #00ff00;
+  font-size: 16px;
+  border: 2px solid #00ff00;
+  height: 40px;
+  width: 100px;
+  margin-top: 5px;
+}
+
+.Username,
+.Password,
+.Password2,
+.eMail {
+  padding: 10px;
+  margin-top: 5px;
+  width: 250px;
+}
+
+.Username:hover,
+.Password:hover,
+.Password2:hover,
+.eMail:hover {
+  outline-color: #00ff00;
+}
+

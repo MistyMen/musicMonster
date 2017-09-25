@@ -3,18 +3,17 @@
 // Import all the necessary packages
 import React, { Component } from "react";
 import axios from "axios";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+
 // Import all the necessary components
-// import Iframe from "react-iframe";
 import Nav from "./components/partials/Nav";
 import Footer from "./components/partials/Footer";
 import SearchForm from "./components/SearchForm";
 import Results from "./components/Results";
 import { Link } from "react-router-dom";
-import { scaleRotate as Menu } from "react-burger-menu";
+import Menu from "./components/partials/Menu";
 import Register from "./components/Register";
 import Login from "./components/Login";
-// import Result from './components/Result';
 
 // CSS files
 import "./reset.css";
@@ -29,12 +28,13 @@ class MusicMonster extends Component {
       artist: "",
       image: "",
       song: "",
+      track: "",
+      comments: "",
       username: "",
       password: "",
       home: true,
     };
     this.submitToServer = this.submitToServer.bind(this);
-    this.callSpotifyApi = this.callSpotifyApi.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleUsernameInput = this.handleUsernameInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
@@ -46,8 +46,16 @@ class MusicMonster extends Component {
     console.log("Will Mount...");
   };
 
+<<<<<<< HEAD
   componentDidMount() {
     console.log('Did mount...');
+=======
+  componentDidMount(e) {
+    console.log("HAAAAAAAAAA");
+    this.checkUrl();
+
+    console.log("Did mount...");
+>>>>>>> f76406d5617f33a8ed8ca3785342672b40b1b51c
   };
 
   handleInputChange(event) {
@@ -60,6 +68,7 @@ class MusicMonster extends Component {
   };
 
   checkUrl() {
+    console.log("CheckingURL -------->", this.state.home);
     window.location.href.includes("results")
       ? this.setState({ home: false })
       : this.setState({ home: true });
@@ -85,7 +94,7 @@ class MusicMonster extends Component {
     e.preventDefault();
     const artistSearch = this.state.input;
     const APIToken =
-      "BQBW1ODyJencES28moyb__Bltc4Kp9gKA8L48T_TbLDvPHStsHSg9JTVnuI4uDB4qYBT85mn6y-knJ2Vtjha-PrwJZ4dk1L1cRkN1ErjyjnQ-4NoMS7IoF_XNjBLW4Z00HBtlV695ucrJjL4Hn39FHFI3Io8KA6psKzd&refresh_token=AQBMPnJovyAdZig52i2ZBnBuxM835Osl0DKJKCX1esB5vbLjEDQtItlsvwcdssf52mYaZkbWoZSCQV9G6NhJKk40KpkFoQRVrprLZDtax525LDHIOeMXh0vsMLjzh0dnM14";
+      "BQCAYxe9bOudPJYcLO7LI9od_Y6hGuLIaP2JKyMztS-fpiPj9o9JeB4mJZ2ybEO-SCio5qqxAzMGdNAkAJykFqMtT8ja9rCjaTD-Knt2vtk7SExAtG9tlDDlENMtyBA3K7y-HCq1QlbjfyIhFWkIEqeZIUcaeYdqbfJa";
 
     axios({
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
@@ -126,7 +135,9 @@ class MusicMonster extends Component {
       data: {
         name: this.state.artist,
         picture: this.state.image,
-      },
+        track: this.state.track,
+      }
+
     })
       .then(res => {
         console.log(this.state.artist, "-----------");
@@ -147,50 +158,28 @@ class MusicMonster extends Component {
   render() {
     console.log("Rendering...");
     console.log(this.state.home);
+
+    let searchF = null;
+    if(window.location.href.includes("login") == false && window.location.href.includes("register") == false) {
+      searchF = <div className="searchSection">
+                  <h3>
+                    <span>Genre</span>
+                    <span className={"artist" + (this.state.home ? "" : "Sec")}>
+                      Artist
+                    </span>
+                    <span>Music</span>
+                  </h3>
+                    <SearchForm
+                      home={this.state.home}
+                      handleInputChange={this.handleInputChange}
+                      callSpotifyApi={this.callSpotifyApi}
+                      input={this.state.input}
+                    />
+                  </div>
+    }
     return (
       <div id="outer-container">
-        <Menu
-          width={"15%"}
-          pageWrapId={"page-wrap"}
-          outerContainerId={"outer-container"}
-        >
-          <ul>
-            <li>
-              <a id="home" className="menu-item" href="/">
-                Home
-              </a>
-            </li>
-            <li>
-              <a id="user" className="menu-item" href="/">
-                User
-              </a>
-            </li>
-            <li>
-              <a
-                id="about"
-                className="menu-item"
-                href="https://github.com/MistyMen/musicMonster"
-              >
-                About
-              </a>
-            </li>
-            <li>
-              <a id="contact" className="menu-item" href="/contact">
-                Contact
-              </a>
-            </li>
-            <li>
-              <a
-                id="setting"
-                onClick={this.showSettings}
-                className="menu-item--small"
-                href=""
-              >
-                Settings
-              </a>
-            </li>
-          </ul>
-        </Menu>
+        <Menu />
         <main id="page-wrap">
           <Nav />
 
@@ -200,21 +189,7 @@ class MusicMonster extends Component {
                 Music Monster
               </div>
               <div className={"search" + (this.state.home ? "" : "Sec")}>
-                <h3>
-                  <span>Genre</span>
-                  <span className={"artist" + (this.state.home ? "" : "Sec")}>
-                    Artist
-                  </span>
-                  <span>Music</span>
-                </h3>
-
-                <SearchForm
-                  home={this.state.home}
-                  handleInputChange={this.handleInputChange}
-                  callSpotifyApi={this.callSpotifyApi}
-                  input={this.state.input}
-                />
-
+              {searchF}
                 <Switch>
                   <Route
                     exact
@@ -261,7 +236,11 @@ class MusicMonster extends Component {
           <Footer />
         </main>
       </div>
+<<<<<<< HEAD
     );
+=======
+    )
+>>>>>>> f76406d5617f33a8ed8ca3785342672b40b1b51c
   }
 }
 
