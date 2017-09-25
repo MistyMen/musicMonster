@@ -38,14 +38,14 @@ function createTrack(id) {
   let id = "";
   modelMon
     .findArtistByName({
-      name: "asasdasdqqweqw"
+      name: req.body.name
     })
     .then(data => {
       if (typeof data[0] !== "object") {
         modelMon
           .createArtist({
-            name: "asasdasdqqweqw",
-            picture: "asdad"
+            name: req.body.name,
+            picture: req.body.picture
           })
           .then(record => {
             id = record.id;

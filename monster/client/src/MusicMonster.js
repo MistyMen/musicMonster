@@ -84,9 +84,8 @@ handlePasswordInput(event) {
   })
   .then(res => {
     console.log(res);
-
     const artistName = res.data.artists.items["0"].name;
-    const track_url = res.data.artists.items[0].href;
+    const track_url = res.data.artists.items["0"].external_urls.spotify;
     const artistPopularity = res.data.artists.items["0"].popularity;
     const artistFollowers = res.data.artists.items["0"].followers.total;
     const genre = res.data.artists.items[0].genres
@@ -114,16 +113,28 @@ handlePasswordInput(event) {
 
 submitToServer(e){
   e.preventDefault();
+  console.log('this is the submit to server -----------')
 
   axios({
-    url: 'http:localhost:3001/api/artists',
     method: 'POST',
+    url: 'http://localhost:3001/api/artists',
     data: {
-      artistSearch: this.state.artist
+      name: this.state.artist,
+      picture: this.state.image
     }
   })
   .then(res => {
+    console.log(this.state.artist,'-----------')
     // res will include all the information you sent back from the server
+    const savingMusicToDataBase = {
+      name: res.data.artists.items["0"].name
+      picture: res.data.artists.items["0"].images[0].url
+    };
+    this.setState(prevState => {
+      return {
+        artists: prevState.artists.concat(savingMusicToDataBase)
+      };
+    });
   })
   .catch(err => console.log(err));
 }
@@ -159,7 +170,7 @@ submitToServer(e){
                 password={this.state.password}
                 handleUsernameInput={this.handleUsernameInput}
                 handlePasswordInput={this.handlePasswordInput}/>}/>
-              }
+
             </Switch>
         </main>
       </div>

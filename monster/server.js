@@ -3,8 +3,13 @@ const express = require('express');
 const logger = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
+// you need cors to make the connection between front end and back end
+// also you need to use app.use(cors()); for it to work
+const cors = require('cors')
 
 const app = express();
+
+app.use(cors())
 
 const PORT = process.env.PORT || 3001;
 
