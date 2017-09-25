@@ -28,6 +28,7 @@ class MusicMonster extends Component {
       artist: "",
       image: "",
       track: "",
+      comments: "",
       username: "",
       password: "",
       home: true
@@ -87,7 +88,7 @@ class MusicMonster extends Component {
     e.preventDefault();
     const artistSearch = this.state.input;
     const APIToken =
-      "BQBW1ODyJencES28moyb__Bltc4Kp9gKA8L48T_TbLDvPHStsHSg9JTVnuI4uDB4qYBT85mn6y-knJ2Vtjha-PrwJZ4dk1L1cRkN1ErjyjnQ-4NoMS7IoF_XNjBLW4Z00HBtlV695ucrJjL4Hn39FHFI3Io8KA6psKzd&refresh_token=AQBMPnJovyAdZig52i2ZBnBuxM835Osl0DKJKCX1esB5vbLjEDQtItlsvwcdssf52mYaZkbWoZSCQV9G6NhJKk40KpkFoQRVrprLZDtax525LDHIOeMXh0vsMLjzh0dnM14-OJTw4BhG9IFUedHYLNsfvUrkaQu-gUME16BbKGbrO2MvxrjX_Z-aAfnd&refresh_token=AQAOC73a_iLb38OuiEw3XIggOmePs89XYSmkAbok8yUfgmwfGLZ_pDhgZyK7rc9DcDsXLdPw_190dYR3UvqqkOgTwWoFyQCgcYswwdQed0q77iG1MkCJvR0ouhafItGOamE";
+      "BQCAYxe9bOudPJYcLO7LI9od_Y6hGuLIaP2JKyMztS-fpiPj9o9JeB4mJZ2ybEO-SCio5qqxAzMGdNAkAJykFqMtT8ja9rCjaTD-Knt2vtk7SExAtG9tlDDlENMtyBA3K7y-HCq1QlbjfyIhFWkIEqeZIUcaeYdqbfJa";
 
     axios({
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
@@ -134,7 +135,8 @@ class MusicMonster extends Component {
       url: "http://localhost:3001/api/artists",
       data: {
         name: this.state.artist,
-        picture: this.state.image
+        picture: this.state.image,
+        track: this.state.track,
       }
     })
       .then(res => {
@@ -156,6 +158,25 @@ class MusicMonster extends Component {
   render() {
     console.log("Rendering...");
     console.log(this.state.home);
+
+    let searchF = null;
+    if(window.location.href.includes("login") == false && window.location.href.includes("register") == false) {
+      searchF = <div className="searchSection">
+                  <h3>
+                    <span>Genre</span>
+                    <span className={"artist" + (this.state.home ? "" : "Sec")}>
+                      Artist
+                    </span>
+                    <span>Music</span>
+                  </h3>
+                    <SearchForm
+                      home={this.state.home}
+                      handleInputChange={this.handleInputChange}
+                      callSpotifyApi={this.callSpotifyApi}
+                      input={this.state.input}
+                    />
+                  </div>
+    }
     return (
       <div id="outer-container">
         <Menu />
@@ -168,24 +189,7 @@ class MusicMonster extends Component {
                 Music Monster
               </div>
               <div className={"search" + (this.state.home ? "" : "Sec")}>
-
-              <div className="searchSection">
-                <h3>
-                  <span>Genre</span>
-                  <span className={"artist" + (this.state.home ? "" : "Sec")}>
-                    Artist
-                  </span>
-                  <span>Music</span>
-                </h3>
-
-                <SearchForm
-                  home={this.state.home}
-                  handleInputChange={this.handleInputChange}
-                  callSpotifyApi={this.callSpotifyApi}
-                  input={this.state.input}
-                />
-                </div>
-
+              {searchF}
                 <Switch>
                   <Route
                     exact
@@ -232,8 +236,8 @@ class MusicMonster extends Component {
           <Footer />
         </main>
       </div>
-    );
-  };
-};
+    )
+  }
+}
 
 export default MusicMonster;

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Add from './partials/Add';
 
 class Results extends Component {
   componentWillMount() {
@@ -14,7 +15,7 @@ class Results extends Component {
     return (
       <div className="results">
         <div className="musicInfo">
-          <div className="name">{this.props.artist}</div>
+          <div className="name">{this.props.artist}<Add /></div>
           <div className="music">
             <div className="image">
               <img src={this.props.image} alt={this.props.artist} />
