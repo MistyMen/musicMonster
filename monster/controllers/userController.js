@@ -28,7 +28,7 @@ userController.singIn = (req, res) => {
           if (!user.comparePassword(req.body.password, userSign.password)) {
               res.status(401).json({ mesage: 'Authentication failed. wrong password' });
         } else {
-            res.json({ token: jwt.sign({ username: userSign.username, id: userSign.id }, 'darkWaider') });
+            res.json({ token: jwt.sign({ username: userSign.username, id: userSign.id }, 'darkWaider', { expiresIn: 5000 }) });
         }
       }
   }).catch((err) => {
