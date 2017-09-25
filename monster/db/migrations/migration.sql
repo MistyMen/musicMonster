@@ -14,7 +14,6 @@ CREATE TABLE records (
   artist VARCHAR(255) NOT NULL,
   image TEXT
   song VARCHAR(255) NOT NULL,
-  url TEXT
 );
 
 CREATE INDEX ON tracks (song);

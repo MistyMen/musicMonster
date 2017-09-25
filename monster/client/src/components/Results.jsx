@@ -7,6 +7,7 @@ class Results extends Component {
 
   componentDidMount() {
     console.log("Results did mount...");
+    this.props.checkUrl();
   }
 
   render() {
@@ -19,7 +20,7 @@ class Results extends Component {
               <img src={this.props.image} alt={this.props.artist} />
             </div>
             <div className="tracks">
-              <iframe src={this.props.track} width="400" height="415" />
+              <iframe src={this.props.song} width="400" height="415" />
             </div>
           </div>
         </div>
