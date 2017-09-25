@@ -6,9 +6,6 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const expressJWT = require('express-jwt');
 const music = require('./models/musicModel');
-
-// you need cors to make the connection between front end and back end
-// also you need to use app.use(cors()); for it to work
 const cors = require('cors')
 
 const app = express();
