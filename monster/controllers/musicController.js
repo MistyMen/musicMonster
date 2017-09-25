@@ -17,14 +17,13 @@ controllerMon.indexAll = (req, res) => {
     });
 };
 
-/*store new record in db. NEED TO FIGURE OUT HOW ADD A USER_ID*/
+/*store particular record to db*/
 controllerMon.create = (req, res) => {
   modelMon.createRecord({
       id: req.body.id,
       artist: req.body.song,
       image: req.body.artist_id,
       song: req.body.song,
-      user_id: () =>
     })
     .then((record) => {
       console.log('OK...Creating record', record);
@@ -34,24 +33,24 @@ controllerMon.create = (req, res) => {
       res.status('400').json({ message: '400. Something goes wrong' });
     });
 };
-
-// /*create a new record in a user db*/
-// controllerMon.create = (req, res) => {
-//     const nothing = await modelMon.save(req.body);
-//     const record = await createRecord(req.body.id);//
-//     console.log("OK...Creating Track", record);
-//   } catch (e) {
-//     // something happened
-//     next(err);
-//   }
-// };
+/*update particular record*/
+controllerMon.update = (req, res) => {
+  modelMon.update(req.body)
+    .then((record) => {
+      res.json({message: `records ${record.comments} updated`});
+      res.redirect('/results');
+    }).catch((err) => {
+        console.log(err);
+        res.status(401).json({message: 'something went wrong'});
+    });
+};
 
   /*delete records*/
-  controllerMon.destroy = (req, res) => {
+  controllerMon.destroy = (req, res, next) => {
     modelMon
       .delete(res.params.id)
       .then(() => {
-        res.redirect('/');
+        next();
       })
       .catch((err) => {
         console.log(err);
