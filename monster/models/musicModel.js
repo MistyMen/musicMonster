@@ -5,35 +5,31 @@ const Music = {};
 Music.findAll = () => {
   return db.many(
     `
-    SELECT artists.name, artists.picture, tracks.song, tracks.url FROM artists
-    INNER JOIN tracks ON (artists.id = tracks.artist_id)`);
+    SELECT artist, image, song
+    FROM records
+    `);
 };
 
-    // check does artist exist.
-    //if already seen this artist do nothing
 Music.save = (music) => {
+  return db.none(`
+    INSERT INTO records (id, artist, image, song)
+    VALUES ($/id/, $/artist/, $/image/, $/song/)
+    ON CONFLICT (id) DO NOTHING
+    `,
+    music);
+};
+
+Music.update = (music) => {
+  return db.one(`
+    UPDATE records SET (comments)
+    WHERE id = $/id/
+    RETURNING*`,
+    music);
+};
+
+Music.destroy = (id) => {
     return db.none(`
-      INSERT INTO artists (id, name, picture)
-      VALUES ($/id/, $/name/, $/picture/)
-      ON CONFLICT (id) DO NOTHING
-      `,
-      music);
+    DELETE FROM tracks WHERE id = $1`, id);
 };
-
-Music.createTrack = (music) => {
-  return db.one(
-    `
-    INSERT INTO tracks (artist_id, song, url)
-    VALUES ($1, $2, $3)
-    RETURNING *`,
-    [music.artist_id, music.song, music.url],
-  );
-};
-
-  Music.destroy = (id) => {
-    return db.none(
-      `
-      DELETE FROM tracks WHERE id = $1`, id);
-  }
 
 module.exports = Music;

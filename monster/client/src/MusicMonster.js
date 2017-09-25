@@ -31,7 +31,7 @@ class MusicMonster extends Component {
       song: "",
       username: "",
       password: "",
-      home: true
+      home: true,
     };
     this.submitToServer = this.submitToServer.bind(this);
     this.callSpotifyApi = this.callSpotifyApi.bind(this);
@@ -39,7 +39,7 @@ class MusicMonster extends Component {
     this.handleUsernameInput = this.handleUsernameInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.checkUrl = this.checkUrl.bind(this);
-  };
+  }
 
   componentDidMount(e) {
     console.log("Did mount...");
@@ -122,7 +122,7 @@ class MusicMonster extends Component {
 
     axios({
       method: "POST",
-      url: "http://localhost:3001/api/user/records",
+      url: "http://localhost:3001/api/user/",
       data: {
         artist: this.state.artist,
         image: this.state.image,

@@ -10,7 +10,7 @@ userController.reg = (req, res, next) => {
       .then((userReg) => {
         req.login(userReg, (err) => {
           if (err) return next(err);
-          res.redirect('/user');
+          res.redirect('/auth/sign_in');
           res.json(userReg);
           });
     }).catch((err) => {
@@ -29,6 +29,7 @@ userController.singIn = (req, res) => {
               res.status(401).json({ mesage: 'Authentication failed. wrong password' });
         } else {
             res.json({ token: jwt.sign({ username: userSign.username, id: userSign.id }, 'darkWaider', { expiresIn: 5000 }) });
+            res.redirect(`/user/${userSign.id}`);
         }
       }
   }).catch((err) => {
