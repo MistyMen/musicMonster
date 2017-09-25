@@ -22,7 +22,8 @@ class SearchForm extends Component {
         <button
         type="submit"
         className="searchButton"
-        id="submit"><Link type="submit" to="/results">Find</Link></button>
+        id="submit"
+        onSubmit={this.props.callSpotifyApi}><Link type="submit" to="/results" >Find</Link></button>
       </form>
       );
   }
