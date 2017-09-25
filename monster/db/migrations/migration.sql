@@ -7,6 +7,6 @@ CREATE TABLE records (
   artist VARCHAR(255) NOT NULL,
   image TEXT,
   song VARCHAR(255) NOT NULL,
-  comments TEXT DEFAULT "favorite track"
+  comments TEXT
 );
 
