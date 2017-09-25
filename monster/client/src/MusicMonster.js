@@ -21,8 +21,8 @@ import "./reset.css";
 import "./App.css";
 
 class MusicMonster extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       searchData: null,
       input: "",
@@ -40,29 +40,49 @@ class MusicMonster extends Component {
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.callSpotifyApi = this.callSpotifyApi.bind(this);
     this.checkUrl = this.checkUrl.bind(this);
-  }
+  };
 
   componentWillMount() {
     console.log("Will Mount...");
-  }
+  };
+
+  componentDidMount() {
+    console.log('Did mount...');
+  };
+
+  callSpotifyApi(event) {
+    console.log(event)
+    fetch(`https://api.spotify.com/v1/search?q=eminem&type=artist`)
+      .then((res) => {
+        return res.json();
+      }).then((jsonRes) => {
+        this.setState({
+          searchData: jsonRes.data,
+        })
+    })
+  };
 
   componentDidMount(e) {
     console.log("HAAAAAAAAAA");
     this.checkUrl();
 
     console.log("Did mount...");
-  }
+  };
+
   handleInputChange(event) {
+    event.preventDefault();
     this.setState({
       input: event.target.value
     });
-  }
+    console.log(event.target.value);
+    // console.log(this.state.input);
+  };
 
   checkUrl() {
     window.location.href.includes("results")
       ? this.setState({ home: false })
       : this.setState({ home: true });
-  }
+  };
 
   handleUsernameInput(event) {
     event.preventDefault();
@@ -70,7 +90,7 @@ class MusicMonster extends Component {
       username: event.target.value
     });
     console.log(event.target.value);
-  }
+  };
 
   handlePasswordInput(event) {
     event.preventDefault();
@@ -78,7 +98,8 @@ class MusicMonster extends Component {
       password: event.target.value
     });
     console.log(event.target.value);
-  }
+  };
+
   callSpotifyApi(e) {
     e.preventDefault();
     const artistSearch = this.state.input;
@@ -119,7 +140,7 @@ class MusicMonster extends Component {
         console.log("Track URL", this.state.track);
       })
       .catch(err => console.error(err));
-  }
+  };
 
   submitToServer(e) {
     e.preventDefault();
@@ -147,7 +168,7 @@ class MusicMonster extends Component {
         });
       })
       .catch(err => console.log(err));
-  }
+  };
 
   render() {
     console.log("Rendering...");
@@ -267,7 +288,7 @@ class MusicMonster extends Component {
         </main>
       </div>
     );
-  }
-}
+  };
+};
 
 export default MusicMonster;

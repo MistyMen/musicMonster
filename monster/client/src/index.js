@@ -9,6 +9,7 @@ import './index.css';
 // Necessary components
 import MusicMonster from './MusicMonster';
 import registerServiceWorker from './registerServiceWorker';
+import Router from 'react-router-dom';
 
 ReactDOM.render(
   <Router>

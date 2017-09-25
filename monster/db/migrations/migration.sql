@@ -1,17 +1,29 @@
 \c monster_dev
 
-\drop table artists
-\drop table tracks
+drop table if exists artists;
+drop table if exists tracks;
+drop table if exists users;
 
-CREATE TABLE IF NOT EXISTS artists (
+CREATE TABLE artists (
+  id VARCHAR(64) PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  picture TEXT
+);
+
+CREATE INDEX ON artists (name);
+
+CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(1024),
-  picture VARCHAR(1024)
+  username VARCHAR(64) NOT NULL,
+  password TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS tracks (
-  id BIGSERIAL PRIMARY KEY,
-  artist_id INT REFERENCES artists(id),
-  song VARCHAR(1024),
-  url VARCHAR(1024)
+
+CREATE TABLE tracks (
+  id VARCHAR(64) PRIMARY KEY,
+  artist_id VARCHAR(64) REFERENCES artists,
+  song VARCHAR(255) NOT NULL,
+  url TEXT
 );
+
+CREATE INDEX ON tracks (song);
