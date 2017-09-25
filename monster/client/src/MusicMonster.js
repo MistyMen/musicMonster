@@ -65,7 +65,7 @@ class MusicMonster extends Component {
     });
     console.log(event.target.value);
     // console.log(this.state.input);
-  };
+  }
 
   checkUrl() {
     console.log("CheckingURL -------->", this.state.home);
