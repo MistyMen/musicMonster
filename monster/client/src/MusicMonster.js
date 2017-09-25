@@ -32,6 +32,7 @@ class MusicMonster extends Component {
       username: "",
       password: "",
       home: true,
+      testObject: {},
     };
     this.submitToServer = this.submitToServer.bind(this);
     this.callSpotifyApi = this.callSpotifyApi.bind(this);
@@ -47,6 +48,14 @@ class MusicMonster extends Component {
 }
   componentWillMount() {
     console.log("Will Mount...");
+      axios('http://localhost:3001/api/results')
+      .then(res => {
+        this.setState(prevState => {
+          return {
+            testObject: res,
+          }
+      });
+    });
   };
 
 
@@ -85,7 +94,7 @@ class MusicMonster extends Component {
     e.preventDefault();
     const artistSearch = this.state.input;
     const APIToken =
-      "BQBl0w7eFVJuinvNjCEW7aGBfJFwzP1iLdLWqwwkgciZNyKTHRxcKlGXQTRBXHgAYPHqmoX3t_YJNe2Mq9EtGMjLIXa1lXG3hH5yyw2Z1p15K9IuqLo1GLfiaNG1IgwClGIpCDmcIAt81PVxS-8xUFFLzYeHPfZWXRKe";
+      "BQCAYxe9bOudPJYcLO7LI9od_Y6hGuLIaP2JKyMztS-fpiPj9o9JeB4mJZ2ybEO-SCio5qqxAzMGdNAkAJykFqMtT8ja9rCjaTD-Knt2vtk7SExAtG9tlDDlENMtyBA3K7y-HCq1QlbjfyIhFWkIEqeZIUcaeYdqbfJa";
 
     axios({
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
@@ -122,7 +131,7 @@ class MusicMonster extends Component {
 
     axios({
       method: "POST",
-      url: "http://localhost:3001/api/user/",
+      url: "http://localhost:3001/api/results/",
       data: {
         artist: this.state.artist,
         image: this.state.image,
@@ -148,7 +157,7 @@ class MusicMonster extends Component {
 
   render() {
     console.log("Rendering...");
-    console.log(this.state.home);
+    console.log("Test",this.state.testObject);
     return (
       <div id="outer-container">
         <Menu
