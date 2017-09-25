@@ -16,7 +16,7 @@ class BurgerMenu extends Component {
               </a>
             </li>
             <li>
-              <a id="user" className="menu-item" href="/">
+              <a id="user" className="menu-item" href="/user">
                 User
               </a>
             </li>

@@ -12,6 +12,7 @@ import SearchForm from "./components/SearchForm";
 import Results from "./components/Results";
 import { Link } from "react-router-dom";
 import Menu from "./components/partials/Menu";
+import User from "./components/partials/User";
 import Register from "./components/Register";
 import Login from "./components/Login";
 
@@ -24,15 +25,17 @@ class MusicMonster extends Component {
     super(props);
     this.state = {
       searchData: null,
+      id: "",
       input: "",
       artist: "",
       image: "",
       song: "",
-      track: "",
       comments: "",
       username: "",
       password: "",
       home: true,
+      isLoggedIn: false,
+      dataBase: []
     };
     this.submitToServer = this.submitToServer.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -44,44 +47,72 @@ class MusicMonster extends Component {
 
   componentWillMount() {
     console.log("Will Mount...");
-  };
-
+  }
 
   componentDidMount() {
     console.log('Did mount...');
-  };
+  }
 
   handleInputChange(event) {
     event.preventDefault();
     this.setState({
-      input: event.target.value,
+      input: event.target.value
     });
     console.log(event.target.value);
     // console.log(this.state.input);
-  };
+  }
 
   checkUrl() {
     console.log("CheckingURL -------->", this.state.home);
-    window.location.href.includes("results")
+    window.location.href.includes("results") ||
+    window.location.href.includes("user")
       ? this.setState({ home: false })
       : this.setState({ home: true });
-  };
+  }
 
   handleUsernameInput(event) {
     event.preventDefault();
     this.setState({
-      username: event.target.value,
+      username: event.target.value
     });
     console.log(event.target.value);
-  };
+  }
 
   handlePasswordInput(event) {
     event.preventDefault();
     this.setState({
-      password: event.target.value,
+      password: event.target.value
     });
     console.log(event.target.value);
-  };
+  }
+
+  handleSongDelete(key) {
+    axios({
+      method: "DELETE",
+      url: `http://localhost:3001/api/user`,
+      data: key
+    })
+      .then(res => {
+        this.callingDB();
+        console.log("DELETE Request SENT");
+      })
+      .catch(err => console.log(err));
+  }
+
+  callingDB() {
+    axios({
+      method: "GET",
+      url: `http://localhost:3001/api/user/`
+    })
+      .then(res => {
+        console.log(res);
+        this.setState({
+          dataBase: res
+        });
+        console.log("DataBase", this.state.dataBase);
+      })
+      .catch(err => console.error(err));
+  }
 
   callSpotifyApi(e) {
     e.preventDefault();
@@ -91,9 +122,9 @@ class MusicMonster extends Component {
 
     axios({
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
-      method: 'GET',
+      method: "GET",
       headers: {
-        Authorization: `Bearer ${APIToken}`,
+        Authorization: `Bearer ${APIToken}`
       }
     })
       .then(res => {
@@ -105,18 +136,23 @@ class MusicMonster extends Component {
         const artistFollowers = res.data.artists.items["0"].followers.total;
         const genre = res.data.artists.items[0].genres;
         const image = res.data.artists.items["0"].images[1].url;
+        const id = res.data.artists.items["0"].id;
+
         console.log("Track URL", track_url);
 
         this.setState({
+          id: id,
           searchData: res.data.artists.items,
           artist: artistName,
           image: image,
-          track: "https://open.spotify.com/embed?uri=" + track_url
+          song: "https://open.spotify.com/embed?uri=" + track_url,
+          isLoggedIn: true
         });
-        console.log("Track URL", this.state.track);
+        console.log("IDI IDIDIDIDIDIDDI", this.state.id);
+        console.log("SEARCH ID ID ID", this.state.searchData);
       })
       .catch(err => console.error(err));
-  };
+  }
 
   submitToServer(e) {
     e.preventDefault();
@@ -135,39 +171,43 @@ class MusicMonster extends Component {
         // res will include all the information you sent back from the server
         const savingMusicToDataBase = {
           artist: res.data.artists.items["0"].name,
-          image: res.data.artists.items["0"].images[1].url,
+          image: res.data.artists.items["0"].images[1].url
         };
         this.setState(prevState => {
           return {
-            artists: prevState.artists.concat(savingMusicToDataBase.artist),
-            image: prevState.artists.concat(savingMusicToDataBase.image)
+            artists: prevState.artists.concat(savingMusicToDataBase)
           };
         });
       })
       .catch(err => console.log(err));
-  };
+  }
 
   render() {
     console.log("Rendering...");
     console.log(this.state.home);
 
     let searchF = null;
-    if(window.location.href.includes("login") == false && window.location.href.includes("register") == false) {
-      searchF = <div className="searchSection">
-                  <h3>
-                    <span>Genre</span>
-                    <span className={"artist" + (this.state.home ? "" : "Sec")}>
-                      Artist
-                    </span>
-                    <span>Music</span>
-                  </h3>
-                    <SearchForm
-                      home={this.state.home}
-                      handleInputChange={this.handleInputChange}
-                      callSpotifyApi={this.callSpotifyApi}
-                      input={this.state.input}
-                    />
-                  </div>
+    if (
+      window.location.href.includes("login") == false &&
+      window.location.href.includes("register") == false
+    ) {
+      searchF = (
+        <div className="searchSection">
+          <h3>
+            <span>Genre</span>
+            <span className={"artist" + (this.state.home ? "" : "Sec")}>
+              Artist
+            </span>
+            <span>Music</span>
+          </h3>
+          <SearchForm
+            home={this.state.home}
+            handleInputChange={this.handleInputChange}
+            callSpotifyApi={this.callSpotifyApi}
+            input={this.state.input}
+          />
+        </div>
+      );
     }
     return (
       <div id="outer-container">
@@ -181,7 +221,7 @@ class MusicMonster extends Component {
                 Music Monster
               </div>
               <div className={"search" + (this.state.home ? "" : "Sec")}>
-              {searchF}
+                {searchF}
                 <Switch>
                   <Route
                     exact
@@ -216,9 +256,22 @@ class MusicMonster extends Component {
                         checkUrl={this.checkUrl}
                         artist={this.state.artist}
                         image={this.state.image}
-                        track={this.state.track}
+                        song={this.state.song}
                         data={this.state.searchData}
                         input={this.state.input}
+                        submitToServer={this.submitToServer}
+                      />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/user"
+                    render={props => (
+                      <User
+                        checkUrl={this.checkUrl}
+                        callingDB={this.callingDB}
+                        dataBase={this.state.dataBase}
+                        handleSongDelete={this.handleSongDelete}
                       />
                     )}
                   />
@@ -229,7 +282,10 @@ class MusicMonster extends Component {
           <Footer />
         </main>
       </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> b7e6439e64477fc1f6d55791f9c250438d732ed7
     );
   }
 }

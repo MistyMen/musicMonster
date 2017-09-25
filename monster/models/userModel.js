@@ -20,8 +20,4 @@ User.saveNew = (user) => {
       user);
 };
 
-User.comparePassword = (password, databasePass) => {
-  return bcrypt.compareSync(password, databasePass);
-};
-
 module.exports = User;

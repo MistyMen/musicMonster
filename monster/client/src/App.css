@@ -9,7 +9,7 @@ body {
   color: white;
   font-size: 24px;
   cursor: default;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 a {
@@ -40,8 +40,8 @@ header {
   justify-content: space-between;
 }
 .menu,
-.login,
-.sign {
+a .login,
+a .sign {
   cursor: pointer;
 }
 
@@ -57,8 +57,7 @@ header {
 }
 
 .menu:hover,
-.login:hover,
-.sign:hover,
+.reg a:hover,
 .about a:hover {
   color: white;
 }
@@ -67,12 +66,6 @@ header {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-/* Separation */
-.login,
-.VLine {
-  margin-right: 10px;
-}
-
 /* First Page */
 .front {
   display: flex;
@@ -94,9 +87,9 @@ header {
 
 .searchSection {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   margin: 10px 0px 0px 0px;
+  flex-direction: column;
 }
 
 .search {
@@ -193,6 +186,7 @@ header {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-top: 6px;
+  font-family: "Amarante", cursive;
 }
 
 .searchSec {
@@ -201,6 +195,7 @@ header {
   color: #a7a7a7;
   margin-top: -8px;
   display: flex;
+  /* flex-wrap: wrap; */
   flex-direction: column;
   align-items: center;
 }

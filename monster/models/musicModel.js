@@ -5,15 +5,15 @@ const Music = {};
 Music.findAll = () => {
   return db.many(
     `
-    SELECT artist, image, song
+    SELECT id, artist, image, song, comments
     FROM records
     `);
 };
 
 Music.save = (music) => {
   return db.none(`
-    INSERT INTO records (id, artist, image, song)
-    VALUES ($/id/, $/artist/, $/image/, $/song/)
+    INSERT INTO records (id, artist, image, song, comments)
+    VALUES ($/id/, $/artist/, $/image/, $/song/, $/comments/)
     ON CONFLICT (id) DO NOTHING
     `,
     music);
@@ -21,7 +21,8 @@ Music.save = (music) => {
 
 Music.update = (music) => {
   return db.one(`
-    UPDATE records SET (comments)
+    UPDATE records SET
+    comments = $/comments/
     WHERE id = $/id/
     RETURNING*`,
     music);
