@@ -9,8 +9,8 @@ Music.findAll = () => {
     INNER JOIN users ON (records.user_id = users.id)
     `);
 
-    // check does artist exist.
-    //if already seen this artist do nothing
+// check does records exist.
+//if already seen this artist do nothing
 Music.save = (music) => {
     return db.none(`
       INSERT INTO records (id, artist, image, song, user_id)
@@ -19,16 +19,6 @@ Music.save = (music) => {
       `,
       music);
 };
-
-// Music.createRecord = (music) => {
-//   return db.one(
-//     `
-//     INSERT INTO tracks (id, artist, image, song)
-//     VALUES ($1, $2, $3, $4)
-//     RETURNING *`,
-//     [musci.id, music.artist, music.image, music.song],
-//   );
-// };
 
   Music.destroy = (id) => {
     return db.none(

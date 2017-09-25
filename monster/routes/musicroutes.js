@@ -7,10 +7,6 @@ const musicRoutes = express.Router();
 
 
 /*adding protected endpoints*/
-// musicRoutes.get('/:id', controllerMod.showOne);
-
-// app.post('/login', passport.authentication('local'), controllerMod.authentic);
-
 musicRoutes.post('/auth/register', userController.reg);
 musicRoutes.post('/auth/sign_in', userController.singIn);
 
