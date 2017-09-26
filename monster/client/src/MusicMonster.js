@@ -34,14 +34,16 @@ class MusicMonster extends Component {
       username: "",
       password: "",
       home: true,
-      isLoggedIn: false,
+      isLoggedIn: true,
       dataBase: []
     };
     this.submitToServer = this.submitToServer.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSongDelete = this.handleSongDelete.bind(this);
     this.handleUsernameInput = this.handleUsernameInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.callSpotifyApi = this.callSpotifyApi.bind(this);
+    this.callingDB = this.callingDB.bind(this);
     this.checkUrl = this.checkUrl.bind(this);
   }
 
@@ -86,11 +88,12 @@ class MusicMonster extends Component {
     console.log(event.target.value);
   }
 
-  handleSongDelete(key) {
+  handleSongDelete(event) {
+    console.log('del', event);
     axios({
-      method: "DELETE",
+      method: "delete",
       url: `http://localhost:3001/api/user`,
-      data: key
+      data: event
     })
       .then(res => {
         this.callingDB();
@@ -107,9 +110,8 @@ class MusicMonster extends Component {
       .then(res => {
         console.log(res);
         this.setState({
-          dataBase: res
+          dataBase: res.data.data.records,
         });
-        console.log("DataBase", this.state.dataBase);
       })
       .catch(err => console.error(err));
   }
@@ -118,7 +120,7 @@ class MusicMonster extends Component {
     e.preventDefault();
     const artistSearch = this.state.input;
     const APIToken =
-      "BQD-kf6_D-nqB4-lwLrHhFL0qud7Sc6uDm04Z6SR4s0ERnlCJ-oQil-cXnyByuQGDMD8jtNfpqeG-O41VQLr203CegxoIVJO_8mvmLuPz1HVeJSw69Xd4_elHr5kh9A7echCaYPtYJubSz35LnJ_cTU9RFZagzrSBkkF";
+      "BQCVnUdcUpkMM8FOLa0Y8ZeUr1G_Ci9GwztXZorDVKbm1oWAO_4xODRhcxwvncxV57JU-i1KfR-jtJaEmc0SWCo4tVoVJutxPuwzby2iFLP1C6kMoQ-B3XzbHHh1KnZBMnnNBhdYQ3vED5Ut_Eh09WYIs-J6nh6A3_2G";
 
     axios({
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
@@ -155,31 +157,37 @@ class MusicMonster extends Component {
   }
 
   submitToServer(e) {
+    console.log('id:', this.state.id,
+'artist: ', this.state.artist,
+'image:', this.state.image,
+'song: ', this.state.song);
     e.preventDefault();
     console.log("this is the submit to server -----------");
     axios({
       method: "POST",
       url: "http://localhost:3001/api/results",
       data: {
+        id: this.state.id,
         artist: this.state.artist,
         image: this.state.image,
-        song: this.state.track,
+        song: this.state.song,
+        comments: 'Comment'
       }
     })
-      .then(res => {
-        console.log(this.state.artist, "-----------");
-        // res will include all the information you sent back from the server
-        const savingMusicToDataBase = {
-          artist: res.data.artists.items["0"].name,
-          image: res.data.artists.items["0"].images[1].url
-        };
-        this.setState(prevState => {
-          return {
-            artists: prevState.artists.concat(savingMusicToDataBase)
-          };
-        });
-      })
-      .catch(err => console.log(err));
+      // .then(res => {
+      //   console.log(this.state.artist, "-----------");
+      //   // res will include all the information you sent back from the server
+      //   const savingMusicToDataBase = {
+      //     artist: res.data.artists.items["0"].name,
+      //     image: res.data.artists.items["0"].images[1].url
+      //   };
+      //   this.setState(prevState => {
+      //     return {
+      //       artists: prevState.artists.concat(savingMusicToDataBase)
+      //     };
+      //   });
+      // })
+      // .catch(err => console.log(err));
   }
 
   render() {
@@ -268,10 +276,12 @@ class MusicMonster extends Component {
                     path="/user"
                     render={props => (
                       <User
+                        isLoggedIn={this.state.isLoggedIn}
                         checkUrl={this.checkUrl}
                         callingDB={this.callingDB}
                         dataBase={this.state.dataBase}
                         handleSongDelete={this.handleSongDelete}
+                        handleSongEdit={this.handleSongDelete}
                       />
                     )}
                   />
@@ -282,10 +292,6 @@ class MusicMonster extends Component {
           <Footer />
         </main>
       </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> b7e6439e64477fc1f6d55791f9c250438d732ed7
     );
   }
 }

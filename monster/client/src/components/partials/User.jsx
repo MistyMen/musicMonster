@@ -5,6 +5,7 @@ class User extends Component {
     console.log("User componentDidMount");
     this.props.callingDB();
     this.props.checkUrl();
+    console.log("DataBase", this.dataBase);
   }
 
   render() {
@@ -12,20 +13,21 @@ class User extends Component {
     return (
       <div className="UserFav">
         {this.props.isLoggedIn ? (
-          this.props.data.map(tracksInfo => (
+          this.props.dataBase.map(tracksInfo => (
             <li key={tracksInfo.id}>
-              <button onClick={this.props.handlSongDelete(tracksInfo.id)}>x</button>
+            {console.log(tracksInfo)}
+              <button onClick={this.props.handleSongDelete()}>x</button>
               <iframe src={tracksInfo.song} width="400" height="415" />
 
+              <form className="commentForm">
               <input
               value={tracksInfo.comments}
-              className=""
+              className="comment"
               type="text"
               onClick={this.props.handleInputChange}
             />
-
-              {tracksInfo.comments}
-              <button onClick={this.props.handleSongEdit(tracksInfo)}>*</button>
+              <button onClick={this.props.handleSongEdit()}>*</button>
+              </form>
             </li>
           ))
         ) : (
@@ -37,3 +39,5 @@ class User extends Component {
 }
 
 export default User;
+
+
