@@ -48,13 +48,13 @@ controllerMon.update = (req, res) => {
 };
 
   /*delete records*/
-  controllerMon.destroy = (req, res, next) => {
-    console.log(res);
+  controllerMon.destroy = (req, res) => {
+    console.log(req.params);
     modelMon
-      .destroy(res.params)
+      .destroy(req.params)
       .then(() => {
-        console.log(res.params)
-        next();
+        console.log(res.params);
+        res.redirect('/user');
       })
       .catch((err) => {
         console.log(err);

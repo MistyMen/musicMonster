@@ -30,7 +30,9 @@ Music.update = (music) => {
 
 Music.destroy = (id) => {
     return db.none(`
-    DELETE FROM records WHERE id = $/id/`, id);
+    DELETE FROM records
+      WHERE id = $1`,
+    id);
 };
 
 module.exports = Music;

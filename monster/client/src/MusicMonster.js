@@ -89,23 +89,24 @@ class MusicMonster extends Component {
   }
 
   handleSongDelete(event) {
+    event.preventDefault();
     console.log('del', event);
     axios({
-      method: "delete",
-      url: `http://localhost:3001/api/user`,
-      data: event
+      method: 'DELETE',
+      url: `http://localhost:3001/api/user/${event}`,
+      data: { event },
     })
-      .then(res => {
+      .then(() => {
         this.callingDB();
-        console.log("DELETE Request SENT");
+        console.log('DELETE Request SENT');
       })
       .catch(err => console.log(err));
   }
 
   callingDB() {
     axios({
-      method: "GET",
-      url: `http://localhost:3001/api/user/`
+      method: 'GET',
+      url: 'http://localhost:3001/api/user/',
     })
       .then(res => {
         console.log(res);
@@ -158,9 +159,9 @@ class MusicMonster extends Component {
 
   submitToServer(e) {
     console.log('id:', this.state.id,
-'artist: ', this.state.artist,
-'image:', this.state.image,
-'song: ', this.state.song);
+                'artist: ', this.state.artist,
+                'image:', this.state.image,
+                'song: ', this.state.song);
     e.preventDefault();
     console.log("this is the submit to server -----------");
     axios({
@@ -171,7 +172,7 @@ class MusicMonster extends Component {
         artist: this.state.artist,
         image: this.state.image,
         song: this.state.song,
-        comments: 'Comment'
+        comments: 'Comment',
       }
     })
       // .then(res => {

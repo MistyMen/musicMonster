@@ -16,17 +16,15 @@ class User extends Component {
           this.props.dataBase.map(tracksInfo => (
             <li key={tracksInfo.id}>
             {console.log(tracksInfo)}
-              <button onClick={this.props.handleSongDelete()}>x</button>
+              <button onClick={this.props.handleSongDelete(tracksInfo.id)}>x</button>
               <iframe src={tracksInfo.song} width="400" height="415" />
-
               <form className="commentForm">
-              <input
-              value={tracksInfo.comments}
-              className="comment"
-              type="text"
-              onClick={this.props.handleInputChange}
-            />
-              <button onClick={this.props.handleSongEdit()}>*</button>
+                  <input
+                  value={tracksInfo.comments}
+                  className="comment"
+                  type="text"
+                  onClick={this.props.handleInputChange} />
+                  <button onClick={this.props.handleSongEdit()}>*</button>
               </form>
             </li>
           ))
