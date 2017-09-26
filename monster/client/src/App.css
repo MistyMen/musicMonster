@@ -447,3 +447,29 @@ footer {
   outline-color: #00ff00;
 }
 
+.UserFav {
+  /*position: absolute;
+  width: 95%;*/
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.UserFav li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 4px solid red;
+  text-decoration: none;
+  list-style: none;
+  margin: 10px;
+}
+
+.
+
+.UserFav li button{
+  width: 20px;
+}
+

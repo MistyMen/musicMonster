@@ -19,10 +19,10 @@ controllerMon.indexAll = (req, res) => {
 
 /*store particular record to db*/
 controllerMon.create = (req, res) => {
-  modelMon.createRecord({
+  modelMon.save({
       id: req.body.id,
-      artist: req.body.song,
-      image: req.body.artist_id,
+      artist: req.body.artist,
+      image: req.body.images,
       song: req.body.song,
       comments: req.body.comments,
     })
@@ -34,6 +34,7 @@ controllerMon.create = (req, res) => {
       res.status('400').json({ message: '400. Something goes wrong' });
     });
 };
+
 /*update particular record*/
 controllerMon.update = (req, res) => {
   modelMon.update(req.body)
@@ -48,9 +49,11 @@ controllerMon.update = (req, res) => {
 
   /*delete records*/
   controllerMon.destroy = (req, res, next) => {
+    console.log(res);
     modelMon
-      .delete(res.params.id)
+      .destroy(res.params)
       .then(() => {
+        console.log(res.params)
         next();
       })
       .catch((err) => {
