@@ -60,7 +60,6 @@ Our application is a playlist manager, that lets you save and manage your favori
 | API | H | 6hrs | 3 Days | 3-4 Days |
 | Main Menu | H | 2hrs | 4hrs | 5hrs |
 | Registration/Login | L | 3 Days | 4 Days | +++ |
-| Registration | L | 3 Days | 4 Days | +++ |
 
 ## Code Snippet
 
