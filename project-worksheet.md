@@ -1,11 +1,5 @@
 # Project Overview
 
-## Project Preview
-![Landing Page](./assests/LandingPage.png)
-![ResultsPage Page](./assests/ResultsPage.png)
-![BurgerKing Page](./assests/BurgerKing.png)
-
-
 ## Project Description
 
 Our application is a playlist manager, that lets you save and manage your favorite artists albums. Our user-friendly music monster currently lets you search for artists using the spotify api and saving their albums to our database. You can play a clip on your browser from our website, or if you have the application you can control spotify right from your browser!
@@ -25,31 +19,35 @@ Our application is a playlist manager, that lets you save and manage your favori
 
 ## Priority Matrix
 
-Include an image of the matirx as well as a full bulleted list of features that have been prioritized based on the `Time and Importance` Matix.  
-
-## MVP 
-
-Include the full list of features that will be part of your MVP 
-
-## Post-MVP
-
-Include the full list of features that you are considering for Post-MVP
+![Matrix](./assests/Matrix.jpg)
+ 
+## MVP & Post-MVP
+![Mvp](./assests/Mvp.jpg)
 
 ## Wireframes
-
-Include images of the following wireframes:
-
-- Landing Page
-- All supporting pages
-- The below routes\controllers\models\views table
+![overallPicture](./assests/overallPicture.jpg)
+![wireframes](./assests/wireframes.jpg)
+![Landing Page](./assests/LandingPage.png)
+![ResultsPage Page](./assests/ResultsPage.png)
+![BurgerKing Page](./assests/BurgerKing.png)
 
 ## User Stories
-
-Include user stories regarding how users will interact with the app such as when the page loads how will the user migrate through the page.  
+![UserStories Page](./assests/UserStories.jpg)
 
 ## Project Management
+### Completed Tasks
+- Creating Node.js server
+- Creating React server
+- Conntecting both front and backend server
+- Getting API from Spotify
+- Working On CSS
+- CAN Read API data based on user search
+- CAN ADD to DATABASE
+- CAN READ from DATABASE and show to user
 
-Use Github's `Project Managment Tab`  to list all the task that need to be completed.  At a minimum the tasks should be categroized into one of the four columns:  ToDo, InProgress, Complete, Issue
+### Uncompleted Tasks
+- CAN Delete and edit
+- CAN Login and Sign up
 
 ## Routes..Controllers..Models..Views..Oh My...
 
