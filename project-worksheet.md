@@ -1,5 +1,10 @@
 # Project Overview
 
+## Project Preview
+![Landing Page](./assests/LandingPage.png)
+![BurgerKing Page](./assests/BurgerKing.png)
+![ResultsPage Page](./assests/ResultsPage.png)
+
 ## Project Description
 
 Our application is a playlist manager, that lets you save and manage your favorite artists albums. Our user-friendly music monster currently lets you search for artists using the spotify api and saving their albums to our database. You can play a clip on your browser from our website, or if you have the application you can control spotify right from your browser!
