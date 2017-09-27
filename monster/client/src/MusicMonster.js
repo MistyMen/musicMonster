@@ -120,7 +120,7 @@ class MusicMonster extends Component {
     e.preventDefault();
     const artistSearch = this.state.input;
     const APIToken =
-      "BQCVnUdcUpkMM8FOLa0Y8ZeUr1G_Ci9GwztXZorDVKbm1oWAO_4xODRhcxwvncxV57JU-i1KfR-jtJaEmc0SWCo4tVoVJutxPuwzby2iFLP1C6kMoQ-B3XzbHHh1KnZBMnnNBhdYQ3vED5Ut_Eh09WYIs-J6nh6A3_2G";
+      "BQBSZgsSSgCdbhZlpt0FqCe1Vl2x_YwHzrqHBQ2Sy3X3nFk5OvqZbyMG3dBofLd9MNC5fDVrCHfzsjFyaW4FkO3EYBEgCXB6oMGW9j_guynCm00ESaP3RIbGxduITaXiqMjlKcydxwWgoEVx0Vr4CEPkFauiP5tDWGYg";
 
     axios({
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
