@@ -46,9 +46,11 @@ Our application is a playlist manager, that lets you save and manage your favori
 - CAN READ from DATABASE and show to user
 
 ### Uncompleted Tasks
-- CAN Delete and edit
+- CAN Delete saved songs and edit comments
 - CAN Login and Sign up
+- User can save and only show after user has logged in - No global saving!
 
+```
 ## Routes..Controllers..Models..Views..Oh My...
 
 Use this section to document the routes and supporting functionality of the app. 
@@ -56,21 +58,133 @@ Use this section to document the routes and supporting functionality of the app.
 | Route | Controller | Model | Does | Result | View | Exits |
 | --- | :---: |  :---: | :---: | :---: | :---: | :---: |
 | /quotes | GET | Index | findAll | Selects *  | [{quotes}] | ShowQuotes | redirect(/quotes) 
+```
 
 ## Functional Components
 
-Time frames are also key in the development cycle.  You have limited time to code all phases of the game.  Based on the prioritized feature list completed in the `Priority Matix` and assign time estimates.  
-
 | Feature | Priority | Estimated Time | Time Invetsted | Actual Time |
 | --- | :---: |  :---: | :---: | :---: |
-| add a todo | H | 1hrs |  |  |
+| Results Page | H | 3-4hrs | 6hrs | 12hrs |
+| API | H | 6hrs | 3 Days | 3-4 Days |
+| Main Menu | H | 2hrs | 4hrs | 5hrs |
+| Registration/Login | L | 3 Days | 4 Days | +++ |
+| Registration | L | 3 Days | 4 Days | +++ |
 
 ## Code Snippet
 
-Use this section to include a brief code snippet of functionality that you are proud of an a brief description.  
+```
+render() {
+    console.log("Rendering...");
+    console.log(this.state.home);
+
+    let searchF = null;
+    if (
+      window.location.href.includes("login") == false &&
+      window.location.href.includes("register") == false
+    ) {
+      searchF = (
+        <div className="searchSection">
+          <h3>
+            <span>Genre</span>
+            <span className={"artist" + (this.state.home ? "" : "Sec")}>
+              Artist
+            </span>
+            <span>Music</span>
+          </h3>
+          <SearchForm
+            home={this.state.home}
+            handleInputChange={this.handleInputChange}
+            callSpotifyApi={this.callSpotifyApi}
+            input={this.state.input}
+          />
+        </div>
+      );
+    }
+    return (
+      <div id="outer-container">
+        <Menu />
+        <main id="page-wrap">
+          <Nav />
+
+          <div className={"container" + (this.state.home ? "" : "Sec")}>
+            <div className={this.state.home ? "front" : "results"}>
+              <div className={"title" + (this.state.home ? "" : "Sec")}>
+                Music Monster
+              </div>
+              <div className={"search" + (this.state.home ? "" : "Sec")}>
+                {searchF}
+                <Switch>
+                  <Route
+                    exact
+                    path="/login"
+                    render={props => (
+                      <Login
+                        username={this.state.username}
+                        password={this.state.password}
+                        handleUsernameInput={this.handleUsernameInput}
+                        handlePasswordInput={this.handlePasswordInput}
+                      />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/register"
+                    render={props => (
+                      <Register
+                        username={this.state.username}
+                        password={this.state.password}
+                        handleUsernameInput={this.handleUsernameInput}
+                        handlePasswordInput={this.handlePasswordInput}
+                      />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/results"
+                    render={props => (
+                      <Results
+                        submit={this.submitToServer}
+                        checkUrl={this.checkUrl}
+                        artist={this.state.artist}
+                        image={this.state.image}
+                        song={this.state.song}
+                        data={this.state.searchData}
+                        input={this.state.input}
+                        submitToServer={this.submitToServer}
+                      />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/user"
+                    render={props => (
+                      <User
+                        checkUrl={this.checkUrl}
+                        callingDB={this.callingDB}
+                        dataBase={this.state.dataBase}
+                        handleSongDelete={this.handleSongDelete}
+                      />
+                    )}
+                  />
+                </Switch>
+              </div>
+            </div>
+          </div>
+          <Footer />
+        </main>
+      </div>
+    );
+  }
+
+
+```
+
+
+It is inside the musicController.js which is the main file in REACT that connects all the components and backend Node.js server. This `return` renders the "CSS" and all the funtionalities such as calling API, getting data from database, taking input's values from user and saving temporarily into states, submitting saved artist's song by user into database. And of course other 'CRUD' methods such as editing and deleting.     
 
 ## Additional Libraries
- Use this section to list all supporting libraries and thier role in the project. 
+ Burger King Menu - https://github.com/negomi/react-burger-menu
+![BurgerKing Page](./assests/BurgerKing.png)
 
 ## Change Log
  Use this section to document what changes were made and the reasoning behind those changes.  
