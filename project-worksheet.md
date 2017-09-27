@@ -6,11 +6,11 @@ Our application is a playlist manager, that lets you save and manage your favori
 
 
 ## Installation
-- Fork it to your account!
+- Fork it to your github account!
 - Clone it to your local machine!
 - Go to migration folder in "musicMonster/monster/db/migration/" and then type `psql`
 - Create database by typing in psql `CREATE DATABASE monster_dev;`
-- Then come put from "psql" by typing `\q`
+- Then come out from "psql" by typing `\q`
 - Create table by typing `psql -f migration.sql` inside the "./migration" folder
 - In "monster" directory "./musicMonster/monster/", type `npm install` - to install the node.js server
 - Then do same in "/client" directory - to install the react server
@@ -50,15 +50,7 @@ Our application is a playlist manager, that lets you save and manage your favori
 - CAN Login and Sign up
 - User can save and only show after user has logged in - No global saving!
 
-```
-## Routes..Controllers..Models..Views..Oh My...
 
-Use this section to document the routes and supporting functionality of the app. 
-
-| Route | Controller | Model | Does | Result | View | Exits |
-| --- | :---: |  :---: | :---: | :---: | :---: | :---: |
-| /quotes | GET | Index | findAll | Selects *  | [{quotes}] | ShowQuotes | redirect(/quotes) 
-```
 
 ## Functional Components
 
@@ -184,14 +176,5 @@ It is inside the musicController.js which is the main file in REACT that connect
 
 ## Additional Libraries
  Burger King Menu - https://github.com/negomi/react-burger-menu
+  Burger King Menu Example - http://negomi.github.io/react-burger-menu/
 ![BurgerKing Page](./assests/BurgerKing.png)
-
-## Change Log
- Use this section to document what changes were made and the reasoning behind those changes.  
-
-## Issues and Resolutions
- Use this section to list of all major issues encountered and their resolution.
-
-#### SAMPLE.....
-**ERROR**: app.js:34 Uncaught SyntaxError: Unexpected identifier                                
-**RESOLUTION**: Missing comma after first object in sources {} object
