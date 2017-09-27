@@ -2,8 +2,9 @@
 
 ## Project Preview
 ![Landing Page](./assests/LandingPage.png)
-![BurgerKing Page](./assests/BurgerKing.png)
 ![ResultsPage Page](./assests/ResultsPage.png)
+![BurgerKing Page](./assests/BurgerKing.png)
+
 
 ## Project Description
 
