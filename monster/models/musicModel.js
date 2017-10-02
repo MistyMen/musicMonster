@@ -1,36 +1,28 @@
-const db = require("../db/config");
+const db = require('../db/config');
 
 const Music = {};
 
-Music.findAll = () => {
-  return db.many(
-    `
+Music.findAll = () => db.many(
+  `
     SELECT id, artist, image, song, comments
     FROM records
     `);
-};
 
-Music.save = (music) => {
-  return db.none(`
+Music.save = music => db.none(`
     INSERT INTO records (id, artist, image, song, comments)
     VALUES ($/id/, $/artist/, $/image/, $/song/, $/comments/)
     ON CONFLICT (id) DO NOTHING
     `,
-    music);
-};
+  music);
 
-Music.update = (music) => {
-  return db.one(`
+Music.update = music => db.one(`
     UPDATE records SET
     comments = $/comments/
     WHERE id = $/id/
     RETURNING*`,
-    music);
-};
+  music);
 
-Music.destroy = (id) => {
-    return db.none(`
+Music.destroy = id => db.none(`
     DELETE FROM records WHERE id = $/id/`, id);
-};
 
 module.exports = Music;

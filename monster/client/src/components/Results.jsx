@@ -1,17 +1,16 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import Add from './partials/Add';
 
 class Results extends Component {
   constructor(props) {
     super(props);
-
   }
   componentWillMount() {
-    console.log("Results will mount...");
+    console.log('Results will mount...');
   }
 
   componentDidMount() {
-    console.log("Results did mount...");
+    console.log('Results did mount...');
     this.props.checkUrl();
   }
 

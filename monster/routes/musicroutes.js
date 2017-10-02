@@ -7,7 +7,7 @@ const musicRoutes = express.Router();
 musicRoutes.post('/results', controllerMod.create);
 
 musicRoutes.route('/user')
-            .get(controllerMod.indexAll)
-            .delete(controllerMod.destroy)
-            .put(controllerMod.update);
+  .get(controllerMod.indexAll)
+  .delete(controllerMod.destroy)
+  .put(controllerMod.update);
 module.exports = musicRoutes;

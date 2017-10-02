@@ -2,7 +2,7 @@ const modelMon = require('../models/musicModel');
 
 const controllerMon = {};
 
-/*middleware to get all records*/
+/* middleware to get all records */
 controllerMon.indexAll = (req, res) => {
   modelMon.findAll()
     .then((records) => {
@@ -17,15 +17,15 @@ controllerMon.indexAll = (req, res) => {
     });
 };
 
-/*store particular record to db*/
+/* store particular record to db */
 controllerMon.create = (req, res) => {
   modelMon.save({
-      id: req.body.id,
-      artist: req.body.artist,
-      image: req.body.images,
-      song: req.body.song,
-      comments: req.body.comments,
-    })
+    id: req.body.id,
+    artist: req.body.artist,
+    image: req.body.images,
+    song: req.body.song,
+    comments: req.body.comments,
+  })
     .then(() => {
       res.json({ message: 'ok' });
     })
@@ -35,30 +35,30 @@ controllerMon.create = (req, res) => {
     });
 };
 
-/*update particular record*/
+/* update particular record */
 controllerMon.update = (req, res) => {
   modelMon.update(req.body)
     .then((record) => {
       res.json({ message: `records ${record.comments} updated` });
       res.redirect('/user');
     }).catch((err) => {
-        console.log(err);
-        res.status(401).json({ message: 'something went wrong' });
+      console.log(err);
+      res.status(401).json({ message: 'something went wrong' });
     });
 };
 
-  /*delete records*/
-  controllerMon.destroy = (req, res, next) => {
-    console.log(res);
-    modelMon
-      .destroy(res.params)
-      .then(() => {
-        console.log(res.params)
-        next();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+/* delete records */
+controllerMon.destroy = (req, res, next) => {
+  console.log(res);
+  modelMon
+    .destroy(res.params)
+    .then(() => {
+      console.log(res.params);
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 module.exports = controllerMon;
