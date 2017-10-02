@@ -2,25 +2,28 @@ import React, { Component } from 'react';
 
 class Login extends Component {
   render() {
-    return(
+    return (
       <form className="loginPage">
         <input
           className="Username"
           type="text"
           placeholder="Enter your username"
-          onChange={this.props.handleUsernameInput} />
+          onChange={this.props.handleUsernameInput}
+        />
         <input
           className="Password"
           type="text"
           placeholder="Enter your Password"
-          onChange={this.props.handlePasswordInput} />
+          onChange={this.props.handlePasswordInput}
+        />
         <button
           type="submit"
-          className="loginButton" >
+          className="loginButton"
+        >
             Login
         </button>
       </form>
-      )
+    );
   }
 }
 

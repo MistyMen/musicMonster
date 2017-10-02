@@ -1,41 +1,41 @@
 // This is the top level of the application
 
 // Import all the necessary packages
-import React, { Component } from "react";
-import axios from "axios";
-import { Route, Switch } from "react-router-dom";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { Route, Switch } from 'react-router-dom';
 
 // Import all the necessary components
-import Nav from "./components/partials/Nav";
-import Footer from "./components/partials/Footer";
-import SearchForm from "./components/SearchForm";
-import Results from "./components/Results";
-import { Link } from "react-router-dom";
-import Menu from "./components/partials/Menu";
-import User from "./components/partials/User";
-import Register from "./components/Register";
-import Login from "./components/Login";
+import Nav from './components/partials/Nav';
+import Footer from './components/partials/Footer';
+import SearchForm from './components/SearchForm';
+import Results from './components/Results';
+import { Link } from 'react-router-dom';
+import Menu from './components/partials/Menu';
+import User from './components/partials/User';
+import Register from './components/Register';
+import Login from './components/Login';
 
 // CSS files
-import "./reset.css";
-import "./App.css";
+import './reset.css';
+import './App.css';
 
 class MusicMonster extends Component {
   constructor(props) {
     super(props);
     this.state = {
       searchData: null,
-      id: "",
-      input: "",
-      artist: "",
-      image: "",
-      song: "",
-      comments: "",
-      username: "",
-      password: "",
+      id: '',
+      input: '',
+      artist: '',
+      image: '',
+      song: '',
+      comments: '',
+      username: '',
+      password: '',
       home: true,
       isLoggedIn: true,
-      dataBase: []
+      dataBase: [],
     };
     this.submitToServer = this.submitToServer.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -48,7 +48,7 @@ class MusicMonster extends Component {
   }
 
   componentWillMount() {
-    console.log("Will Mount...");
+    console.log('Will Mount...');
   }
 
   componentDidMount() {
@@ -58,16 +58,16 @@ class MusicMonster extends Component {
   handleInputChange(event) {
     event.preventDefault();
     this.setState({
-      input: event.target.value
+      input: event.target.value,
     });
     console.log(event.target.value);
     // console.log(this.state.input);
   }
 
   checkUrl() {
-    console.log("CheckingURL -------->", this.state.home);
-    window.location.href.includes("results") ||
-    window.location.href.includes("user")
+    console.log('CheckingURL -------->', this.state.home);
+    window.location.href.includes('results') ||
+    window.location.href.includes('user')
       ? this.setState({ home: false })
       : this.setState({ home: true });
   }
@@ -75,7 +75,7 @@ class MusicMonster extends Component {
   handleUsernameInput(event) {
     event.preventDefault();
     this.setState({
-      username: event.target.value
+      username: event.target.value,
     });
     console.log(event.target.value);
   }
@@ -83,7 +83,7 @@ class MusicMonster extends Component {
   handlePasswordInput(event) {
     event.preventDefault();
     this.setState({
-      password: event.target.value
+      password: event.target.value,
     });
     console.log(event.target.value);
   }
@@ -91,23 +91,23 @@ class MusicMonster extends Component {
   handleSongDelete(event) {
     console.log('del', event);
     axios({
-      method: "delete",
-      url: `http://localhost:3001/api/user`,
-      data: event
+      method: 'delete',
+      url: 'http://localhost:3001/api/user',
+      data: event,
     })
-      .then(res => {
+      .then((res) => {
         this.callingDB();
-        console.log("DELETE Request SENT");
+        console.log('DELETE Request SENT');
       })
       .catch(err => console.log(err));
   }
 
   callingDB() {
     axios({
-      method: "GET",
-      url: `http://localhost:3001/api/user/`
+      method: 'GET',
+      url: 'http://localhost:3001/api/user/',
     })
-      .then(res => {
+      .then((res) => {
         console.log(res);
         this.setState({
           dataBase: res.data.data.records,
@@ -120,90 +120,90 @@ class MusicMonster extends Component {
     e.preventDefault();
     const artistSearch = this.state.input;
     const APIToken =
-      "BQBSZgsSSgCdbhZlpt0FqCe1Vl2x_YwHzrqHBQ2Sy3X3nFk5OvqZbyMG3dBofLd9MNC5fDVrCHfzsjFyaW4FkO3EYBEgCXB6oMGW9j_guynCm00ESaP3RIbGxduITaXiqMjlKcydxwWgoEVx0Vr4CEPkFauiP5tDWGYg";
+      'BQBSZgsSSgCdbhZlpt0FqCe1Vl2x_YwHzrqHBQ2Sy3X3nFk5OvqZbyMG3dBofLd9MNC5fDVrCHfzsjFyaW4FkO3EYBEgCXB6oMGW9j_guynCm00ESaP3RIbGxduITaXiqMjlKcydxwWgoEVx0Vr4CEPkFauiP5tDWGYg';
 
     axios({
       url: `https://api.spotify.com/v1/search?q=${artistSearch}&type=artist`,
-      method: "GET",
+      method: 'GET',
       headers: {
-        Authorization: `Bearer ${APIToken}`
-      }
+        Authorization: `Bearer ${APIToken}`,
+      },
     })
-      .then(res => {
+      .then((res) => {
         console.log(res);
 
-        const artistName = res.data.artists.items["0"].name;
-        const track_url = res.data.artists.items["0"].external_urls.spotify;
-        const artistPopularity = res.data.artists.items["0"].popularity;
-        const artistFollowers = res.data.artists.items["0"].followers.total;
+        const artistName = res.data.artists.items['0'].name;
+        const track_url = res.data.artists.items['0'].external_urls.spotify;
+        const artistPopularity = res.data.artists.items['0'].popularity;
+        const artistFollowers = res.data.artists.items['0'].followers.total;
         const genre = res.data.artists.items[0].genres;
-        const image = res.data.artists.items["0"].images[1].url;
-        const id = res.data.artists.items["0"].id;
+        const image = res.data.artists.items['0'].images[1].url;
+        const id = res.data.artists.items['0'].id;
 
-        console.log("Track URL", track_url);
+        console.log('Track URL', track_url);
 
         this.setState({
-          id: id,
+          id,
           searchData: res.data.artists.items,
           artist: artistName,
-          image: image,
-          song: "https://open.spotify.com/embed?uri=" + track_url,
-          isLoggedIn: true
+          image,
+          song: `https://open.spotify.com/embed?uri=${track_url}`,
+          isLoggedIn: true,
         });
-        console.log("IDI IDIDIDIDIDIDDI", this.state.id);
-        console.log("SEARCH ID ID ID", this.state.searchData);
+        console.log('IDI IDIDIDIDIDIDDI', this.state.id);
+        console.log('SEARCH ID ID ID', this.state.searchData);
       })
       .catch(err => console.error(err));
   }
 
   submitToServer(e) {
     console.log('id:', this.state.id,
-'artist: ', this.state.artist,
-'image:', this.state.image,
-'song: ', this.state.song);
+      'artist: ', this.state.artist,
+      'image:', this.state.image,
+      'song: ', this.state.song);
     e.preventDefault();
-    console.log("this is the submit to server -----------");
+    console.log('this is the submit to server -----------');
     axios({
-      method: "POST",
-      url: "http://localhost:3001/api/results",
+      method: 'POST',
+      url: 'http://localhost:3001/api/results',
       data: {
         id: this.state.id,
         artist: this.state.artist,
         image: this.state.image,
         song: this.state.song,
-        comments: 'Comment'
-      }
-    })
-      // .then(res => {
-      //   console.log(this.state.artist, "-----------");
-      //   // res will include all the information you sent back from the server
-      //   const savingMusicToDataBase = {
-      //     artist: res.data.artists.items["0"].name,
-      //     image: res.data.artists.items["0"].images[1].url
-      //   };
-      //   this.setState(prevState => {
-      //     return {
-      //       artists: prevState.artists.concat(savingMusicToDataBase)
-      //     };
-      //   });
-      // })
-      // .catch(err => console.log(err));
+        comments: 'Comment',
+      },
+    });
+    // .then(res => {
+    //   console.log(this.state.artist, "-----------");
+    //   // res will include all the information you sent back from the server
+    //   const savingMusicToDataBase = {
+    //     artist: res.data.artists.items["0"].name,
+    //     image: res.data.artists.items["0"].images[1].url
+    //   };
+    //   this.setState(prevState => {
+    //     return {
+    //       artists: prevState.artists.concat(savingMusicToDataBase)
+    //     };
+    //   });
+    // })
+    // .catch(err => console.log(err));
   }
 
   render() {
-    console.log("Rendering...");
+    console.log('Rendering...');
     console.log(this.state.home);
 
     let searchF = null;
     if (
-      window.location.href.includes("login") == false &&
-      window.location.href.includes("register") == false
+      window.location.href.includes('login') == false &&
+      window.location.href.includes('register') == false
     ) {
       searchF = (
         <div className="searchSection">
           <h3>
             <span>Genre</span>
-            <span className={"artist" + (this.state.home ? "" : "Sec")}>
+            <span className={`artist${this.state.home ? '' : 'Sec'}`}>
               Artist
             </span>
             <span>Music</span>
@@ -223,12 +223,12 @@ class MusicMonster extends Component {
         <main id="page-wrap">
           <Nav />
 
-          <div className={"container" + (this.state.home ? "" : "Sec")}>
-            <div className={this.state.home ? "front" : "results"}>
-              <div className={"title" + (this.state.home ? "" : "Sec")}>
+          <div className={`container${this.state.home ? '' : 'Sec'}`}>
+            <div className={this.state.home ? 'front' : 'results'}>
+              <div className={`title${this.state.home ? '' : 'Sec'}`}>
                 Music Monster
               </div>
-              <div className={"search" + (this.state.home ? "" : "Sec")}>
+              <div className={`search${this.state.home ? '' : 'Sec'}`}>
                 {searchF}
                 <Switch>
                   <Route
