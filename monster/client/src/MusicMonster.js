@@ -75,7 +75,7 @@ class MusicMonster extends Component {
   handleUsernameInput(event) {
     event.preventDefault();
     this.setState({
-      username: event.target.value
+      username: event.target.value,
     });
     console.log(event.target.value);
   }
@@ -83,18 +83,17 @@ class MusicMonster extends Component {
   handlePasswordInput(event) {
     event.preventDefault();
     this.setState({
-      password: event.target.value
+      password: event.target.value,
     });
     console.log(event.target.value);
   }
 
   handleSongDelete(event) {
-    event.preventDefault();
+    // event.preventDefault();
     console.log('del', event);
     axios({
       method: 'DELETE',
       url: `http://localhost:3001/api/user/${event}`,
-      data: { event },
     })
       .then(() => {
         this.callingDB();
@@ -174,22 +173,16 @@ class MusicMonster extends Component {
         song: this.state.song,
         comments: 'Comment',
       }
-    })
-      // .then(res => {
-      //   console.log(this.state.artist, "-----------");
-      //   // res will include all the information you sent back from the server
-      //   const savingMusicToDataBase = {
-      //     artist: res.data.artists.items["0"].name,
-      //     image: res.data.artists.items["0"].images[1].url
-      //   };
-      //   this.setState(prevState => {
-      //     return {
-      //       artists: prevState.artists.concat(savingMusicToDataBase)
-      //     };
-      //   });
-      // })
-      // .catch(err => console.log(err));
-  }
+    }).then(() => {
+      this.setState((prevState, props) => {
+          return {
+            dataBase: prevState.dataBase.concat(props),
+          };
+        });
+      }).cathc(err => {
+        console.log()
+      })
+    }
 
   render() {
     console.log("Rendering...");
@@ -282,7 +275,7 @@ class MusicMonster extends Component {
                         callingDB={this.callingDB}
                         dataBase={this.state.dataBase}
                         handleSongDelete={this.handleSongDelete}
-                        handleSongEdit={this.handleSongDelete}
+                        // handleSongEdit={this.handleSongEdit}
                       />
                     )}
                   />

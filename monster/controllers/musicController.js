@@ -37,6 +37,7 @@ controllerMon.create = (req, res) => {
 
 /*update particular record*/
 controllerMon.update = (req, res) => {
+  console.log('i am in');
   modelMon.update(req.body)
     .then((record) => {
       res.json({ message: `records ${record.comments} updated` });
@@ -48,12 +49,12 @@ controllerMon.update = (req, res) => {
 };
 
   /*delete records*/
-  controllerMon.destroy = (req, res) => {
-    console.log(req.params);
+  controllerMon.destroy = (req, res, next) => {
+    console.log(req.params.id);
     modelMon
-      .destroy(req.params)
+      .destroy(req.params.id)
       .then(() => {
-        console.log(res.params);
+        next();
         res.redirect('/user');
       })
       .catch((err) => {
