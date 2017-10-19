@@ -1,4 +1,4 @@
-\c monster_dev
+-- \c monster_dev
 
 drop table if exists records;
 

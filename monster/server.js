@@ -25,7 +25,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
 
 /* set static file_path */
-app.use(express.static('public'));
+// app.use(express.static('public'));
+(process.env.NODE_ENV === 'production')
+app.use(express.static('client/build'));
 
 /* API routes */
 const musicRoute = require('./routes/musicroutes');

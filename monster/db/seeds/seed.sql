@@ -1,4 +1,4 @@
-\c monster_dev
+-- \c monster_dev
 
 INSERT INTO records
   (id, artist, image, song)
