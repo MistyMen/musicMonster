@@ -12,8 +12,8 @@ Our application is a playlist manager, that lets you save and manage your favori
 - Create database by typing in psql `CREATE DATABASE monster_dev;`
 - Then come out from "psql" by typing `\q`
 - Create table by typing `psql -f migration.sql` inside the "./migration" folder
-- In "monster" directory "./musicMonster/monster/", type `npm install` - to install all the dependences!
-- Then do same in "/client" directory - to install the react server
+- In "monster" directory "./musicMonster/monster/", type `npm install` - to install all the dependences for node.js!
+- Then do same in "/client" directory for REACT.
 - You are ready to GO! Of course you also need Spotify token and then put it inside the "./musicMonster/monster/client/src/MusicMonster.js" file and inside the file, the variable called "APIToken" in "callSpotifyApi" function on line '117' - replace with the old one....
 - Inside the "musicMonster/monster/" type `npm start` to start the server on http://localhost:3001/ 
 - Inside the "musicMonster/monster/client" type `npm start` to start the server on http://localhost:3000/  
